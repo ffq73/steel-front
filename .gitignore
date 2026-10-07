@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# MCP server cache & browser profiles & debug screenshots
+mcp/
+mcp_config.json
+
+# Compressed archives (exceed GitHub 100MB limit)
+*.zip
+*.tar.gz
+*.rar
+
+# Logs & temp
+*.log
+npm-debug.log*
+
+# System & Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

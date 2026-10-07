@@ -1,0 +1,87 @@
+{
+  "scenario": "coldwar",
+  "name": "铁幕 1949",
+  "version": "5.0",
+  "title": {
+    "path": "assets/titles/title_coldwar.jpg",
+    "fallbackColor": "#1e2e3e",
+    "title": "1947 铁幕初启"
+  },
+  "portraits": {
+    "truman": {
+      "path": "assets/portraits/leaders/truman.jpg",
+      "fallbackColor": "#21364d",
+      "badge": "杜鲁门",
+      "role": "美国总统"
+    },
+    "stalin_cw": {
+      "path": "assets/portraits/leaders/stalin.jpg",
+      "fallbackColor": "#691717",
+      "badge": "斯大林",
+      "role": "部长会议主席"
+    },
+    "khrushchev": {
+      "path": "assets/portraits/leaders/khrushchev.jpg",
+      "fallbackColor": "#591919",
+      "badge": "赫鲁晓夫",
+      "role": "苏共第一书记"
+    },
+    "kennedy": {
+      "path": "assets/portraits/leaders/kennedy.jpg",
+      "fallbackColor": "#1a3a5a",
+      "badge": "肯尼迪",
+      "role": "美国总统"
+    },
+    "mao_cw": {
+      "path": "assets/portraits/leaders/mao.jpg",
+      "fallbackColor": "#991c1c",
+      "badge": "毛泽东",
+      "role": "中共中央主席"
+    },
+    "zhou": {
+      "path": "assets/portraits/leaders/zhou.jpg",
+      "fallbackColor": "#851717",
+      "badge": "周恩来",
+      "role": "国务院总理"
+    },
+    "castro": {
+      "path": "assets/portraits/leaders/castro.jpg",
+      "fallbackColor": "#2b4d2f",
+      "badge": "卡斯特罗",
+      "role": "古巴领导人"
+    },
+    "tito": {
+      "path": "assets/portraits/leaders/tito.jpg",
+      "fallbackColor": "#334455",
+      "badge": "铁托",
+      "role": "南斯拉夫总统"
+    }
+  },
+  "events": {
+    "berlin_airlift": {
+      "path": "assets/events/berlin_airlift.jpg",
+      "fallbackColor": "#112233",
+      "badge": "柏林大空运"
+    },
+    "korean_war": {
+      "path": "assets/events/korean_war.jpg",
+      "fallbackColor": "#332211",
+      "badge": "朝鲜战争"
+    },
+    "cuban_crisis": {
+      "path": "assets/events/cuban_crisis.jpg",
+      "fallbackColor": "#441111",
+      "badge": "古巴导弹危机"
+    },
+    "apollo_landing": {
+      "path": "assets/events/apollo.jpg",
+      "fallbackColor": "#111133",
+      "badge": "阿波罗登月"
+    },
+    "vietnam_war": {
+      "path": "assets/events/vietnam.jpg",
+      "fallbackColor": "#223311",
+      "badge": "越南丛林战"
+    }
+  }
+}

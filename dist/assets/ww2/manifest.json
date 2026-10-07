@@ -1,0 +1,111 @@
+{
+  "scenario": "ww2",
+  "name": "全面战争 1939",
+  "version": "5.0",
+  "title": {
+    "path": "assets/titles/title_ww2.jpg",
+    "fallbackColor": "#3a1e1e",
+    "title": "1939 钢铁风暴"
+  },
+  "portraits": {
+    "hitler": {
+      "path": "assets/portraits/leaders/hitler.jpg",
+      "fallbackColor": "#333333",
+      "badge": "元首",
+      "role": "国家元首"
+    },
+    "churchill": {
+      "path": "assets/portraits/leaders/churchill.jpg",
+      "fallbackColor": "#b22222",
+      "badge": "丘吉尔",
+      "role": "战时首相"
+    },
+    "stalin": {
+      "path": "assets/portraits/leaders/stalin.jpg",
+      "fallbackColor": "#8b0000",
+      "badge": "斯大林",
+      "role": "最高统帅"
+    },
+    "roosevelt": {
+      "path": "assets/portraits/leaders/roosevelt.jpg",
+      "fallbackColor": "#2e5b88",
+      "badge": "罗斯福",
+      "role": "美国总统"
+    },
+    "chiang": {
+      "path": "assets/portraits/leaders/chiang.jpg",
+      "fallbackColor": "#3b5998",
+      "badge": "蒋中正",
+      "role": "国民政府特级上将"
+    },
+    "mao": {
+      "path": "assets/portraits/leaders/mao.jpg",
+      "fallbackColor": "#c8102e",
+      "badge": "毛泽东",
+      "role": "中共中央主席"
+    },
+    "mussolini": {
+      "path": "assets/portraits/leaders/mussolini.jpg",
+      "fallbackColor": "#2f4f4f",
+      "badge": "墨索里尼",
+      "role": "法西斯领袖"
+    },
+    "tojo": {
+      "path": "assets/portraits/leaders/tojo.jpg",
+      "fallbackColor": "#4a5d23",
+      "badge": "东条英机",
+      "role": "内阁总理大臣"
+    },
+    "guderian": {
+      "path": "assets/portraits/generals/guderian.jpg",
+      "fallbackColor": "#222222",
+      "badge": "古德里安",
+      "role": "装甲兵总监"
+    },
+    "manstein": {
+      "path": "assets/portraits/generals/manstein.jpg",
+      "fallbackColor": "#2c2c2c",
+      "badge": "曼施坦因",
+      "role": "陆军元帅"
+    },
+    "zhukov": {
+      "path": "assets/portraits/generals/zhukov.jpg",
+      "fallbackColor": "#7a1111",
+      "badge": "朱可夫",
+      "role": "苏联元帅"
+    },
+    "eisenhower": {
+      "path": "assets/portraits/generals/eisenhower.jpg",
+      "fallbackColor": "#1f3a52",
+      "badge": "艾森豪威尔",
+      "role": "盟军最高司令"
+    }
+  },
+  "events": {
+    "danzig_war": {
+      "path": "assets/events/danzig.jpg",
+      "fallbackColor": "#221111",
+      "badge": "进军波兰"
+    },
+    "fall_of_france": {
+      "path": "assets/events/fall_france.jpg",
+      "fallbackColor": "#112233",
+      "badge": "法国沦陷"
+    },
+    "pearl_harbor": {
+      "path": "assets/events/pearl_harbor.jpg",
+      "fallbackColor": "#442211",
+      "badge": "珍珠港事变"
+    },
+    "stalingrad": {
+      "path": "assets/events/stalingrad.jpg",
+      "fallbackColor": "#331111",
+      "badge": "斯大林格勒绞肉"
+    },
+    "normandy_dday": {
+      "path": "assets/events/dday.jpg",
+      "fallbackColor": "#113322",
+      "badge": "霸王行动诺曼底"
+    }
+  }
+}

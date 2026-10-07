@@ -1,0 +1,375 @@
+{
+  "_comment": "modifier 键覆盖率棘轮基线。uncovered = 声明了但引擎无读取点的键名数组。只许收紧不许放宽：新增未覆盖键会让测试变红。",
+  "generatedAt": "2026-10-07T08:31:58.096Z",
+  "declaredCount": 96,
+  "uncoveredCount": 74,
+  "uncovered": [
+    "airDetection",
+    "airSuperiorityBonus",
+    "all_brk",
+    "all_def",
+    "all_org",
+    "all_orgDamage",
+    "all_planning",
+    "all_speed",
+    "arm_atk",
+    "arm_brk",
+    "arm_def",
+    "arm_soft",
+    "bbArmor",
+    "bbOrg",
+    "casGroundDmg",
+    "casWidthCapBonus",
+    "cav_atk",
+    "cav_speed",
+    "consumerGoods",
+    "convoyRaid",
+    "cvPlaneDmg",
+    "cvSortieEff",
+    "dailyCP",
+    "divSpeed",
+    "entrenchRate",
+    "escortEfficiency",
+    "expansion",
+    "fighterSuperiority",
+    "frontlineOrg",
+    "frontlineSoftAtk",
+    "groundAttackBonus",
+    "hardAtk",
+    "infCombatWidth",
+    "infOrg",
+    "inf_brk",
+    "inf_def",
+    "inf_hp",
+    "inf_org",
+    "inf_soft",
+    "interceptionSpeed",
+    "maxCP",
+    "maxEntrench",
+    "motBreakthrough",
+    "motOrg",
+    "moveOrgLoss",
+    "mtn_atk",
+    "nightAtk",
+    "outOfSupplyPenalty",
+    "planSpeed",
+    "planningMax",
+    "puppetSupport",
+    "recruitablePop",
+    "reinforce",
+    "reinforceRate",
+    "resistanceGrowth",
+    "resourceOutput",
+    "screenBonus",
+    "softAtk",
+    "stratBombDmg",
+    "subAttack",
+    "subDefense",
+    "subDetectNegate",
+    "subRaidingEff",
+    "supplyConsumption",
+    "supplyHubBuild",
+    "supportOrg",
+    "supportSoftAtk",
+    "tacBombEff",
+    "tankBreakthrough",
+    "tankHardAtk",
+    "tankOrg",
+    "tankSoftAtk",
+    "threat",
+    "torpedoCrit"
+  ],
+  "detail": {
+    "airDetection": [
+      "tech:radar1",
+      "tech:radar2"
+    ],
+    "airSuperiorityBonus": [
+      "doctrine:sf_airland_battle"
+    ],
+    "all_brk": [
+      "focus:base:deep_battle",
+      "focus:ww1:brusilov_breakthrough",
+      "focus:ww1:dobro_pole_breakthrough",
+      "focus:ww1:meuse_argonne_strike",
+      "focus:ww1:skra_di_legen_victory",
+      "focus:ww1:tyrol_offensive",
+      "tech:grand1",
+      "tech:mobiledoc"
+    ],
+    "all_def": [
+      "tech:trenchdoc"
+    ],
+    "all_org": [
+      "focus:ww1:danube_dominance",
+      "focus:ww1:eternal_crescent_army",
+      "focus:ww1:great_retreat_albania",
+      "focus:ww1:greek_expedition_corps",
+      "focus:ww1:kaiser_battle",
+      "focus:ww1:king_albert_resistance",
+      "focus:ww1:taxi_mobilize",
+      "tech:trench2"
+    ],
+    "all_orgDamage": [
+      "tech:fire3"
+    ],
+    "all_planning": [
+      "focus:ww1:schlieffen_plan"
+    ],
+    "all_speed": [
+      "focus:ww1:railway_logistics_ww1",
+      "focus:ww1:trans_siberian_upgrade",
+      "tech:mobile3"
+    ],
+    "arm_atk": [
+      "focus:base:blitzkrieg",
+      "focus:base:degaulle_mech",
+      "focus:ww1:cambrai_tank_shock",
+      "tech:mobile2"
+    ],
+    "arm_brk": [
+      "focus:base:blitzkrieg"
+    ],
+    "arm_def": [
+      "focus:base:royal_tank"
+    ],
+    "arm_soft": [
+      "tech:tank_upgun"
+    ],
+    "bbArmor": [
+      "doctrine:nd_battleship_focus"
+    ],
+    "bbOrg": [
+      "doctrine:nd_battleship_focus"
+    ],
+    "casGroundDmg": [
+      "doctrine:ad_dive_bomb"
+    ],
+    "casWidthCapBonus": [
+      "doctrine:ad_direct_support"
+    ],
+    "cav_atk": [
+      "focus:base:cav_brigades",
+      "focus:base:rapid_brigade",
+      "focus:ww1:cossack_cavalry_corps"
+    ],
+    "cav_speed": [
+      "focus:ww1:sinai_canal_raid"
+    ],
+    "consumerGoods": [
+      "decision:austerity",
+      "decision:full_utilization",
+      "decision:improve_work_env",
+      "decision:war_production"
+    ],
+    "convoyRaid": [
+      "focus:base:commerce_raiding",
+      "focus:base:merchant_navy",
+      "focus:base:unrestricted_sub"
+    ],
+    "cvPlaneDmg": [
+      "doctrine:nd_deck_ops"
+    ],
+    "cvSortieEff": [
+      "doctrine:nd_carrier_strike"
+    ],
+    "dailyCP": [
+      "doctrine:gb_grand_battleplan"
+    ],
+    "divSpeed": [
+      "doctrine:mw_blitzkrieg"
+    ],
+    "entrenchRate": [
+      "doctrine:gb_trench_warfare"
+    ],
+    "escortEfficiency": [
+      "doctrine:ad_escort"
+    ],
+    "expansion": [
+      "focus:ww1:pan_turkism_dream"
+    ],
+    "fighterSuperiority": [
+      "doctrine:ad_air_sup"
+    ],
+    "frontlineOrg": [
+      "doctrine:sf_airland_battle"
+    ],
+    "frontlineSoftAtk": [
+      "doctrine:sf_superior_firepower"
+    ],
+    "groundAttackBonus": [
+      "doctrine:ad_air_ground"
+    ],
+    "hardAtk": [
+      "doctrine:sf_concentrated_fire"
+    ],
+    "infCombatWidth": [
+      "doctrine:ma_human_wave",
+      "doctrine:ma_vast_offensives"
+    ],
+    "infOrg": [
+      "doctrine:mw_delay"
+    ],
+    "inf_brk": [
+      "focus:ww1:arditi_dagger_troops",
+      "focus:ww1:creeping_barrage",
+      "focus:ww1:stormtroopers"
+    ],
+    "inf_def": [
+      "focus:base:army_modernization",
+      "focus:base:army_reform",
+      "focus:base:bef_reform",
+      "focus:ww1:bef_channel_shield",
+      "focus:ww1:carpathian_defense",
+      "focus:ww1:caucasus_mountain_war",
+      "focus:ww1:cer_mountain_stand",
+      "focus:ww1:elastic_defense",
+      "focus:ww1:flood_yser_gates",
+      "focus:ww1:gallipoli_resistance",
+      "focus:ww1:isonzo_defense",
+      "focus:ww1:marasesti_last_stand",
+      "focus:ww1:piave_river_stand",
+      "focus:ww1:salonica_stalemate",
+      "focus:ww1:straits_forts",
+      "focus:ww1:they_shall_not_pass",
+      "focus:ww1:ypres_iron_ridge"
+    ],
+    "inf_hp": [
+      "focus:base:soviet_mass",
+      "focus:ww1:doughboys_arrival",
+      "focus:ww1:kitchener_army",
+      "focus:ww1:slavic_steamroller"
+    ],
+    "inf_org": [
+      "focus:base:army_reform",
+      "focus:base:honved_corps",
+      "focus:base:romania_bridgehead",
+      "focus:ww1:congo_force_campaign",
+      "focus:ww1:gallipoli_resistance"
+    ],
+    "inf_soft": [
+      "tech:inf_weapon_1",
+      "tech:inf_weapon_2",
+      "tech:inf_weapon_3"
+    ],
+    "interceptionSpeed": [
+      "doctrine:ad_air_intercept"
+    ],
+    "maxCP": [
+      "doctrine:gb_central_planning"
+    ],
+    "maxEntrench": [
+      "doctrine:gb_trench_warfare",
+      "doctrine:ma_defense_in_depth"
+    ],
+    "motBreakthrough": [
+      "doctrine:mw_modern_blitzkrieg"
+    ],
+    "motOrg": [
+      "doctrine:mw_delay"
+    ],
+    "moveOrgLoss": [
+      "doctrine:mw_blitzkrieg"
+    ],
+    "mtn_atk": [
+      "focus:ww1:alpini_elite_corps",
+      "focus:ww1:caucasus_mountain_campaign",
+      "focus:ww1:mountain_gebirgsjager"
+    ],
+    "nightAtk": [
+      "doctrine:gb_night_assault"
+    ],
+    "outOfSupplyPenalty": [
+      "doctrine:ma_guerrilla"
+    ],
+    "planSpeed": [
+      "doctrine:mw_blitzkrieg"
+    ],
+    "planningMax": [
+      "focus:base:desert_army",
+      "focus:base:kampfgruppe"
+    ],
+    "puppetSupport": [
+      "decision:puppet_propaganda"
+    ],
+    "recruitablePop": [
+      "doctrine:ma_human_wave"
+    ],
+    "reinforce": [
+      "tech:recon",
+      "tech:trench3"
+    ],
+    "reinforceRate": [
+      "doctrine:ma_defense_in_depth",
+      "doctrine:ma_human_wave",
+      "doctrine:mw_elastic_def",
+      "tech:radio1"
+    ],
+    "resistanceGrowth": [
+      "doctrine:ma_guerrilla"
+    ],
+    "resourceOutput": [
+      "decision:resource_mobilization"
+    ],
+    "screenBonus": [
+      "doctrine:nd_escort_screen"
+    ],
+    "softAtk": [
+      "doctrine:gb_grand_assault"
+    ],
+    "stratBombDmg": [
+      "doctrine:ad_day_bomb"
+    ],
+    "subAttack": [
+      "focus:base:advanced_torpedoes",
+      "focus:base:wolfpack_doctrine"
+    ],
+    "subDefense": [
+      "focus:base:sub_bases"
+    ],
+    "subDetectNegate": [
+      "doctrine:nd_wolfpack"
+    ],
+    "subRaidingEff": [
+      "doctrine:nd_wolfpack"
+    ],
+    "supplyConsumption": [
+      "doctrine:ma_large_front"
+    ],
+    "supplyHubBuild": [
+      "decision:reorg_railway"
+    ],
+    "supportOrg": [
+      "doctrine:sf_integrated_support"
+    ],
+    "supportSoftAtk": [
+      "doctrine:sf_integrated_support"
+    ],
+    "tacBombEff": [
+      "doctrine:ad_tac_flex"
+    ],
+    "tankBreakthrough": [
+      "doctrine:mw_armored_spearhead",
+      "doctrine:mw_blitzkrieg",
+      "doctrine:mw_modern_blitzkrieg"
+    ],
+    "tankHardAtk": [
+      "doctrine:sf_combined_arms"
+    ],
+    "tankOrg": [
+      "doctrine:mw_armored_spearhead",
+      "doctrine:mw_modern_blitzkrieg"
+    ],
+    "tankSoftAtk": [
+      "doctrine:sf_combined_arms"
+    ],
+    "threat": [
+      "focus:ww1:blockade_germany",
+      "focus:ww1:goeben_breslau",
+      "focus:ww1:unrestricted_sub"
+    ],
+    "torpedoCrit": [
+      "doctrine:nd_night_raiding"
+    ]
+  }
+}

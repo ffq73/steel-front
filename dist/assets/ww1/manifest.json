@@ -1,0 +1,139 @@
+{
+  "scenario": "ww1",
+  "name": "火药桶 1914",
+  "version": "5.0",
+  "title": {
+    "path": "assets/titles/title_ww1.jpg",
+    "fallbackColor": "#4a3c31",
+    "title": "1914 帝国黄昏"
+  },
+  "portraits": {
+    "wilhelm2": {
+      "path": "assets/portraits/leaders/wilhelm2.jpg",
+      "fallbackColor": "#1b2a47",
+      "badge": "威廉二世",
+      "role": "德意志皇帝"
+    },
+    "moltke": {
+      "path": "assets/portraits/generals/moltke.jpg",
+      "fallbackColor": "#2b3a4a",
+      "badge": "小毛奇",
+      "role": "总参谋长"
+    },
+    "hindenburg": {
+      "path": "assets/portraits/generals/hindenburg.jpg",
+      "fallbackColor": "#1a2530",
+      "badge": "兴登堡",
+      "role": "东线陆军元帅"
+    },
+    "ludendorff": {
+      "path": "assets/portraits/generals/ludendorff.jpg",
+      "fallbackColor": "#202a35",
+      "badge": "鲁登道夫",
+      "role": "军需总监"
+    },
+    "poincare": {
+      "path": "assets/portraits/leaders/poincare.jpg",
+      "fallbackColor": "#2a3d66",
+      "badge": "彭加勒",
+      "role": "法国总统"
+    },
+    "joffre": {
+      "path": "assets/portraits/generals/joffre.jpg",
+      "fallbackColor": "#1d2b45",
+      "badge": "霞飞",
+      "role": "法军总司令"
+    },
+    "petain_ww1": {
+      "path": "assets/portraits/generals/petain.jpg",
+      "fallbackColor": "#243350",
+      "badge": "贝当",
+      "role": "凡尔登守将"
+    },
+    "nicholas2": {
+      "path": "assets/portraits/leaders/nicholas2.jpg",
+      "fallbackColor": "#5a2d2d",
+      "badge": "尼古拉二世",
+      "role": "全俄罗斯皇帝"
+    },
+    "brusilov": {
+      "path": "assets/portraits/generals/brusilov.jpg",
+      "fallbackColor": "#4b2222",
+      "badge": "布鲁西洛夫",
+      "role": "西南方面军司令"
+    },
+    "george5": {
+      "path": "assets/portraits/leaders/george5.jpg",
+      "fallbackColor": "#8b1a1a",
+      "badge": "乔治五世",
+      "role": "英国国王"
+    },
+    "haig": {
+      "path": "assets/portraits/generals/haig.jpg",
+      "fallbackColor": "#701515",
+      "badge": "黑格",
+      "role": "英国远征军司令"
+    },
+    "franz_joseph": {
+      "path": "assets/portraits/leaders/franz_joseph.jpg",
+      "fallbackColor": "#594d26",
+      "badge": "弗朗茨·约瑟夫",
+      "role": "奥匈帝国皇帝"
+    },
+    "conrad": {
+      "path": "assets/portraits/generals/conrad.jpg",
+      "fallbackColor": "#473d1f",
+      "badge": "康拉德",
+      "role": "奥匈总参谋长"
+    },
+    "mehmed5": {
+      "path": "assets/portraits/leaders/mehmed5.jpg",
+      "fallbackColor": "#265935",
+      "badge": "穆罕默德五世",
+      "role": "奥斯曼苏丹"
+    },
+    "enver": {
+      "path": "assets/portraits/generals/enver.jpg",
+      "fallbackColor": "#1f472a",
+      "badge": "恩维尔帕夏",
+      "role": "陆军大臣"
+    }
+  },
+  "events": {
+    "sarajevo_shot": {
+      "path": "assets/events/sarajevo.jpg",
+      "fallbackColor": "#331111",
+      "badge": "萨拉热窝暗杀"
+    },
+    "schlieffen_plan": {
+      "path": "assets/events/schlieffen.jpg",
+      "fallbackColor": "#112233",
+      "badge": "施里芬计划"
+    },
+    "battle_marne": {
+      "path": "assets/events/marne.jpg",
+      "fallbackColor": "#223344",
+      "badge": "马恩河战役"
+    },
+    "battle_tannenberg": {
+      "path": "assets/events/tannenberg.jpg",
+      "fallbackColor": "#1a2211",
+      "badge": "坦能堡战役"
+    },
+    "verdun_mill": {
+      "path": "assets/events/verdun.jpg",
+      "fallbackColor": "#332211",
+      "badge": "凡尔登绞肉机"
+    },
+    "lusitania_sunk": {
+      "path": "assets/events/lusitania.jpg",
+      "fallbackColor": "#112244",
+      "badge": "卢西塔尼亚号沉没"
+    },
+    "russian_revolution": {
+      "path": "assets/events/rus_rev.jpg",
+      "fallbackColor": "#441111",
+      "badge": "俄国二月风暴"
+    }
+  }
+}

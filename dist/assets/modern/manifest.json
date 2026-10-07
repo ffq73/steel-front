@@ -1,0 +1,81 @@
+{
+  "scenario": "modern",
+  "name": "多极危机 2022",
+  "version": "5.0",
+  "title": {
+    "path": "assets/titles/title_modern.jpg",
+    "fallbackColor": "#222c36",
+    "title": "2022 动荡边缘"
+  },
+  "portraits": {
+    "ge_xiufu": {
+      "path": "assets/portraits/characters/ge_xiufu.png",
+      "fallbackColor": "#3d271d",
+      "badge": "葛修傅 [F]",
+      "role": "炉火阵线议员"
+    },
+    "yoshi_aixi": {
+      "path": "assets/portraits/characters/yoshi_aixi.png",
+      "fallbackColor": "#2d3345",
+      "badge": "吉爱习 [F]",
+      "role": "旭日会党魁"
+    },
+    "xiao_lu": {
+      "path": "assets/portraits/characters/xiao_lu.png",
+      "fallbackColor": "#1a3a4b",
+      "badge": "小鹿 [F]",
+      "role": "务实派州长"
+    },
+    "wang_ruoyi": {
+      "path": "assets/portraits/characters/wang_ruoyi.png",
+      "fallbackColor": "#3a2d45",
+      "badge": "王若伊 [F]",
+      "role": "白厅战略顾问"
+    },
+    "putin": {
+      "path": "assets/portraits/leaders/putin.jpg",
+      "fallbackColor": "#233342",
+      "badge": "普京",
+      "role": "俄罗斯总统"
+    },
+    "zelensky": {
+      "path": "assets/portraits/leaders/zelensky.jpg",
+      "fallbackColor": "#2f4f2f",
+      "badge": "泽连斯基",
+      "role": "乌克兰总统"
+    },
+    "biden": {
+      "path": "assets/portraits/leaders/biden.jpg",
+      "fallbackColor": "#1c325c",
+      "badge": "拜登",
+      "role": "美国总统"
+    }
+  },
+  "events": {
+    "smo_start": {
+      "path": "assets/events/smo_start.jpg",
+      "fallbackColor": "#332211",
+      "badge": "特别军事行动"
+    },
+    "nordstream_blow": {
+      "path": "assets/events/nordstream.jpg",
+      "fallbackColor": "#112233",
+      "badge": "北溪管道爆炸"
+    },
+    "drone_swarm": {
+      "path": "assets/events/drone_swarm.jpg",
+      "fallbackColor": "#222233",
+      "badge": "无人机蜂群突击"
+    },
+    "kerch_bridge": {
+      "path": "assets/events/kerch_bridge.jpg",
+      "fallbackColor": "#331111",
+      "badge": "刻赤大桥爆炸"
+    },
+    "final_reckoning": {
+      "path": "assets/events/final_reckoning.jpg",
+      "fallbackColor": "#2a3a4a",
+      "badge": "最后的抉择 [F]"
+    }
+  }
+}

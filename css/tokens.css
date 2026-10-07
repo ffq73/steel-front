@@ -1,0 +1,216 @@
+/* ============================================================
+   css/tokens.css —— 钢铁前线设计令牌与组件规范 (v9.0 N7)
+   考据依据：HOI4 core.gfx bitmapfont textcolors, generic_box DDS, 界面布局规范
+   ============================================================ */
+
+:root {
+  /* 语义色（考据自 HOI4 core.gfx bitmapfont textcolors） [H] */
+  --c-good: #56AC5B;          /* 正面/增加 [H] */
+  --c-bad: #DE5646;           /* 负面/减少 [H] */
+  --c-warn: #EEC923;          /* 警告/强调 [H] */
+  --c-warn2: #EE7B23;         /* 次警告 [H] */
+  --c-dim: #AFAFAF;           /* 次要灰 [H] */
+  --c-link: #0099D2;          /* 名词/链接 [H] */
+  --c-gold-brown: #BF992E;    /* 金褐文字色 [H] */
+  --c-brass: #b59247;         /* 本作主色（黄铜） [F] */
+  --c-brass-bright: #ffd977;  /* 高亮黄铜 [F] */
+
+  /* 面板底色（考据自 HOI4 generic_box DDS 像素实测） [H] */
+  --bg-box: #171716;
+  --bg-box-shadow: #0b0b0b;
+  --bg-box-border: #818c84;
+  --bg-drawer: #151a22;
+  --bg-overlay: rgba(8, 10, 14, 0.78);
+
+  /* 字号层级（考据自 HOI4 界面文件字体出现频次） [H] */
+  --fs-h1: 36px;
+  --fs-h2: 24px;
+  --fs-h3: 18px;
+  --fs-body: 16px;
+  --fs-small: 14px;
+  --fs-micro: 12px;
+
+  /* 顶栏几何规范 [H] */
+  --topbar-height: 79px;      /* HOI4 原版顶栏高度 [H] */
+  --res-box-w: 70px;          /* 资源格宽 70px [H] */
+  --res-box-h: 26px;          /* 资源格高 26px [H] */
+  --res-box-pitch: 73px;      /* 资源格节距 73px [H] */
+  --manpower-box-w: 96px;     /* 人力格宽 96px [H] */
+
+  /* 间距栅格 4px 基准 [H] */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-6: 24px;
+
+  /* 动效时长（考据自 HOI4 animation_time） [H] */
+  --t-quick: 150ms;           /* 小控件、下拉 [H] */
+  --t-panel: 300ms;           /* 常规面板滑入/折叠 [H] */
+  --t-drawer: 450ms;          /* 大抽屉 [H] */
+  --ease-in: cubic-bezier(.2, .7, .3, 1);    /* 显示减速 [H] */
+  --ease-out: cubic-bezier(.5, 0, .8, .4);   /* 隐藏加速 [H] */
+
+  /* 兵牌尺寸常量规范 [H] */
+  --counter-w: 76px;          /* 兵牌基础宽 [H] */
+  --counter-h: 24px;          /* 兵牌基础高 [H] */
+}
+
+/* ============================================================
+   组件规范：盒子、抽屉、弹窗、数字与增量
+   ============================================================ */
+
+/* 1. 标准面板盒 [H] */
+.sf-box {
+  background: var(--bg-box);
+  border: 1px solid var(--bg-box-border);
+  box-shadow: inset 0 0 8px var(--bg-box-shadow), 0 4px 12px rgba(0, 0, 0, 0.65);
+  border-radius: 4px;
+  color: #e2e8f0;
+  box-sizing: border-box;
+}
+
+/* 2. 抽屉外壳与尺寸档（宽 550 / 600 / 700 / 720） [H] */
+.sf-drawer {
+  position: absolute;
+  left: 0;
+  top: var(--topbar-height);
+  bottom: 0;
+  width: 550px; /* 常规档 550px [H] */
+  background: linear-gradient(180deg, #1b212c 0%, var(--bg-box) 100%);
+  border-right: 2px solid var(--bg-box-border);
+  box-shadow: 6px 0 24px rgba(0, 0, 0, 0.85);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  transform: translateX(-100%);
+  transition: transform var(--t-panel) var(--ease-out);
+  overflow: hidden;
+}
+.sf-drawer.on, .sf-drawer.active {
+  transform: translateX(0);
+  transition: transform var(--t-panel) var(--ease-in);
+}
+.sf-drawer.w-diplo { width: 600px; }   /* 外交档 600px [H] */
+.sf-drawer.w-build { width: 700px; }   /* 建造档 700px [H] */
+.sf-drawer.w-trade { width: 720px; }   /* 贸易档 720px [H] */
+
+/* 3. 模态弹窗（锚居中略偏左上） [H] */
+.sf-modal {
+  position: fixed;
+  left: 48%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  background: var(--bg-box);
+  border: 2px solid var(--c-brass);
+  box-shadow: inset 0 0 16px var(--bg-box-shadow), 0 12px 36px rgba(0, 0, 0, 0.85);
+  border-radius: 6px;
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+  color: #e2e8f0;
+  box-sizing: border-box;
+}
+.sf-modal.on { display: flex; animation: sfModalIn var(--t-quick) var(--ease-in); }
+@keyframes sfModalIn {
+  from { opacity: 0; transform: translate(-50%, -46%) scale(0.97); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* 弹窗尺寸预设档 [H] */
+.sf-modal.w-480 { width: 480px; }
+.sf-modal.w-500 { width: 500px; }
+.sf-modal.w-520 { width: 520px; }
+.sf-modal.w-584 { width: 584px; }
+.sf-modal.w-1024 { width: 1024px; } /* Ledger 账簿 [H] */
+
+.sf-modal.h-260 { height: 260px; }
+.sf-modal.h-320 { height: 320px; }
+.sf-modal.h-400 { height: 400px; }
+.sf-modal.h-480 { height: 480px; }
+.sf-modal.h-703 { height: 703px; } /* Ledger 账簿 [H] */
+
+/* 4. 等宽数字与增量标记 [H] */
+.sf-num {
+  font-family: var(--font-mono, 'Consolas', 'Courier New', monospace);
+  font-variant-numeric: tabular-nums;
+  display: inline-block;
+  text-align: right;
+}
+.sf-pct {
+  min-width: 48px;
+  text-align: right;
+  display: inline-block;
+}
+.sf-delta-up {
+  color: var(--c-good);
+  font-weight: 700;
+}
+.sf-delta-up::before {
+  content: '↑+';
+}
+.sf-delta-down {
+  color: var(--c-bad);
+  font-weight: 700;
+}
+.sf-delta-down::before {
+  content: '↓';
+}
+
+/* 5. 警报系统三色呼吸光晕 [H] */
+.sf-alert-halo-red {
+  animation: sfHaloRed 1s infinite alternate ease-in-out;
+  border-color: var(--c-bad) !important;
+}
+@keyframes sfHaloRed {
+  0% { box-shadow: 0 0 3px rgba(222, 86, 70, 0.4); }
+  100% { box-shadow: 0 0 10px rgba(222, 86, 70, 0.95); }
+}
+
+.sf-alert-halo-yellow {
+  animation: sfHaloYellow 1s infinite alternate ease-in-out;
+  border-color: var(--c-warn) !important;
+}
+@keyframes sfHaloYellow {
+  0% { box-shadow: 0 0 3px rgba(238, 201, 35, 0.4); }
+  100% { box-shadow: 0 0 10px rgba(238, 201, 35, 0.95); }
+}
+
+.sf-alert-halo-green {
+  animation: sfHaloGreen 2s infinite alternate ease-in-out;
+  border-color: var(--c-good) !important;
+}
+@keyframes sfHaloGreen {
+  0% { box-shadow: 0 0 3px rgba(86, 172, 91, 0.3); }
+  100% { box-shadow: 0 0 8px rgba(86, 172, 91, 0.85); }
+}
+
+/* 6. Tooltip 规范 (统一 max-width:400px, max-height:256px, padding:18px, font-size:16px) [H] */
+.pdx_tooltip, #sf-tooltip {
+  max-width: 400px;
+  max-height: 256px;
+  padding: 18px;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  box-sizing: border-box;
+  background: rgba(23, 23, 22, 0.97);
+  border: 1px solid var(--c-brass);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.85);
+  border-radius: 4px;
+}
+.pdx_tooltip_delayed {
+  transition-delay: 300ms;
+}
+
+/* ============================================================
+   v12.0 观感轮新增令牌 —— toast 类型色 / 玻璃底 / 金框
+   ============================================================ */
+:root {
+  --sf-toast-info: #d4af37;                 /* info 黄铜 */
+  --sf-toast-warn: #f59e0b;                 /* warn 橙 */
+  --sf-toast-bad: #ef4444;                  /* bad 红 */
+  --sf-glass-bg: rgba(12, 17, 26, 0.86);    /* 玻璃底 */
+  --sf-glass-border: rgba(181, 146, 71, 0.55); /* 玻璃金框 */
+  --sf-cap-glow: rgba(255, 214, 130, 0.36); /* 首都暖金光晕 */
+}

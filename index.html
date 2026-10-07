@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>钢铁前线 Steel Front · 战争大厅与统帅部</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/screens.css">
+<link rel="stylesheet" href="css/era.css">
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- v9.5 U5 黄铜线描图标集（stroke=currentColor 由 CSS 着色） -->
+  <symbol id="ic-pp" viewBox="0 0 16 16">
+    <rect x="4" y="2.5" width="8" height="11" rx="1"/>
+    <line x1="6" y1="5.5" x2="10" y2="5.5"/><line x1="6" y1="8" x2="10" y2="8"/><line x1="6" y1="10.5" x2="8.5" y2="10.5"/>
+    <circle cx="12.5" cy="12.5" r="1.6" class="accent"/>
+  </symbol>
+  <symbol id="ic-cp" viewBox="0 0 16 16">
+    <line x1="4" y1="2" x2="4" y2="14"/>
+    <path d="M4 3 L12 4.5 L4 7"/>
+    <circle cx="12" cy="4.5" r="1" class="accent"/>
+  </symbol>
+  <symbol id="ic-xp" viewBox="0 0 16 16">
+    <path d="M4 12 C2.5 9 3 5.5 5.5 3.5"/>
+    <path d="M12 12 C13.5 9 13 5.5 10.5 3.5"/>
+    <path d="M5.5 8 L7 9.5 L10.5 5.5"/>
+    <circle cx="8" cy="12.8" r="1" class="accent"/>
+  </symbol>
+  <symbol id="ic-stab" viewBox="0 0 16 16">
+    <line x1="8" y1="3" x2="8" y2="13"/><line x1="5.5" y1="13" x2="10.5" y2="13"/>
+    <line x1="3" y1="4.5" x2="13" y2="4.5"/>
+    <path d="M1.5 8 A 2.2 2.2 0 0 0 5.5 8 Z"/><path d="M10.5 8 A 2.2 2.2 0 0 0 14.5 8 Z"/>
+    <line x1="3.5" y1="4.5" x2="3.5" y2="8"/><line x1="12.5" y1="4.5" x2="12.5" y2="8"/>
+  </symbol>
+  <symbol id="ic-mp" viewBox="0 0 16 16">
+    <circle cx="8" cy="4.5" r="1.8"/><path d="M5.5 12 C5.5 9.5 6.5 8 8 8 C9.5 8 10.5 9.5 10.5 12"/>
+    <circle cx="3.5" cy="5.5" r="1.3"/><path d="M1.8 12 C1.8 10 2.4 9 3.5 9 C4.2 9 4.8 9.4 5.1 10.2"/>
+    <circle cx="12.5" cy="5.5" r="1.3"/><path d="M14.2 12 C14.2 10 13.6 9 12.5 9 C11.8 9 11.2 9.4 10.9 10.2"/>
+  </symbol>
+  <symbol id="ic-fac" viewBox="0 0 16 16">
+    <path d="M2.5 13.5 L2.5 7 L6 9.5 L6 7 L9.5 9.5 L9.5 7 L13 9.5 L13 13.5 Z"/>
+    <line x1="11" y1="7" x2="11" y2="3.5"/><line x1="13" y1="7" x2="13" y2="4.5"/>
+    <circle cx="4.5" cy="11.5" r="0.9" class="accent"/>
+  </symbol>
+  <symbol id="ic-eq" viewBox="0 0 16 16">
+    <rect x="3" y="4.5" width="10" height="9" rx="0.8"/>
+    <line x1="3" y1="7.5" x2="13" y2="7.5"/><line x1="8" y1="7.5" x2="8" y2="13.5"/>
+    <path d="M5.5 4.5 L5.5 2.5 M10.5 4.5 L10.5 2.5"/>
+  </symbol>
+  <symbol id="ic-res" viewBox="0 0 16 16">
+    <ellipse cx="8" cy="4" rx="4" ry="1.6"/>
+    <path d="M4 4 L4 12 C4 13 6 13.8 8 13.8 C10 13.8 12 13 12 12 L12 4"/>
+    <line x1="4" y1="8" x2="12" y2="8"/>
+    <circle cx="8" cy="10" r="0.9" class="accent"/>
+  </symbol>
+  <symbol id="ic-div" viewBox="0 0 16 16">
+    <rect x="4.5" y="4.5" width="7" height="7"/>
+    <line x1="3" y1="13" x2="6.5" y2="9.5"/><line x1="13" y1="13" x2="9.5" y2="9.5"/>
+    <circle cx="8" cy="2.8" r="1" class="accent"/>
+  </symbol>
+</svg>
+
+<script>window.onerror=function(m,u,l){window.__pageError={m:m,l:l};document.title="ERR:"+m;};</script>
+<div id="sf-app">
+  <!-- 1. 冷启动主菜单（v7.0 全景页面流） -->
+  <section class="sf-screen" id="screen-main-menu"></section>
+  <!-- 2. 四时代全景副本大厅 -->
+  <section class="sf-screen" id="screen-era-select"></section>
+  <!-- 3. 国家挑选与沙盘档案舱 -->
+  <section class="sf-screen" id="screen-country-select"></section>
+
+  <!-- 4. 局内推演大厅（v6.0 战争大厅标准） -->
+  <section class="sf-screen active" id="screen-gameplay">
+  <!-- §2 顶部：国家统帅看板与战略缎带 -->
+  <header class="sf-topbar">
+    <!-- 2.1 领袖统帅看板 -->
+    <div class="sf-leader-plaque" id="hud-leader-plaque">
+      <div class="sf-leader-frame" id="hud-leader-frame" title="点击进入统帅部与内阁管理">
+        <div id="hud-leader-portrait"></div>
+      </div>
+      <div class="sf-nation-info">
+        <div class="sf-nation-name-row">
+          <span id="hud-nation-flag-wrap"></span>
+          <span class="sf-nation-title" id="hud-nation-title">德意志国</span>
+          <span class="sf-cabinet-badge" id="hud-ideology-badge">国家复兴</span>
+        </div>
+        <div class="sf-nation-badge-row">
+          <div class="sf-focus-quick-slot" id="hud-focus-quick-slot" title="点击查看全量国策树">
+            <div class="sf-focus-arc-wrap">
+              <svg class="sf-focus-arc-svg" viewBox="0 0 36 36">
+                <path class="sf-focus-arc-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path id="hud-focus-arc-path" class="sf-focus-arc-bar" stroke-dasharray="35, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              </svg>
+            </div>
+            <span class="sf-focus-text" id="hud-focus-text">国策: <b>四周年计划</b> (24/70天)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.2 中部：宏观战略资源金属缎带 -->
+    <div class="sf-strategic-ribbon" id="hud-strategic-ribbon">
+      <div class="sf-ribbon-item" data-tip="pp" title="政治点数: 影响内阁顾问、法案制定与外交行动">
+        <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-pp"/></svg></span>
+        <div class="sf-ribbon-data">
+          <span class="sf-ribbon-label">政治点</span>
+          <span class="sf-ribbon-val gold" id="sf-pp">0</span>
+        </div>
+      </div>
+      <div class="sf-ribbon-item" data-tip="cp" title="指挥点数: 用于将领战术特技、编制重组与作战动员">
+        <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-cp"/></svg></span>
+        <div class="sf-ribbon-data">
+          <span class="sf-ribbon-label">指挥点</span>
+          <span class="sf-ribbon-val cyan" id="sf-cp">100/200</span>
+        </div>
+      </div>
+      <div class="sf-ribbon-item" data-tip="xp" title="陆战作战经验: 用于师设计器调整与科技学说强化">
+        <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-xp"/></svg></span>
+        <div class="sf-ribbon-data">
+          <span class="sf-ribbon-label">陆战经验</span>
+          <span class="sf-ribbon-val green" id="sf-xp">50</span>
+        </div>
+      </div>
+
+      <div class="sf-ribbon-item" data-tip="stab" title="国家稳定度与战争支持度">
+        <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-stab"/></svg></span>
+        <div class="sf-ribbon-data">
+          <span class="sf-ribbon-label">稳定/战意</span>
+          <span class="sf-ribbon-val" id="sf-stab-war">85% / 90%</span>
+        </div>
+      </div>
+
+      <div class="sf-ribbon-item sf-ribbon-manpower" data-tip="manpower" title="可动员人力储备 (可征召/服役)">
+        <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-mp"/></svg></span>
+        <div class="sf-ribbon-data">
+          <span class="sf-ribbon-label">人力</span>
+          <span class="sf-ribbon-val gold" id="sf-manpower">1.2M</span>
+        </div>
+      </div>
+
+      <div class="sf-ribbon-item" data-tip="factory" title="工业工厂: 军用工厂(红) / 民用工厂(金)">
+        <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-fac"/></svg></span>
+        <div class="sf-ribbon-data">
+          <span class="sf-ribbon-label">工厂 (军/民)</span>
+          <span class="sf-ribbon-val"><b id="sf-mil" style="color:#f87171">0</b> / <b id="sf-civ" style="color:#ffd977">0</b></span>
+        </div>
+      </div>
+
+      <div class="sf-ribbon-item" data-tip="equip" title="装备库存总量">
+        <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-eq"/></svg></span>
+        <div class="sf-ribbon-data">
+          <span class="sf-ribbon-label">装备点</span>
+          <span class="sf-ribbon-val" id="sf-equip">0</span>
+        </div>
+      </div>
+
+      <!-- v7.0 E4：六大战略资源 + 燃料储备缎带 -->
+      <div class="sf-ribbon-item sf-res-ribbon" title="六大战略资源：悬停查看产出/消耗/赤字公式下钻">
+        <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-res"/></svg></span>
+        <div class="sf-ribbon-data">
+          <span class="sf-ribbon-label">战略资源</span>
+          <span class="sf-ribbon-val" id="sf-res-strip" style="display:flex;gap:5px;align-items:center;"></span>
+        </div>
+      </div>
+
+      <div class="sf-ribbon-item" data-tip="div" title="我方现役师团总量">
+        <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-div"/></svg></span>
+        <div class="sf-ribbon-data">
+          <span class="sf-ribbon-label">现役师</span>
+          <span class="sf-ribbon-val gold" id="sf-div">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.3 右侧：战地日历时钟与调速操控台 -->
+    <div class="sf-clock-controls">
+      <div class="sf-chronometer-box">
+        <div class="sf-date-display" id="sf-date">1939年9月1日</div>
+        <div class="sf-day-count" id="sf-day-count">战役历时: 第 1 天</div>
+      </div>
+      <!-- §6.1 时间组：世界紧张度半圆表盘（固定在时间组，不随资源缎带滚动） -->
+      <div class="sf-tension-badge" id="hud-tension-badge" data-tip="tension" title="世界紧张度: 反映全球危机对抗升级程度"></div>
+      <div class="sf-speed-knobs">
+        <button class="sf-speed-btn" data-speed="0" title="暂停 (空格)">⏸</button>
+        <button class="sf-speed-btn active" data-speed="1" title="1 天/秒">1x</button>
+        <button class="sf-speed-btn" data-speed="2" title="2 天/秒">2x</button>
+        <button class="sf-speed-btn" data-speed="3" title="4 天/秒">4x</button>
+        <button class="sf-speed-btn" data-speed="4" title="8 天/秒（大地图快进）">8x</button>
+      </div>
+      <div class="sf-sys-actions">
+        <button class="btn gold" id="sf-focus-btn" title="战略国策树 [打开全量国策树]"><span class="bi">📜</span><span class="bt">国策</span></button>
+        <button class="btn" id="sf-chars-btn" title="内政、将领与顾问"><span class="bi">🎖️</span><span class="bt">统帅</span></button>
+        <button class="btn gold" id="sf-designer-btn" title="师编制设计器"><span class="bi">📐</span><span class="bt">编制</span></button>
+        <button class="btn" id="sf-stats-btn" title="全球大账本与战史"><span class="bi">📊</span><span class="bt">统计</span></button>
+        <button class="btn" id="sf-encyclopedia-btn" title="百科全书档案">📖</button>
+        <button class="btn" id="sf-diff-btn" title="切换游戏难度">上将</button>
+        <button class="btn" id="sf-save-btn" title="存档与读档">💾</button>
+        <button class="btn" id="sf-load-btn" style="display:none">读档</button>
+        <button class="btn" id="sf-audio-btn" title="音效开关">🔊</button>
+        <button class="btn" id="sf-menu-btn" title="返回统帅部主菜单">☰</button>
+        <button class="btn" id="sf-help-btn" title="作战手册">?</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- v9.5 U2 态势带：副本态势 chips（左） + 警报（右）合并为一条 30px 战略带 -->
+  <div class="sf-statusband" id="sf-statusband">
+    <!-- §8 剧本时代专属次级战略轨 (双轨顶栏架构：冷战两极对峙/DEFCON、一战疲惫/炮击、现代威慑) -->
+    <div class="sf-era-subtrack" id="sf-era-subtrack" style="display:none;"></div>
+    <!-- §6.1 警报条：横向一行，每条可点击定位（无警报时收起） -->
+    <div class="sf-alertbar" id="sf-alertbar"></div>
+  </div>
+
+  <!-- §3 主体作战大厅 -->
+  <div class="sf-main">
+    <!-- §6.2 左侧折叠图标条（56px） -->
+    <div class="sf-rail" id="sf-rail-left"></div>
+    <!-- 3.1 左侧抽屉式军工装甲操作台 -->
+    <aside class="sf-side-drawer" id="sf-side-drawer">
+      <button class="sf-collapse-btn" id="sf-collapse-left" title="折叠左侧军工抽屉">«</button>
+      <div class="sf-drawer-tabs">
+        <button class="sf-drawer-tab-btn active" data-tab="prod">工业流水线</button>
+        <button class="sf-drawer-tab-btn" data-tab="recruit">部队招募</button>
+        <button class="sf-drawer-tab-btn" data-tab="queue">训练队列</button>
+        <button class="sf-drawer-tab-btn" data-tab="air">空军战区</button>
+        <button class="sf-drawer-tab-btn" data-tab="navy">海军舰队</button>
+        <button class="sf-drawer-tab-btn" data-tab="intel">间谍情报</button>
+        <button class="sf-drawer-tab-btn" data-tab="doctrine">军种学说</button>
+        <button class="sf-drawer-tab-btn" data-tab="trade">国际贸易</button>
+        <button class="sf-drawer-tab-btn" data-tab="stats">战况统计</button>
+        <button class="sf-drawer-tab-btn" data-tab="era">时代机制</button>
+        <button class="sf-drawer-tab-btn" data-tab="decisions">决议</button>
+        <button class="sf-drawer-tab-btn" data-tab="research">科研</button>
+        <button class="sf-drawer-tab-btn" data-tab="army">野战军</button>
+      </div>
+      <div class="sf-drawer-content" id="sf-prod"></div>
+      <!-- v14.1 E4：panelArmy.js（军与作战计划面板）此前整个文件是死代码，此处激活 -->
+      <div class="sf-drawer-content" id="sf-army-panel" style="display:none;"></div>
+    </aside>
+
+    <!-- 3.2 中央参谋大地图视口 -->
+    <main class="sf-mapwrap">
+      <canvas id="sfmap"></canvas>
+      <div class="sf-map-legend" id="sf-map-legend"></div>
+      <div class="sf-map-scale" id="sf-map-scale"><span id="sf-map-scale-text">200px ≈ 200 km</span></div>
+      <div class="sf-map-compass" title="正北"><svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="18" fill="rgba(12,16,22,.7)" stroke="#b59247" stroke-width="1.5"/><path d="M20 6 L24 20 L20 34 L16 20 Z" fill="#d8b74f"/><path d="M20 6 L24 20 L20 20 Z" fill="#8a6f27"/><text x="20" y="14" text-anchor="middle" font-size="9" fill="#1a1d24" font-weight="bold">N</text></svg></div>
+      <div class="sf-devbar" id="sf-devbar">
+        <button class="btn" data-dev="equip">+2000装备</button>
+        <button class="btn" data-dev="skip">跳30天</button>
+        <button class="btn" data-dev="win">波兰即降</button>
+        <button class="btn" data-dev="ai">AI日志</button>
+      </div>
+
+      <!-- §6.5 迷你地图（220×140，默认关闭，M 键开关） -->
+      <div class="sf-minimap" id="sf-minimap"></div>
+      <!-- v10.0 M4 省份战术情报舱 -->
+      <div class="sf-province-dossier" id="sf-province-dossier"></div>
+    </main>
+
+    <!-- §6.3 右侧折叠图标条（56px） -->
+    <div class="sf-rail sf-rail-right" id="sf-rail-right"></div>
+    <!-- 3.3 右侧战场与地块情报详情 -->
+    <aside class="sf-side-info-panel">
+      <button class="sf-collapse-btn sf-collapse-right" id="sf-collapse-right" title="折叠右侧情报面板">»</button>
+      <!-- v14.1 E4：右轨三键的对应页签（战区情报 / 地形修正 / 驻防名册） -->
+      <div class="sf-drawer-tabs sf-info-tabs" id="sf-info-tabs">
+        <button class="sf-info-tab-btn" data-info-tab="theater">战区情报</button>
+        <button class="sf-info-tab-btn" data-info-tab="terrain">地形修正</button>
+        <button class="sf-info-tab-btn" data-info-tab="garrison">驻防名册</button>
+      </div>
+      <!-- M4：命令队列（可逐条撤销） -->
+      <div class="sf-cmdqueue" id="sf-cmdqueue"></div>
+      <div class="sf-info" id="sf-info"></div>
+    </aside>
+  </div>
+
+  <!-- §5 底部：集团军群将领带与作战计划快捷栏 -->
+  <footer class="sf-bottom-ribbon" id="sf-army-ribbon">
+    <!-- 将领卡牌槽带 (524张将领头像全面登台) -->
+    <div class="sf-generals-strip" id="hud-generals-strip"></div>
+    <div id="sf-general-detail"></div>
+
+    <!-- 作战计划指令盘 -->
+    <div class="sf-plan-action-bar" id="hud-plan-actions">
+      <button class="sf-plan-btn" id="sf-plan-frontline" title="划设防守前线 (快捷键 Z)">
+        <img src="assets/icons/ui_plan_frontline.png" alt="前线" onerror="this.src='assets/icons/focus_army.svg'">
+        <span>划前线</span>
+        <b>[Z]</b>
+      </button>
+      <button class="sf-plan-btn" id="sf-plan-spearhead" title="进攻矛头突破 (快捷键 X)">
+        <img src="assets/icons/ui_plan_spearhead.png" alt="矛头" onerror="this.src='assets/icons/focus_armor.svg'">
+        <span>进攻矛头</span>
+        <b>[X]</b>
+      </button>
+      <button class="sf-plan-btn" id="sf-plan-fallback" title="退守备用防线 (快捷键 C)">
+        <img src="assets/icons/ui_plan_fallback.png" alt="退守" onerror="this.src='assets/icons/focus_social.svg'">
+        <span>退守线</span>
+        <b>[C]</b>
+      </button>
+      <button class="sf-plan-btn" id="sf-plan-fill" title="全军填线对齐 (快捷键 V)">
+        <img src="assets/icons/ui_plan_fill.png" alt="填线" onerror="this.src='assets/icons/focus_intel.svg'">
+        <span>填线对齐</span>
+        <b>[V]</b>
+      </button>
+      <button class="sf-plan-btn" id="sf-plan-stance" title="作战激进度切换 (谨慎/平衡/狂暴)">
+        <span style="font-size:16px;">⚔️</span>
+        <span id="sf-stance-label">平衡推进</span>
+        <b>[姿态]</b>
+      </button>
+      <!-- 执行进攻大按钮 -->
+      <button class="sf-plan-execute-btn" id="sf-plan-execute" title="启动执行当前集团军群全部作战计划">
+        <img src="assets/icons/ui_plan_execute.png" alt="执行" onerror="this.src='assets/icons/focus_air.svg'">
+        <span>启动执行</span>
+      </button>
+    </div>
+  </footer>
+
+  <!-- v9.5 U2 战地电台（唯一入口）：左侧最新头条 + 右侧历史日志；默认单行，悬停展开 -->
+  <div class="sf-logbar" id="sf-logbar">
+    <div class="sf-log-head" id="sf-log-head"></div>
+    <div class="sf-log" id="sf-log"></div>
+  </div>
+  </section>
+
+  <!-- 5. 终局战史复盘与将领授勋大厅（AAR） -->
+  <section class="sf-screen" id="screen-aar"></section>
+</div>
+
+<!-- 战前简报与帮助覆盖层 -->
+<div class="sf-overlay" id="sf-brief">
+  <div class="brief-box">
+    <h1>钢铁前线 · 战争大厅</h1>
+    <p class="bf-sub" id="bf-sub-text">1939年9月1日 · 你指挥最高统帅部 · 确定性沙盘战役</p>
+    <p>最高统帅部训令：<b>在既定工期内突破主要防御枢纽</b>，达成战略威慑目标。</p>
+    <ul>
+      <li><b>领袖与内阁</b>：点击左上角领袖头像，调整经济/征兵法案并任命顾问</li>
+      <li><b>作战计划</b>：在底部选中将领，通过 [Z] 划前线、[X] 进攻矛头、点击 [启动执行] 展开推演</li>
+      <li><b>立体军标</b>：绿色垂直条为兵员/装备充实度，黄色垂直条为组织度</li>
+      <li><b>工业总装</b>：在左侧抽屉调整军工厂分配与生产效率曲线</li>
+    </ul>
+    <button class="btn primary" style="width:100%;padding:10px;font-size:14px;margin-top:10px" onclick="document.getElementById('sf-brief').classList.remove('on')">签署命令 · 进入战位</button>
+  </div>
+</div>
+
+<div class="sf-overlay" id="sf-help">
+  <div class="brief-box" style="max-width:740px;max-height:86vh;overflow-y:auto;text-align:left;">
+    <h2>统帅部作战操典与全键位操作手册 (v9.0)</h2>
+    <div style="font-size:12px;color:var(--c-brass-bright,#ffd977);margin-bottom:8px;">★ 深度复刻《钢铁雄心IV》核心战术微操与作战计划系统</div>
+    <table style="width:100%;font-size:12px;border-collapse:collapse;margin:8px 0 12px;color:#e2e8f0;">
+      <thead>
+        <tr style="border-bottom:1px solid #4a5568;color:#94a3b8;text-align:left;">
+          <th style="padding:4px 6px;">操作指令</th>
+          <th style="padding:4px 6px;">快捷键 (本作 v9)</th>
+          <th style="padding:4px 6px;">说明与战术要领</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">点选 / 框选部队</td><td style="padding:4px 6px;color:#ffd977;">左键 / 左键框选</td><td style="padding:4px 6px;">支持单选、拖拽框选多个师团，双击选定同编制师</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">机动开进 / 进攻</td><td style="padding:4px 6px;color:#ffd977;">右键目标格</td><td style="padding:4px 6px;">所选师团向目标格机动；若目标有敌军则发起进攻</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">航路点编排</td><td style="padding:4px 6px;color:#ffd977;">Shift + 右键</td><td style="padding:4px 6px;">设定连续行军航路点（显示编号旗标），按序推进</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">支援攻击</td><td style="padding:4px 6px;color:#ffd977;">Ctrl + 右键</td><td style="padding:4px 6px;">原地参与进攻提供火力，攻克后不进入目标格</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">进攻攻势线 / 矛头</td><td style="padding:4px 6px;color:#ffd977;">X / Shift + X</td><td style="padding:4px 6px;">X 标定宽正面攻势线；Shift+X 标定窄正面突破矛头</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">防线划设 / 均势填线</td><td style="padding:4px 6px;color:#ffd977;">Z / C / V</td><td style="padding:4px 6px;">Z 划设边境前线，C 划设纵深退守线，V 自动全军填线</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">线形重塑 / 弯曲箭头</td><td style="padding:4px 6px;color:#ffd977;">Alt + 拖拽</td><td style="padding:4px 6px;">按住 Alt 拖动或点击箭头可重塑进攻突击轴线</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">切分一半 / 紧急停步</td><td style="padding:4px 6px;color:#ffd977;">S / H</td><td style="padding:4px 6px;">S 选定当前部队的一半；H 立即停步原地筑垒</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">战略调动 (铁路机动)</td><td style="padding:4px 6px;color:#ffd977;">B</td><td style="padding:4px 6px;">移速提升 1.8 倍，但在行军期间丧失组织度且无法战斗</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">移出计划 / 删命令</td><td style="padding:4px 6px;color:#ffd977;">Ctrl+H / Del</td><td style="padding:4px 6px;">Ctrl+H 将部队移出作战计划；Del 清空所选部队命令</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">军团循环切换</td><td style="padding:4px 6px;color:#ffd977;">Tab</td><td style="padding:4px 6px;">在已编成各野战集团军之间循环切换选中</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">数字键编组 / 居中</td><td style="padding:4px 6px;color:#ffd977;">Ctrl+1..9 / 1..9</td><td style="padding:4px 6px;">Ctrl+数字绑定编组，数字键选中，双按数字键镜头居中 [H]</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">部队演习训练</td><td style="padding:4px 6px;color:#ffd977;">K / Shift + K</td><td style="padding:4px 6px;">K 训练一轮；Shift+K 训练至熟练满级 [H]</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">战术地图模式</td><td style="padding:4px 6px;color:#ffd977;">F1 – F10 / Ctrl+F1</td><td style="padding:4px 6px;">F1默认 / F2海权 / F3制空 / F4补给 / F5地形 / F6抵抗 / F7资源 / F8工业 / F9阵营 / F10天气；Ctrl+F1 打开模式列表</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">昼夜循环遮罩</td><td style="padding:4px 6px;color:#ffd977;">N</td><td style="padding:4px 6px;">切换战场昼夜战术光影与黑夜视效覆盖 [H]</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">兵牌配色切换</td><td style="padding:4px 6px;color:#ffd977;">, (逗号键)</td><td style="padding:4px 6px;">在国家代表色与阵营红蓝对抗色之间切换 [H]</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">战地迷你地图</td><td style="padding:4px 6px;color:#ffd977;">M</td><td style="padding:4px 6px;">开关右下角雷达态势迷你地图，支持视口快速拖拽跳转</td></tr>
+        <tr style="border-bottom:1px solid #2d3748;"><td style="padding:4px 6px;">时钟与推演调速</td><td style="padding:4px 6px;color:#ffd977;">空格 / 1 - 3</td><td style="padding:4px 6px;">空格键暂停/继续推演；数字键 1/2/3 切换推演航速</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:11.5px;color:#94a3b8;line-height:1.6;border-top:1px solid #334155;padding-top:6px;">
+      <b>核心战术法则：</b><br>
+      ① <b>双垂直条</b>：左侧垂直条为兵力充实度（HP/STR，绿），紧邻右侧为战斗组织度（ORG，黄）。组织度打空部队即溃退！<br>
+      ② <b>堑壕与宽度</b>：坚守阵地每日累积壕沟增益；多师突击受限于六角格作战宽度，超宽与超堆叠将招致严厉惩罚。<br>
+      ③ <b>后勤补给网</b>：铁路与摩托化枢纽向外辐射补给，断粮断油会导致机动瘫痪、战斗力大打折扣。
+    </div>
+    <button class="btn primary" style="width:100%;margin-top:12px;padding:8px;" onclick="document.getElementById('sf-help').classList.remove('on')">返回作战指挥台</button>
+  </div>
+</div>
+
+<div class="sf-overlay" id="sf-gameover"></div>
+<div class="sf-overlay" id="sf-focus-modal"></div>
+<div class="sf-overlay" id="sf-chars-modal"></div>
+<div class="sf-overlay" id="sf-designer-modal"></div>
+<div class="sf-overlay" id="sf-encyclopedia-modal"></div>
+<div class="sf-overlay" id="sf-news-modal"></div>
+<div class="sf-overlay" id="sf-save-modal"></div>
+<div class="sf-overlay" id="sf-diff-modal"></div>
+<div id="sf-toast"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
