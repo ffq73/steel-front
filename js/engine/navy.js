@@ -606,7 +606,13 @@ export function shipsAvailable(world, natId){
 export function invasionCapacity(world, natId){
   const n = world.nations[natId];
   if(!n) return 10;
-  return n.invasionCap || 10;
+  // W7-2：海军基地等级扩登陆容量（B5 建造的 naval_base 首个游戏读点）
+  let navalLevels = 0;
+  for(const h of world.hexes){
+    if(h.owner !== natId) continue;
+    navalLevels += (h.buildings && h.buildings.naval_base) || h.naval_base || 0;
+  }
+  return (n.invasionCap || 10) + Math.min(10, navalLevels * 2);
 }
 
 /** 是否具备某特性（核打击 / 火箭 / 登陆艇） */

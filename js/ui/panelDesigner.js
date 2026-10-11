@@ -65,7 +65,12 @@ export function openDesignerModal(store){
       html += `<button class="btn ${sel ? 'gold' : ''}" style="font-size:11.5px;padding:3px 10px;"
         title="${t.desc}" data-set-tier="${tid}">${t.name}${sel ? ' ✓' : ''}</button>`;
     }
-    html += `<span style="font-size:10px;color:#8a94a6;margin-left:4px;">${TEMPLATE_TIERS[workingTemplate.tier].desc}</span></div>
+    html += `<span style="font-size:10px;color:#8a94a6;margin-left:4px;">${TEMPLATE_TIERS[workingTemplate.tier].desc}</span>
+      <!-- W3-4：具名模板库 —— 自建编制的另存与删除 -->
+      <button class="btn" style="font-size:11.5px;padding:3px 10px;margin-left:8px;" id="sf-save-as-template"
+        title="把当前设计另存为一个具名编制，出现在上方模板列表">📂 另存为具名编制</button>
+      ${String(selectedTmplKey).startsWith('custom_') ? `<button class="btn" style="font-size:11.5px;padding:3px 10px;color:#ff6b6b;" id="sf-delete-template"
+        title="删除这个自建编制（预设编制不可删除）">🗑 删除该自建编制</button>` : ''}</div>
 
       <!-- 预设选择器 -->
       <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center;flex-wrap:wrap;">
@@ -237,6 +242,45 @@ export function openDesignerModal(store){
       });
     }
 
+    // W3-4：另存为具名编制 —— 具名模板库的"存"
+    const saveAsBtn = modal.querySelector('#sf-save-as-template');
+    if(saveAsBtn){
+      saveAsBtn.addEventListener('click', () => {
+        sound.playClick();
+        promptSaveAsTemplate();
+      });
+    }
+
+    // W3-4：删除自建编制 —— 具名模板库的"删"（预设编制不可删）
+    const delBtn = modal.querySelector('#sf-delete-template');
+    if(delBtn){
+      delBtn.addEventListener('click', () => {
+        sound.playClick();
+        if(!String(selectedTmplKey).startsWith('custom_')) return;
+        const delModal = document.createElement('div');
+        delModal.className = 'sf-overlay on';
+        delModal.innerHTML = `<div class="brief-box" style="max-width:340px;">
+          <h3 style="margin:0 0 10px 0;font-size:16px;color:var(--gold);">删除自建编制</h3>
+          <div style="font-size:12px;color:var(--ink);margin-bottom:12px;">确认删除【${workingTemplate.name}】？该操作不可撤销。</div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn" style="flex:1;" id="sf-del-cancel">取消</button>
+            <button class="btn" style="flex:1;color:#ff6b6b;" id="sf-del-confirm">确认删除</button>
+          </div>
+        </div>`;
+        document.body.appendChild(delModal);
+        delModal.querySelector('#sf-del-cancel').addEventListener('click', () => delModal.remove());
+        delModal.querySelector('#sf-del-confirm').addEventListener('click', () => {
+          sound.playClick();
+          delete w.templates[selectedTmplKey];
+          selectedTmplKey = Object.keys(w.templates)[0] || 'infantry_standard';
+          workingTemplate = JSON.parse(JSON.stringify(w.templates[selectedTmplKey]));
+          originalTemplate = JSON.parse(JSON.stringify(workingTemplate));
+          delModal.remove();
+          render();
+        });
+      });
+    }
+
     // 全军整编
     const refitBtn = modal.querySelector('#sf-refit-all');
     if(refitBtn){
@@ -259,6 +303,39 @@ export function openDesignerModal(store){
         render();
       });
     }
+  }
+
+  // W3-4：具名模板库 —— 命名弹窗（不花 XP；换装整编才消耗经验）
+  function promptSaveAsTemplate(){
+    const pickModal = document.createElement('div');
+    pickModal.className = 'sf-overlay on';
+    pickModal.innerHTML = `<div class="brief-box" style="max-width:360px;">
+      <h3 style="margin:0 0 10px 0;font-size:16px;color:var(--gold);">另存为具名编制</h3>
+      <div style="font-size:11px;color:#8a94a6;margin-bottom:8px;">编制将存入本国的模板库（免费），此后可在模板列表选用并对全军整编。</div>
+      <input type="text" id="sf-tmpl-name" maxlength="20" placeholder="编制名称（如：装甲矛头师）"
+        style="width:100%;padding:7px 10px;background:#131720;border:1px solid #2d3748;border-radius:4px;color:var(--ink);font-size:13px;margin-bottom:10px;">
+      <div style="display:flex;gap:8px;">
+        <button class="btn" style="flex:1;" id="sf-saveas-cancel">取消</button>
+        <button class="btn gold" style="flex:1;" id="sf-saveas-confirm">保存编制</button>
+      </div>
+    </div>`;
+    document.body.appendChild(pickModal);
+    const input = pickModal.querySelector('#sf-tmpl-name');
+    input.focus();
+    pickModal.querySelector('#sf-saveas-cancel').addEventListener('click', () => pickModal.remove());
+    const confirm = () => {
+      const name = (input.value || '').trim() || '自定义编制';
+      const key = 'custom_' + Date.now();
+      w.templates[key] = JSON.parse(JSON.stringify(workingTemplate));
+      w.templates[key].name = name;
+      w.templates[key].custom = true;
+      selectedTmplKey = key;
+      originalTemplate = JSON.parse(JSON.stringify(workingTemplate));
+      pickModal.remove();
+      render();
+    };
+    pickModal.querySelector('#sf-saveas-confirm').addEventListener('click', () => { sound.playClick(); confirm(); });
+    input.addEventListener('keydown', e => { if(e.key === 'Enter'){ sound.playClick(); confirm(); } });
   }
 
   function promptSupportSelect(slotIdx){

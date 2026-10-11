@@ -3846,6 +3846,134 @@ body.theme-modern{--era-accent:#3b82c4}
         </div>
       </div>
 
+PE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>钢铁前线 Steel Front · 战争大厅与统帅部</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/screens.css">
+<link rel="stylesheet" href="css/era.css">
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- v9.5 U5 黄铜线描图标集（stroke=currentColor 由 CSS 着色） -->
+  <symbol id="ic-pp" viewBox="0 0 16 16">
+    <rect x="4" y="2.5" width="8" height="11" rx="1"/>
+    <line x1="6" y1="5.5" x2="10" y2="5.5"/><line x1="6" y1="8" x2="10" y2="8"/><line x1="6" y1="10.5" x2="8.5" y2="10.5"/>
+    <circle cx="12.5" cy="12.5" r="1.6" class="accent"/>
+  </symbol>
+  <symbol id="ic-cp" viewBox="0 0 16 16">
+    <line x1="4" y1="2" x2="4" y2="14"/>
+    <path d="M4 3 L12 4.5 L4 7"/>
+    <circle cx="12" cy="4.5" r="1" class="accent"/>
+  </symbol>
+  <symbol id="ic-xp" viewBox="0 0 16 16">
+    <path d="M4 12 C2.5 9 3 5.5 5.5 3.5"/>
+    <path d="M12 12 C13.5 9 13 5.5 10.5 3.5"/>
+    <path d="M5.5 8 L7 9.5 L10.5 5.5"/>
+    <circle cx="8" cy="12.8" r="1" class="accent"/>
+  </symbol>
+  <symbol id="ic-stab" viewBox="0 0 16 16">
+    <line x1="8" y1="3" x2="8" y2="13"/><line x1="5.5" y1="13" x2="10.5" y2="13"/>
+    <line x1="3" y1="4.5" x2="13" y2="4.5"/>
+    <path d="M1.5 8 A 2.2 2.2 0 0 0 5.5 8 Z"/><path d="M10.5 8 A 2.2 2.2 0 0 0 14.5 8 Z"/>
+    <line x1="3.5" y1="4.5" x2="3.5" y2="8"/><line x1="12.5" y1="4.5" x2="12.5" y2="8"/>
+  </symbol>
+  <symbol id="ic-mp" viewBox="0 0 16 16">
+    <circle cx="8" cy="4.5" r="1.8"/><path d="M5.5 12 C5.5 9.5 6.5 8 8 8 C9.5 8 10.5 9.5 10.5 12"/>
+    <circle cx="3.5" cy="5.5" r="1.3"/><path d="M1.8 12 C1.8 10 2.4 9 3.5 9 C4.2 9 4.8 9.4 5.1 10.2"/>
+    <circle cx="12.5" cy="5.5" r="1.3"/><path d="M14.2 12 C14.2 10 13.6 9 12.5 9 C11.8 9 11.2 9.4 10.9 10.2"/>
+  </symbol>
+  <symbol id="ic-fac" viewBox="0 0 16 16">
+    <path d="M2.5 13.5 L2.5 7 L6 9.5 L6 7 L9.5 9.5 L9.5 7 L13 9.5 L13 13.5 Z"/>
+    <line x1="11" y1="7" x2="11" y2="3.5"/><line x1="13" y1="7" x2="13" y2="4.5"/>
+    <circle cx="4.5" cy="11.5" r="0.9" class="accent"/>
+  </symbol>
+  <symbol id="ic-eq" viewBox="0 0 16 16">
+    <rect x="3" y="4.5" width="10" height="9" rx="0.8"/>
+    <line x1="3" y1="7.5" x2="13" y2="7.5"/><line x1="8" y1="7.5" x2="8" y2="13.5"/>
+    <path d="M5.5 4.5 L5.5 2.5 M10.5 4.5 L10.5 2.5"/>
+  </symbol>
+  <symbol id="ic-res" viewBox="0 0 16 16">
+    <ellipse cx="8" cy="4" rx="4" ry="1.6"/>
+    <path d="M4 4 L4 12 C4 13 6 13.8 8 13.8 C10 13.8 12 13 12 12 L12 4"/>
+    <line x1="4" y1="8" x2="12" y2="8"/>
+    <circle cx="8" cy="10" r="0.9" class="accent"/>
+  </symbol>
+  <symbol id="ic-div" viewBox="0 0 16 16">
+    <rect x="4.5" y="4.5" width="7" height="7"/>
+    <line x1="3" y1="13" x2="6.5" y2="9.5"/><line x1="13" y1="13" x2="9.5" y2="9.5"/>
+    <circle cx="8" cy="2.8" r="1" class="accent"/>
+  </symbol>
+</svg>
+
+<script>window.onerror=function(m,u,l){window.__pageError={m:m,l:l};document.title="ERR:"+m;};</script>
+<div id="sf-app">
+  <!-- 1. 冷启动主菜单（v7.0 全景页面流） -->
+  <section class="sf-screen" id="screen-main-menu"></section>
+  <!-- 2. 四时代全景副本大厅 -->
+  <section class="sf-screen" id="screen-era-select"></section>
+  <!-- 3. 国家挑选与沙盘档案舱 -->
+  <section class="sf-screen" id="screen-country-select"></section>
+
+  <!-- 4. 局内推演大厅（v6.0 战争大厅标准） -->
+  <section class="sf-screen active" id="screen-gameplay">
+  <!-- §2 顶部：国家统帅看板与战略缎带 -->
+  <header class="sf-topbar">
+    <!-- 2.1 领袖统帅看板 -->
+    <div class="sf-leader-plaque" id="hud-leader-plaque">
+      <div class="sf-leader-frame" id="hud-leader-frame" title="点击进入统帅部与内阁管理">
+        <div id="hud-leader-portrait"></div>
+      </div>
+      <div class="sf-nation-info">
+        <div class="sf-nation-name-row">
+          <span id="hud-nation-flag-wrap"></span>
+          <span class="sf-nation-title" id="hud-nation-title">德意志国</span>
+          <span class="sf-cabinet-badge" id="hud-ideology-badge">国家复兴</span>
+        </div>
+        <div class="sf-nation-badge-row">
+          <div class="sf-focus-quick-slot" id="hud-focus-quick-slot" title="点击查看全量国策树">
+            <div class="sf-focus-arc-wrap">
+              <svg class="sf-focus-arc-svg" viewBox="0 0 36 36">
+                <path class="sf-focus-arc-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path id="hud-focus-arc-path" class="sf-focus-arc-bar" stroke-dasharray="35, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              </svg>
+            </div>
+            <span class="sf-focus-text" id="hud-focus-text">国策: <b>四周年计划</b> (24/70天)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.2 中部：宏观战略资源金属缎带 -->
+    <div class="sf-strategic-ribbon" id="hud-strategic-ribbon">
+      <div class="sf-ribbon-item" data-tip="pp" title="政治点数: 影响内阁顾问、法案制定与外交行动">
+        <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-pp"/></svg></span>
+        <div class="sf-ribbon-data">
+          <span class="sf-ribbon-label">政治点</span>
+          <span class="sf-ribbon-val gold" id="sf-pp">0</span>
+        </div>
+      </div>
+      <div class="sf-ribbon-item" data-tip="cp" title="指挥点数: 用于将领战术特技、编制重组与作战动员">
+        <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-cp"/></svg></span>
+        <div class="sf-ribbon-data">
+          <span class="sf-ribbon-label">指挥点</span>
+          <span class="sf-ribbon-val cyan" id="sf-cp">100/200</span>
+        </div>
+      </div>
+      <div class="sf-ribbon-item" data-tip="xp" title="陆战作战经验: 用于师设计器调整与科技学说强化">
+        <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-xp"/></svg></span>
+        <div class="sf-ribbon-data">
+          <span class="sf-ribbon-label">陆战经验</span>
+          <span class="sf-ribbon-val green" id="sf-xp">50</span>
+        </div>
+      </div>
+
+      <!-- W4-6：人力已由上方 sf-manpower 项承载（本项曾与其重复，已合并） -->
+
       <div class="sf-ribbon-item" data-tip="stab" title="国家稳定度与战争支持度">
         <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-stab"/></svg></span>
         <div class="sf-ribbon-data">
@@ -3854,7 +3982,7 @@ body.theme-modern{--era-accent:#3b82c4}
         </div>
       </div>
 
-      <div class="sf-ribbon-item sf-ribbon-manpower" data-tip="manpower" title="可动员人力储备 (可征召/服役)">
+      <div class="sf-ribbon-item" data-tip="manpower" title="可动员人力储备：补充伤亡与组建新师（受征兵法/稳定度/战意调制，点击看明细）">
         <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-mp"/></svg></span>
         <div class="sf-ribbon-data">
           <span class="sf-ribbon-label">人力</span>
@@ -5139,6 +5267,7 @@ const K = {
   SUPPLY_HUB_BASE: 4.0,             // [B] 单个连通枢纽的基础供给
   SUPPLY_HUB_MOTOR: 1.6,            // [B] 摩托化等级每级 +60% 供给（马→卡车→多卡）
   SUPPLY_INFRA_BONUS: 0.3,          // [H] 每级基建提供的底供（HOI4 原版 0.3）
+  SUPPLY_RAIL_BONUS: 0.2,           // [H] W7-2：每级铁路等级补带上限 +0.2（railLevel 0-3 首个游戏读点）
   SUPPLY_OVERLOAD_PENALTY: 0.40,    // [B] 过载时补给率最多削弱 40%（HOI4 补给不足有下限）
   MANPOWER_PER_DIVISION: {    // [B] 各兵种编制人力（千人）
     inf: 1000, cav: 800, mtn: 900, mot: 1200, larm: 1400, arm: 1600
@@ -5161,7 +5290,9 @@ const K = {
   PP_PER_DAY: 2.0,            // [H]
   PP_STABILITY_PENALTY: -0.5, // [H] 稳定性 0% → -50%
   PP_STABILITY_BONUS: 0.2,    // [H] 稳定性 100% → +20%
+  WS_STABILITY_PENALTY: 30,   // [H] W4-2：战意 0% 时战时稳定度目标 −30 点（每日向下漂移 ≤0.1）
   PP_MAX: 2000,               // [H]
+  ADVISOR_SWAP_COOLDOWN: 7,   // [H] W4-4：同一顾问槽 7 天冷却（每周重选）
   PP_FOCUS_COST: 1.0,         // [H] 国策进行中 -1PP/天
   FOCUS_DAYS: 70,             // [H]
   FOCUS_RUSH_PP: 100,         // [B] 加速国策花费
@@ -5175,7 +5306,7 @@ const K = {
   EFF_CAP: 0.50,              // [H] 效率上限 50%
   EFF_GROWTH: 0.001,          // [H] 日增 = 0.001 × cap² / current
   LINE_FACTORY_CAP: 15,       // [H] 单条生产线最多 15 厂
-  CONSUMER_GOODS: { civilian:0.35, partial:0.20, war:0.10, total:0.05 },  // [H] 结构 + [B] 数值
+  CONSUMER_GOODS: { civilian:0.35, export_focus:0.30, partial:0.20, war:0.10, total:0.05 },  // W4-5：+export_focus  // [H] 结构 + [B] 数值
   // v14.1 B5：5 类建筑 —— 军民工厂受厂槽约束，基建/空海军基地不占厂槽
   BUILD_COST: { civ:5000, mil:6000, infra:3000, fort:2000, air_base:4000, naval_base:4500 },  // [B] 成本
   FACTORY_SLOTS_PER_HEX: 3,   // [B] 每格厂槽（v14.1 B5：4→3，对齐 HOI4 每州 3 建筑位）
@@ -5210,14 +5341,16 @@ const K = {
     art_eq: '火炮',
     tank_eq: '坦克',
     truck_eq: '卡车',
-    sup_eq: '支援装备'
+    sup_eq: '支援装备',
+    air_eq: '空军装备'
   },
   EQUIP_COSTS: {
     inf_eq: 0.5,    // 步枪/轻武器造价低
     art_eq: 3.0,    // 火炮
     tank_eq: 12.0,  // 坦克
     truck_eq: 2.0,  // 军用卡车
-    sup_eq: 4.0     // 电台/工程/野战医疗支援装备
+    sup_eq: 4.0,    // 电台/工程/野战医疗支援装备
+    air_eq: 4.0     // W6-3：空军装备（每架飞机 4 装备点，联队由 airProductionTick 从库存补充）
   },
   DIVISION_EQUIPMENT: {
     inf:  { inf_eq: 100, sup_eq: 10 },
@@ -5367,6 +5500,7 @@ const K = {
     OVERCROWD_EFF_PENALTY: 2.0,     // [H] 超容每 1% 任务效率 -2% (超 50% 效率归 0)
     OVERCROWD_MAX_PENALTY: 1.0,     // [H] 超容最高惩罚 -100%
     STANDARD_WING_SIZE: 100,        // [H] 联队标准规模 100 架
+    UPGRADE_XP_COST: 100,           // [H] W6-4：机型设计改进每次 100 空军经验
     MAX_WING_SIZE: 1000,            // [H] 联队上限 1000 架
 
     // 机种制空权重 [H]
@@ -17349,9 +17483,55 @@ function calcWingSuperiority(wing, baseEff = 1.0, rangeEff = 1.0){
   if(!wing || wing.count <= 0) return 0;
   const weight = (K.AIR.WEIGHTS && K.AIR.WEIGHTS[wing.type] != null) ? K.AIR.WEIGHTS[wing.type] : 1.0;
   const aceBonus = (wing.aces || []).reduce((s, a) => s + (a.effBonus || 0), 0);
-  const missionEff = Math.max(0, baseEff * rangeEff * (1 + aceBonus));
+  // W6-4：机型升级链 —— 每级设计改进 +8% 任务效率（upgradeLevel 0~2）
+  const upgradeBonus = (wing.upgradeLevel || 0) * (K.AIR ? 0.08 : 0.08);
+  const missionEff = Math.max(0, baseEff * rangeEff * (1 + aceBonus + upgradeBonus));
   const scale = wing.count / K.AIR.STANDARD_WING_SIZE;
   return +(scale * weight * missionEff).toFixed(4);
+}
+
+/* ============================================================
+   W6-4（可选尾项）：8 条预置机型升级链 —— 每型两级设计改进。
+   升级消耗空军经验（n.airXP，与学说共享 100 XP/次），效果为
+   upgradeLevel +1（calcWingSuperiority 内 +8% 效率/级）。
+   此前 wing.type 永不变、无任何设计改进机制。
+   ============================================================ */
+const AIR_WING_UPGRADE_CHAINS = {
+  fighter:         ['战斗机改型 I', '战斗机改型 II'],
+  heavy_fighter:   ['重型战斗机改型 I', '重型战斗机改型 II'],
+  cas:             ['对地攻击机改型 I', '对地攻击机改型 II'],
+  naval_bomber:    ['海军轰炸机改型 I', '海军轰炸机改型 II'],
+  tactical_bomber: ['战术轰炸机改型 I', '战术轰炸机改型 II'],
+  strat_bomber:    ['战略轰炸机改型 I', '战略轰炸机改型 II'],
+  air_supply:      ['运输机改型 I', '运输机改型 II'],
+  recon:           ['侦察机改型 I', '侦察机改型 II']
+};
+
+function canUpgradeWing(world, wing){
+  if(!wing) return { ok:false, reason:'联队不存在' };
+  const chain = AIR_WING_UPGRADE_CHAINS[wing.type];
+  if(!chain) return { ok:false, reason:'该机型无升级链' };
+  const lvl = wing.upgradeLevel || 0;
+  if(lvl >= chain.length) return { ok:false, reason:'已达设计上限' };
+  const n = world.nations[wing.nat];
+  if(!n || (n.airXP || 0) < K.AIR.UPGRADE_XP_COST) return { ok:false, reason:`空军经验不足（需 ${K.AIR.UPGRADE_XP_COST}）` };
+  return { ok:true, nextName: chain[lvl], level: lvl + 1 };
+}
+
+function upgradeWingDesign(world, wingId){
+  const wing = (world.airWings || []).find(x => x.id === wingId);
+  const chk = canUpgradeWing(world, wing);
+  if(!chk.ok) return chk;
+  const n = world.nations[wing.nat];
+  n.airXP -= K.AIR.UPGRADE_XP_COST;
+  wing.upgradeLevel = chk.level;
+  wing.designName = chk.nextName;
+  world.events = world.events || [];
+  world.events.push({
+    type: 'air_upgrade', day: world.day, important: wing.nat === world.player,
+    text: `✈️ 机型设计改进：【${wing.nat} 空军】换装「${chk.nextName}」（任务效率 +8%/级，累计 +${chk.level * 8}%）`
+  });
+  return { ok:true, name: chk.nextName, level: chk.level };
 }
 
 /* 4. 空区制空权与制空比计算 [H]
@@ -17485,8 +17665,82 @@ function applyStratBombingDamage(buildingType, rawDamage, provinceAALevel = 0){
   return { effectiveDamage, disabled };
 }
 
+/* 7.5 W6-3：联队补充 / 新编 / 损耗（每日 airTick 首步调用）
+   ------------------------------------------------------------
+   - 产线 hookup：productionLines 里 type='air_eq' 的线按通用经济管线产出
+     n.equipment.air_eq（架数），本 tick 把库存转换为联队补充与新编联队
+   - 补员：每联队每日最多 +5 架，补到 STANDARD_WING_SIZE
+   - 新编：库存 ≥ 100 架且机场有空容量 → 在有空位的机场自动成军
+   - 损耗：执行任务的联队每日 0.5% 折损（事故/磨损），至少 1 架
+   此前 wing.count 固定 100 永不变 —— 联队是"打印出来就不动的贴图"。 */
+function airProductionTick(world){
+  if(!world.airWings) return;
+  const byNat = {};
+  for(const wg of world.airWings){
+    (byNat[wg.nat] = byNat[wg.nat] || []).push(wg);
+  }
+  for(const natId in byNat){
+    const n = world.nations[natId];
+    if(!n || !n.alive) continue;
+    n.equipment = n.equipment || {};
+    let stock = n.equipment.air_eq || 0;
+    const wings = byNat[natId];
+    // 飞机按整架计：存量战斗损耗（AA 击落等）带小数，每日在此规范化
+    for(const wg of wings) wg.count = Math.max(0, Math.round(wg.count));
+    const bases = (world.airBases || []).filter(b => b.nat === natId);
+    const capacity = bases.reduce((s, b) => s + (b.capacity || 0), 0);
+
+    // 1) 补员：按缺口从库存转换
+    for(const wg of wings){
+      const deficit = K.AIR.STANDARD_WING_SIZE - wg.count;
+      if(deficit <= 0 || stock <= 0) continue;
+      const refill = Math.min(deficit, stock, 5);
+      wg.count += refill;
+      stock -= refill;
+    }
+
+    // 2) 新编：库存满一个联队且有机场余量
+    if(stock >= K.AIR.STANDARD_WING_SIZE && wings.length * K.AIR.STANDARD_WING_SIZE < capacity){
+      const used = bases.map(b => wings.filter(wg => wg.baseId === b.id).reduce((s, wg) => s + wg.count, 0));
+      const host = bases.find((b, i) => used[i] + K.AIR.STANDARD_WING_SIZE <= (b.capacity || 0));
+      if(host){
+        const newWing = {
+          id: `wing_${natId}_${world.airWings.length + 1}_${world.day}`,
+          nat: natId,
+          type: 'fighter',
+          count: K.AIR.STANDARD_WING_SIZE,
+          baseId: host.id,
+          baseHex: [host.q, host.r],
+          task: 'air_superiority',
+          regionId: getHexAirRegion(host.q, host.r),
+          exp: 1.0,
+          aces: []
+        };
+        world.airWings.push(newWing);
+        wings.push(newWing);
+        stock -= K.AIR.STANDARD_WING_SIZE;
+        if(natId === world.player && world.events){
+          world.events.push({ type:'air_wing_founded', day: world.day, important: false,
+            text: `🛫 空军扩编：新战斗机联队在 ${host.name || '机场'} 成军（100 架，来自空军装备产线库存）` });
+        }
+      }
+    }
+
+    // 3) 任务损耗：0.5%/日（至少 1 架），仅对在执行任务的联队
+    for(const wg of wings){
+      if(wg.count <= 0 || wg.task === 'none' || !wg.task) continue;
+      const loss = Math.max(1, Math.round(wg.count * 0.005));
+      wg.count = Math.max(0, wg.count - loss);
+    }
+
+    n.equipment.air_eq = stock;
+  }
+}
+
 /* 8. 每日空军总轮转调度 (每日 step 9 调用) */
 function airTick(world, rng = Math.random){
+  // 0. W6-3：联队补充 / 新编 / 损耗（先于任务结算，保证 count 是当日实数）
+  airProductionTick(world);
   if(!world.airWings || !world.airWings.length) return;
 
   // 1. 刷新机场驻军与容量统计
@@ -17560,6 +17814,31 @@ function airTick(world, rng = Math.random){
               day: world.day,
               text: `【战略轰炸】${targetHex.q},${targetHex.r} 基础设施遭受轰炸受损，降至 ${targetHex.infra} 级！`,
               important: false
+            });
+          }
+        }
+
+        // W6-7：战略轰炸打击工厂产能 —— mil/civ 各按 STRAT_BOMB_TARGETS 权重
+        // 独立掷击；命中则工厂 -1（格面与国家计数同步，产线裁最末厂）。
+        // 补给侧无需另接：infra 损伤已经压低物流补给上限（logistics.js 读 h.infra）。
+        const victim = world.nations[targetHex.owner];
+        for(const kind of ['mil', 'civ']){
+          const resF = applyStratBombingDamage(kind, 1.2, aaLv);
+          if(!resF.disabled) continue;
+          if((targetHex[kind] || 0) <= 0) continue;
+          targetHex[kind] -= 1;
+          if(victim){
+            victim[kind] = Math.max(0, (victim[kind] || 0) - 1);
+            // 产线裁最末厂：最末一条有厂的线 −1（等价于整编掉一座厂）
+            const line = (victim.productionLines || []).filter(l => (l.factories || 0) > 0).pop();
+            if(line) line.factories -= 1;
+          }
+          if(world.events && (w.nat === world.player || targetHex.owner === world.player)){
+            world.events.push({
+              type: 'air_strat_bomb_factory',
+              day: world.day,
+              text: `🏭【战略轰炸】${targetHex.q},${targetHex.r} 的${kind === 'mil' ? '军工厂' : '民用工厂'}被炸毁一座！${victim ? victim.name : ''} 产能受损。`,
+              important: w.nat === world.player || targetHex.owner === world.player
             });
           }
         }
@@ -18280,7 +18559,13 @@ function shipsAvailable(world, natId){
 function invasionCapacity(world, natId){
   const n = world.nations[natId];
   if(!n) return 10;
-  return n.invasionCap || 10;
+  // W7-2：海军基地等级扩登陆容量（B5 建造的 naval_base 首个游戏读点）
+  let navalLevels = 0;
+  for(const h of world.hexes){
+    if(h.owner !== natId) continue;
+    navalLevels += (h.buildings && h.buildings.naval_base) || h.naval_base || 0;
+  }
+  return (n.invasionCap || 10) + Math.min(10, navalLevels * 2);
 }
 
 /** 是否具备某特性（核打击 / 火箭 / 登陆艇） */
@@ -19302,6 +19587,10 @@ function calcTradeInfluence(world, buyerNatId, sellerNatId){
   if(buyer.faction && seller.faction && buyer.faction === seller.faction){
     influence += 50;
   }
+
+  // W5-8：双边关系修正（world.relations −100~100 → 影响力 ±25）
+  const rel = (world.relations || {})[[buyerNatId, sellerNatId].sort().join('|')] || 0;
+  influence += Math.max(-25, Math.min(25, Math.round(rel / 4)));
 
   // 距离衰减（v14.1 B8：锚点改为两国首都间 hexDist）。
   // 旧实现「h.city?.cap === X || h.owner === X」的第二条件几乎总先命中任意格，
@@ -20849,6 +21138,8 @@ function checkCeasefireWindow(world){
 
 
    // v14.0 P3 宣战合法性
+// （本文件不得引入 diplomacy/world 边：events.js→tension 是剧本子图的一部分，
+//   diplomacy→world→scenarios 会构成 ESM 链接环 → scenarios TDZ）
 
 function initTension(world){
   world.tension = world.tension || {
@@ -20880,6 +21171,24 @@ function addTension(world, amount, text, sourceNat = null, targetNat = null){
  */
 function tensionTick(world){
   initTension(world);
+  // W5-1：制造借口进度 tick —— 此前 justifying 创建后全库无人消费（休眠链）
+  for(const natId in (world.nations || {})){
+    const n = world.nations[natId];
+    if(!n || !n.alive || !n.justifying) continue;
+    for(const j of n.justifying){
+      if(j.done) continue;
+      j.daysLeft -= 1;
+      if(j.daysLeft <= 0){
+        j.done = true;
+        j.readyDay = world.day;
+        world.events = world.events || [];
+        world.events.push({
+          type: 'justify_ready', day: world.day, important: false,
+          text: `📜【借口就绪】${n.name} 对 ${world.nations[j.target]?.name || j.target} 的战争借口已准备完毕，可择机宣战。`
+        });
+      }
+    }
+  }
   // 检查是否全图和平
   let anyWar = false;
   for(const natId in (world.nations || {})){
@@ -20893,6 +21202,47 @@ function tensionTick(world){
   if(!anyWar && world.tension.value > 0){
     world.tension.value = Math.max(0, +(world.tension.value - 0.1).toFixed(1));
   }
+}
+
+/**
+ * W5-1/2 带目标宣战 与 W5-7 志愿军实体化 都实现在 diplomacy.js
+ * （它们需要 world.js 的 spawnUnit；从本文件引 world 会把 scenarios.js
+ *   拉进剧本事件子图的 ESM 链接环 events→tension→world→scenarios → TDZ）。
+ * 调用方请直接从 './diplomacy.js' 导入 declareWarWithGoal / sendVolunteers。
+ */
+
+/**
+ * W5-8：双边关系（world.relations，键为排序后的 'A|B'，值 −100~100）。
+ * decisions.js 的 instant.relations 与改善关系行动都落到这里。
+ */
+function getRelations(world, a, b){
+  if(!world.relations || a === b) return 0;
+  return world.relations[[a, b].sort().join('|')] || 0;
+}
+
+function adjustRelations(world, a, b, delta){
+  if(a === b) return;
+  world.relations = world.relations || {};
+  const key = [a, b].sort().join('|');
+  world.relations[key] = Math.max(-100, Math.min(100, (world.relations[key] || 0) + delta));
+}
+
+/** W5-8：改善关系行动（25 PP → +25 关系，被制裁/交战状态下无效） */
+function improveRelations(world, fromNat, toNat){
+  const n = world.nations[fromNat];
+  const to = world.nations[toNat];
+  if(!n || !to || fromNat === toNat) return { ok:false, reason:'国家不存在' };
+  if(n.pp < 25) return { ok:false, reason:'政治点数不足（需 25）' };
+  if((n.atWarWith || []).includes(toNat)) return { ok:false, reason:'交战国之间无法改善关系' };
+  if(getRelations(world, fromNat, toNat) >= 100) return { ok:false, reason:'关系已至上限' };
+  n.pp -= 25;
+  adjustRelations(world, fromNat, toNat, +25);
+  world.events = world.events || [];
+  world.events.push({
+    type: 'improve_relations', day: world.day, important: false,
+    text: `🕊️ 外交 gestures：${n.name} 向 ${to.name} 派遣特使团，双边关系 +25。`
+  });
+  return { ok:true };
 }
 
 /**
@@ -20998,34 +21348,6 @@ function guaranteeIndependence(world, sourceNat, targetNat){
 }
 
 /**
- * 派遣志愿军 (需紧张度 >= 30%)
- */
-function sendVolunteers(world, sourceNat, targetNat){
-  initTension(world);
-  const n = world.nations[sourceNat];
-  const target = world.nations[targetNat];
-  if(!n || !target) return false;
-  if(world.tension.value < 30) return false;
-  if(n.pp < 30) return false;
-
-  n.pp -= 30;
-  n.volunteersSent = n.volunteersSent || [];
-  if(!n.volunteersSent.includes(targetNat)) n.volunteersSent.push(targetNat);
-  target.volunteersReceived = target.volunteersReceived || [];
-  if(!target.volunteersReceived.includes(sourceNat)) target.volunteersReceived.push(sourceNat);
-
-  world.events = world.events || [];
-  world.events.push({
-    type: 'volunteers',
-    day: world.day,
-    important: true,
-    text: `🪖 志愿军开拔：${n.name} 批准向【${target.name}】派遣军事志愿观察团与干预师！`
-  });
-
-  return true;
-}
-
-/**
  * 签署租借法案 (需紧张度 >= 50% 或 同盟国关系)
  */
 function sendLendLease(world, sourceNat, targetNat){
@@ -21067,6 +21389,9 @@ function sendLendLease(world, sourceNat, targetNat){
 
 const ECONOMIC_LAWS = {
   civilian: { id: 'civilian', name: '民用经济', consumerGoods: 0.35, milPenalty: -0.15, cost: 150, desc: '和平时期经济，35% 民厂生产消费品，军工生产受抑' },
+  // W4-5：第五档 —— 出口重点（HOI4 Export Focus）：消费品高于部分动员，
+  // 换取外贸弹性（贸易法收益在 TRADE_LAWS 侧独立结算）
+  export_focus: { id: 'export_focus', name: '出口重点', consumerGoods: 0.30, milPenalty: -0.05, cost: 150, desc: '鼓励出口创汇：30% 消费品，外贸市场准入放宽，军工小幅受抑' },
   partial:  { id: 'partial',  name: '部分动员', consumerGoods: 0.20, milPenalty: 0, cost: 150, desc: '应对边境威胁，20% 民厂生产消费品，生产平衡' },
   war:      { id: 'war',      name: '战时经济', consumerGoods: 0.10, milBonus: 0.15, cost: 150, desc: '国家进入战时体制，仅 10% 消费品，军厂产出 +15%' },
   total:    { id: 'total',    name: '总动员',   consumerGoods: 0.05, milBonus: 0.20, manpowerPenalty: -0.03, cost: 150, desc: '一切为了前线，仅 5% 消费品，军厂产出 +20%，但抽调劳工使征兵人口 -3%' }
@@ -21180,9 +21505,19 @@ function hireAdvisor(world, natId, category, advisorId){
   const adv = pool.find(a => a.id === advisorId);
   if(!n || !adv || n.pp < adv.cost) return false;
 
+  // W4-4：每周重选冷却 —— 同一槽位 7 天内不得再度易人（HOI4 换顾问一周生效）。
+  // 冷却命中返回 { ok:false, reason:'cooldown', readyDay }，调用方可给具体提示；
+  // 其余失败返回 false，成功返回 true —— 真值契约保持。
+  n.advisorCd = n.advisorCd || {};
+  const readyDay = (n.advisorCd[category] || -999) + K.ADVISOR_SWAP_COOLDOWN;
+  if(readyDay > world.day){
+    return { ok: false, reason: 'cooldown', readyDay };
+  }
+
   n.advisors = n.advisors || {};
   n.pp -= adv.cost;
   n.advisors[category] = advisorId;
+  n.advisorCd[category] = world.day;
   recalculateNationModifiers(world, natId);
 
   world.events = world.events || [];
@@ -22121,7 +22456,13 @@ function nuclearTick(world){
 /* ===== js/engine/diplomacy.js ===== */
 /* ============================================================
    engine/diplomacy.js —— 外交网络系统（制裁/军援/阵营博弈 §3.9）
+   W5：同盟条约 / 白和停战 / 撕毁条款 / 双边关系
    ============================================================ */
+
+
+   // 白和接受判定（victory↔peace 环已存在，运行时安全）
+  // W5-7：志愿军实体化（world 不引 diplomacy，无环）
+  // W5：tension 已剪断对 diplomacy/world 的边，无环
 
 function initDiplomacy(world){
   world.diplomacy = world.diplomacy || {
@@ -22180,6 +22521,215 @@ function diplomacyTick(world){
       receiver.equip += actualTransfer;
     }
   }
+
+  // W5-8：双边关系每日向 0 衰减（无事件维持的关系自然冷却）
+  if(world.relations){
+    for(const key in world.relations){
+      const v = world.relations[key];
+      if(v > 0) world.relations[key] = Math.max(0, v - 0.02);
+      else if(v < 0) world.relations[key] = Math.min(0, v + 0.02);
+    }
+  }
+}
+
+/* ============================================================
+   W5-8：双边关系（canonical 真源在 world.relations，tension.js 提供
+   get/adjust 辅助；此处引 helper 会成环，故直接操作键值）
+   ============================================================ */
+function relKey(a, b){ return [a, b].sort().join('|'); }
+
+/**
+ * W5-6：双边同盟条约（区别于阵营 faction）—— 缔约方遭受入侵时自动参战。
+ * 代价 100 PP；交战/停战对象不可缔约；缔约提升关系 +40。
+ */
+function formAlliance(world, natA, natB){
+  const a = world.nations[natA], b = world.nations[natB];
+  if(!a || !b || natA === natB) return { ok:false, reason:'国家不存在' };
+  if((a.atWarWith || []).includes(natB)) return { ok:false, reason:'交战国不可缔约' };
+  a.allies = a.allies || [];
+  b.allies = b.allies || [];
+  if(a.allies.includes(natB)) return { ok:false, reason:'同盟已存在' };
+  const cost = 100;
+  if(a.pp < cost) return { ok:false, reason:'政治点数不足（需 100）' };
+  a.pp -= cost;
+  a.allies.push(natB);
+  b.allies.push(natA);
+  world.relations = world.relations || {};
+  const key = relKey(natA, natB);
+  world.relations[key] = Math.min(100, (world.relations[key] || 0) + 40);
+  world.events = world.events || [];
+  world.events.push({
+    type: 'alliance_formed', day: world.day, important: true,
+    text: `🤝【同盟条约】${a.name} 与 ${b.name} 签署共同防御协定：任何一方遭入侵，另一方自动参战！`
+  });
+  return { ok:true };
+}
+
+/* ============================================================
+   W5-5：白和与停战 —— 两败俱伤时的退出口。
+   proposeWhitePeace：提案方发起，AI 接受规则（战意 <40 或 VP 损失过半）；
+   成功 → 战争结束 + 停战白名单（K.TRUCE_DAYS 内不得再战）。
+   ============================================================ */
+function proposeWhitePeace(world, proposerNat, targetNat){
+  const p = world.nations[proposerNat], t = world.nations[targetNat];
+  if(!p || !t) return { ok:false, reason:'国家不存在' };
+  if(!(p.atWarWith || []).includes(targetNat)) return { ok:false, reason:'双方并未交战' };
+  // AI 接受判定：接受方战意低迷，或其 VP 损失过半（打得越惨越愿意停）
+  const st = lostVP(world, targetNat);
+  const accept = (t.warSupport || 50) < 40 || st.ratio >= 0.5;
+  if(!accept) return { ok:false, reason:`${t.name} 拒绝了白和提议（战意 ${(t.warSupport||50).toFixed(0)}%）` };
+
+  endWarMutually(world, proposerNat, targetNat);
+  world.truces = world.truces || {};
+  world.truces[relKey(proposerNat, targetNat)] = world.day + 365;
+  world.events.push({
+    type: 'white_peace', day: world.day, important: true,
+    text: `🕊️【白和】${p.name} 与 ${t.name} 签署无条件停战协定，一切恢复战前状态（停战期 365 天）。`
+  });
+  return { ok:true };
+}
+
+/** 相互停战：清战争关系、清进攻命令、弃置未达成战争目标 */
+function endWarMutually(world, a, b){
+  const na = world.nations[a], nb = world.nations[b];
+  for(const n of [na, nb]){
+    if(!n) continue;
+    n.atWarWith = (n.atWarWith || []).filter(x => x !== (n === na ? b : a));
+  }
+  world.activeWargoals = (world.activeWargoals || []).filter(g => !(
+    (g.from === a && g.to === b) || (g.from === b && g.to === a)));
+  for(const u of world.units){
+    if((u.nat === a && u.order && (u.order.type === 'attack' || u.order.type === 'spearhead' || u.order.type === 'breakthrough' || u.order.type === 'pin')) ||
+       (u.nat === b && u.order && (u.order.type === 'attack' || u.order.type === 'spearhead' || u.order.type === 'breakthrough' || u.order.type === 'pin'))){
+      u.order = null;
+    }
+  }
+}
+
+
+/**
+ * W5-1/2：带战争目标的宣战 —— 宣战流程的唯一正门。
+ * 要求：对目标国的战争借口已就绪（法西斯/共产意识形态可无借口开战）；
+ * 目标格式见 data/wargoals.js（'conquer' | 'capture:城市名' | 'puppet' | 'contain'）。
+ */
+function declareWarWithGoal(world, fromNat, toNat, wargoal = 'conquer'){
+  initTension(world);
+  const n = world.nations[fromNat];
+  const to = world.nations[toNat];
+  if(!n || !to || fromNat === toNat) return { ok:false, reason:'国家不存在' };
+  if(n.atWarWith && n.atWarWith.includes(toNat)) return { ok:false, reason:'已处于战争状态' };
+  // 停战白名单（W5-5）：停战期内不得再战
+  const truceKey = [fromNat, toNat].sort().join('|');
+  world.truces = world.truces || {};
+  if((world.truces[truceKey] || 0) > world.day){
+    return { ok:false, reason:`停战协定生效中（第 ${world.truces[truceKey]} 天前不可开战）` };
+  }
+
+  const ideo = (n.ideology || '').toLowerCase();
+  const needJustify = !(ideo === 'fascist' || ideo === 'communism' || ideo === 'communist');
+  const j = (n.justifying || []).find(x => x.target === toNat && x.done && !x.used);
+  if(needJustify && !j){
+    return { ok:false, reason:'战争借口未就绪（或已被使用）' };
+  }
+  if(j){ j.used = true; }
+
+  const res = declareWar(world, fromNat, toNat, wargoal);
+  if(!res) return { ok:false, reason:'宣战失败' };
+
+  world.tension.value = Math.min(100, world.tension.value + 8);
+  world.tension.sources = world.tension.sources || [];
+  world.tension.sources.push({ day: world.day, value: 8, text: `${n.name} 对 ${to.name} 宣战（战争目标：${wargoal}）` });
+  return { ok:true, wargoal };
+}
+
+/**
+ * W5-7：志愿军实体化 —— 派遣方支付 30PP，目标国获得至多 3 个装备齐全的
+ * 步兵师（u.foreignHelper 记录来源国，用于战报与损耗归属）。
+ * 挂目标国国籍以接入现有战斗/补给/人力管线（旧版只写数组不生成单位）。
+ */
+function sendVolunteers(world, sourceNat, targetNat){
+  initTension(world);
+  const n = world.nations[sourceNat];
+  const target = world.nations[targetNat];
+  if(!n || !target) return false;
+  if(world.tension.value < 30) return false;
+  if(n.pp < 30) return false;
+  n.volunteersSent = n.volunteersSent || [];
+  if(n.volunteersSent.includes(targetNat)) return false;   // 每对 (来源,目标) 只组建一次
+  if(!target.alive || target.capitulated) return false;
+
+  n.pp -= 30;
+  n.volunteersSent.push(targetNat);
+  target.volunteersReceived = target.volunteersReceived || [];
+  if(!target.volunteersReceived.includes(sourceNat)) target.volunteersReceived.push(sourceNat);
+  adjustRelations(world, sourceNat, targetNat, +20);
+
+  const cap = world.hexes.find(h => h.city && h.city.cap === targetNat)
+    || world.hexes.find(h => h.owner === targetNat && h.terrain !== 'sea');
+  let spawned = 0;
+  if(cap){
+    for(let i = 0; i < 3; i++){
+      const u = spawnUnit(world, 'inf', cap.q, cap.r, targetNat);
+      if(u){ u.foreignHelper = sourceNat; u.xp = 30; spawned++; }   // 志愿军按老兵档入场
+    }
+  }
+
+  world.events = world.events || [];
+  world.events.push({
+    type: 'volunteers',
+    day: world.day,
+    important: true,
+    text: `🪖 志愿军开拔：${n.name} 向【${target.name}】派出 ${spawned} 个志愿步兵师（战力挂目标国指挥体系）！`
+  });
+  return true;
+}
+
+/**
+ * W5-3：撕毁和约条款 —— 战败国（或任何受约束方）推翻和会强加的持久条款。
+ * kind: 'demilitarized'（hex）| 'resourceRights'（对某战胜国）
+ * 代价：PP 150 + 稳定 −10 + 战意 −5，并产生世界紧张度。
+ */
+function tearUpTerms(world, natId, kind, payload = {}){
+  const n = world.nations[natId];
+  if(!n) return { ok:false, reason:'国家不存在' };
+  const cost = 150;
+  if((n.pp || 0) < cost) return { ok:false, reason:`政治点数不足（需 ${cost}）` };
+
+  if(kind === 'demilitarized'){
+    const h = world.at[(payload.q != null ? payload.q : '') + ',' + (payload.r != null ? payload.r : '')];
+    if(!h || !h.demilitarized) return { ok:false, reason:'该省并非非军事区' };
+    if(h.owner !== natId) return { ok:false, reason:'只能撕毁本国领土上的条款' };
+    n.pp -= cost;
+    h.demilitarized = false;
+  } else if(kind === 'resourceRights'){
+    n.pp = n.pp;   // 受益方无可撕；此路径由"被掠夺方"调用
+    const other = payload.against;
+    const victim = world.nations[natId];
+    const idx = (victim.resourceRights || []).findIndex(r => r.natId === other);
+    if(idx < 0) return { ok:false, reason:'本国没有该条约的掠夺条款' };
+    // 反向：被掠夺方撕毁 → 移除对方手里的开采特权
+    const benefactor = world.nations[other];
+    if(benefactor && benefactor.resourceRights){
+      benefactor.resourceRights = benefactor.resourceRights.filter(r => r.natId !== natId);
+    }
+    n.pp -= cost;
+  } else {
+    return { ok:false, reason:'未知条款类型' };
+  }
+
+  n.stability = Math.max(10, (n.stability || 60) - 10);
+  n.warSupport = Math.max(0, (n.warSupport || 50) - 5);
+  if(world.tension){
+    world.tension.value = Math.min(100, world.tension.value + 5);
+    world.tension.sources = world.tension.sources || [];
+    world.tension.sources.push({ day: world.day, value: 5, text: `${n.name} 撕毁和约条款（${kind}）` });
+  }
+  world.events = world.events || [];
+  world.events.push({
+    type: 'treaty_torn', day: world.day, important: true,
+    text: `📜【撕毁条约】${n.name} 单方面撕毁和约条款（${kind === 'demilitarized' ? '非军事区' : '资源掠夺'}）！世界哗然。`
+  });
+  return { ok:true };
 }
 
 /**
@@ -22254,6 +22804,16 @@ function declareWar(world, fromNat, toNat, wargoal = null){
   const to = world.nations[toNat];
   if(!from || !to || fromNat === toNat) return false;
 
+  // W5-5：停战白名单 —— 停战期内不得开战（事件/脚本开战同样受约束）
+  world.truces = world.truces || {};
+  const tk = relKey(fromNat, toNat);
+  if((world.truces[tk] || 0) > world.day){
+    world.events = world.events || [];
+    world.events.push({ type:'truce_blocked', day: world.day, important: false,
+      text: `⚖️ 停战协定仍生效：${from.name} 对 ${to.name} 的宣战被阻止（第 ${world.truces[tk]} 天前不可开战）。` });
+    return false;
+  }
+
   from.atWarWith = from.atWarWith || [];
   to.atWarWith = to.atWarWith || [];
 
@@ -22279,6 +22839,30 @@ function declareWar(world, fromNat, toNat, wargoal = null){
     important: true,
     text: `⚔️【宣战】${from.name} 正式向 ${to.name} 宣战！战争目标：${goalObj.name || goalObj.type}。`
   });
+
+  // W5-6：同盟防御征召 —— 被入侵方的双边盟国自动对侵略方参战（不递归走 declareWar）
+  for(const allyId of (to.allies || [])){
+    const ally = world.nations[allyId];
+    if(!ally || !ally.alive || allyId === fromNat) continue;
+    if((ally.atWarWith || []).includes(fromNat)) continue;
+    ally.atWarWith.push(fromNat);
+    from.atWarWith.push(allyId);
+    world.events.push({ type:'ally_called', day: world.day, important: true,
+      text: `🛡️【防御征召】同盟条约生效：${ally.name} 自动对 ${from.name} 参战！` });
+  }
+  for(const allyId of (from.allies || [])){
+    const ally = world.nations[allyId];
+    if(!ally || !ally.alive || allyId === toNat) continue;
+    if((ally.atWarWith || []).includes(toNat)) continue;
+    ally.atWarWith.push(toNat);
+    to.atWarWith.push(allyId);
+    world.events.push({ type:'ally_called', day: world.day, important: true,
+      text: `🛡️【协同参战】同盟义务：${ally.name} 随 ${from.name} 对 ${to.name} 参战！` });
+  }
+
+  // W5-8：开战即交恶
+  world.relations = world.relations || {};
+  world.relations[relKey(fromNat, toNat)] = -100;
   return true;
 }
 
@@ -22292,6 +22876,7 @@ function declareWar(world, fromNat, toNat, wargoal = null){
 
    // v14.0 P2
 
+   // W4-5：消费品份额全五档真源
 
 function economyTick(world){
   for(const id in world.nations){
@@ -22347,16 +22932,22 @@ function economyTick(world){
       : ((0.5 - stab) / 0.5) * (K.PP_STABILITY_PENALTY || -0.5);
     n.pp = Math.min(K.PP_MAX, n.pp + K.PP_PER_DAY * (1 + stabMod) * (1 + (n.modifiers.pp || 0)));
 
-    // 指挥点数与陆军经验 [B] —— 低战意削弱指挥点每日积累
+    // 指挥点数与陆军经验 [B]
+    // W4-3：低战意惩罚（HOI4 精神：战争不得人心时指挥体系瘫痪）
+    //   WS 0% → CP 日增 −95%；WS 100% → 满速。动员 −50% 见 manpower.js wsFactor。
     const wsRatio = (n.warSupport != null ? n.warSupport : 50) / 100;
-    const cpGain = 0.5 * Math.max(0.4, 0.4 + 0.6 * wsRatio);
+    const cpGain = 0.5 * Math.max(0.05, wsRatio * wsRatio);
     n.commandPower = Math.min(200, (n.commandPower != null ? n.commandPower : 100) + cpGain);
     const divCount = (world.units || []).filter(u => u.nat === id).length;
     if(n.atWarWith && n.atWarWith.length){
       n.armyXp = (n.armyXp || 0) + 0.4 * divCount;
-      // 战时低战意疲劳拖累稳定度
-      if(wsRatio < 0.50){
-        n.stability = Math.max(0, (n.stability || 50) - (0.50 - wsRatio) * 0.05);
+      // W4-2：战意 → 稳定度反向（向下漂移，只罚不奖）
+      //   战意 100% → 稳定目标 100（无惩罚）；战意 0% → 稳定目标 70（−30）。
+      //   每日最多漂移 0.1 点，只向下 —— 高战意不会在战时凭空抬升稳定度。
+      const stabNow = n.stability != null ? n.stability : 50;
+      const stabTarget = 100 - K.WS_STABILITY_PENALTY * (1 - wsRatio);
+      if(stabNow > stabTarget){
+        n.stability = Math.max(0, stabNow - Math.min(0.1, stabNow - stabTarget));
       }
     }
 
@@ -22364,7 +22955,11 @@ function economyTick(world){
     //    v14.1 B5：n.buildQueue[] 排队、n.build 为当前施工项；队列空时自动取下一项。
     //    注：州（state）层属 W7-1，现阶段按 hex 建造并以此口径验收（sim B16）。
     if(!n.buildQueue) n.buildQueue = [];
-    const cg = K.CONSUMER_GOODS[n.law] ?? 0.20;
+    // W4-5：消费品份额读 ECONOMIC_LAWS 全五档（含 export_focus）。
+    // 旧写法 K.CONSUMER_GOODS[n.law] ?? 0.20 —— 剧本 law 值跨剧本不统一
+    //（§12-5：'early_mob'/'wartime' 不在四档内）时静默按 0.20 结算。
+    const eLawEntry = ECONOMIC_LAWS[n.economicLaw || n.law];
+    const cg = eLawEntry ? eLawEntry.consumerGoods : (K.CONSUMER_GOODS[n.law] ?? 0.20);
     const tradeOccup = (typeof tradeCivCost === 'function') ? Math.min(0.6, tradeCivCost(n)) : 0;
 
     // W7/§12：占领法案 factoryYield 接入 —— 占领区工厂受占领法与顺从度调制贡献给占领国
@@ -22518,6 +23113,42 @@ function switchLineType(line, newType){
   if(!line || line.type === newType) return;
   line.type = newType;
   line.eff = Math.max(K.EFF_START, +(line.eff * 0.5).toFixed(4));
+}
+
+/**
+ * W3-3：生产线 optimal 一键分配（纯函数式结算，UI 一键调用的引擎真源）。
+ * 把空闲军工厂按各线现有占比分配下去，同时尊重单线上限 K.LINE_FACTORY_CAP
+ * 与单格厂槽语义（全国总厂不超过 n.mil）。返回 { allocated, lines }。
+ * deterministic —— tests/ui_logic.test.js 直接断言守恒与占比不变性。
+ */
+function allocateFactoriesOptimal(world, natId){
+  const n = world.nations[natId];
+  if(!n || !n.productionLines || !n.productionLines.length) return { allocated: 0, lines: [] };
+  const used = n.productionLines.reduce((s, l) => s + (l.factories || 0), 0);
+  let free = (n.mil || 0) - used;
+  if(free <= 0) return { allocated: 0, lines: n.productionLines.map(l => ({ id: l.id, factories: l.factories })) };
+
+  // 按现有占比分配（保持玩家比例偏好），逐个厂落位避免整除误差
+  const total = Math.max(1, used);
+  const want = n.productionLines.map(l => ({ line: l, share: (l.factories || 0) / total }));
+  let allocated = 0;
+  let guard = 0;
+  while(free > 0 && guard < 1000){
+    guard++;
+    // 每轮把 1 个厂给「share×(used+allocated) 最缺额」的未满线
+    let best = null, bestGap = -1;
+    for(const w of want){
+      const cur = w.line.factories || 0;
+      if(cur >= K.LINE_FACTORY_CAP) continue;
+      const gap = w.share * (used + allocated) - cur;
+      if(gap > bestGap){ bestGap = gap; best = w; }
+    }
+    if(!best) break;   // 全部线到顶
+    best.line.factories += 1;
+    allocated += 1;
+    free -= 1;
+  }
+  return { allocated, lines: n.productionLines.map(l => ({ id: l.id, factories: l.factories })) };
 }
 
 function trainingCost(type){
@@ -24627,7 +25258,10 @@ function calcSupplyNetwork(world){
         break;
       }
     }
-    const cap = hubSupply + (hex.infra || 0) * K.SUPPLY_INFRA_BONUS;
+    // W7-2：铁路等级入补给上限（railLevel 0-3 由 atlas 按城市规模生成，
+    // 此前只有 states.railLevel 聚合、无任何游戏读点）
+    const cap = hubSupply + (hex.infra || 0) * K.SUPPLY_INFRA_BONUS
+      + (hex.railLevel || 0) * (K.SUPPLY_RAIL_BONUS || 0.2);
     hex.supplyCap = cap;
     hex.supplyDemand = demand;
     hex.supplyUtil = demand > 0 ? cap / demand : 1;
@@ -24767,8 +25401,18 @@ function resourcesTick(world){
     const base = NATION_RESOURCE_BASE[id] || {};
 
     // 1) 本土+占领区产出
+    // W7-2：本土资源格（STRATEGIC_RESOURCES 落到 h.resources）此前对本土零贡献
+    // ——占领区读取点只覆盖 h._orig !== id 的格子。现在本土聚合与国家表取 max
+    // （国家表是下限兜底，资源格聚合是地形真源；避免双计也避免静默丢失）。
+    const ownCoreRes = {};
+    for(const h of world.hexes){
+      if(h._orig !== id || h.owner !== id || !h.resources) continue;
+      for(const rk in h.resources){
+        ownCoreRes[rk] = (ownCoreRes[rk] || 0) + h.resources[rk];
+      }
+    }
     for(const r of RESOURCE_TYPES){
-      let income = base[r] || 0;
+      let income = Math.max(base[r] || 0, ownCoreRes[r] || 0);
       // 占领区资源开采（顺从度 20% 解锁 25%，60% 解锁 75%）
       for(const h of world.hexes){
         if(h._orig === id) continue;
@@ -25089,6 +25733,36 @@ function closePeaceConference(world){
       h.owner = conf.winners[0];
     }
   }
+  // W5-2：和会校验战争目标是否达成 —— 达成者收获声望与战意，
+  // 未达成者承受"战争无果"的国内反噬（HOI4 同款张力）。
+  for(const g of (world.activeWargoals || [])){
+    if(!conf.winners.includes(g.from) || g.to !== conf.loser) continue;
+    const n = world.nations[g.from];
+    if(!n) continue;
+    const type = g.goal.type;
+    let achieved;
+    if(type === 'conquer' || type === 'contain'){
+      achieved = true;   // 全面战争/有限目标：战胜即达成
+    } else if(type === 'puppet' || type === 'subjugate'){
+      achieved = loser.puppetOf === g.from;
+    } else {
+      // capture:城市 等 —— 交由统一目标解释器判定（capitalDown 口径）
+      achieved = evaluateObjective(world, g.from, type + (g.goal.arg ? ':' + g.goal.arg : '')).achieved;
+    }
+    if(achieved){
+      n.warSupport = Math.min(100, (n.warSupport || 50) + 4);
+      n.prestige = (n.prestige || 0) + 5;
+      world.events.push({ type:'wargoal_fulfilled', day:world.day, important:true,
+        text:`🎖️ 战争目标达成：${n.name} 实现了对${loser.name}的${g.goal.type}${g.goal.arg ? '（' + g.goal.arg + '）' : ''}，声望 +5！` });
+    } else {
+      n.warSupport = Math.max(0, (n.warSupport || 50) - 6);
+      n.stability = Math.max(10, (n.stability || 60) - 3);
+      world.events.push({ type:'wargoal_failed', day:world.day, important:true,
+        text:`💢 战争无果：${n.name} 未能达成对${loser.name}的${g.goal.type}${g.goal.arg ? '（' + g.goal.arg + '）' : ''}战争目标，国内舆论哗然。` });
+    }
+  }
+  world.activeWargoals = (world.activeWargoals || []).filter(g => !(
+    conf.winners.includes(g.from) && g.to === conf.loser));
   conf.resolved = true;
   world.events.push({ type:'peace', day:world.day, important:true, text:'📜 和会闭幕，战后秩序确立。' });
   world.pendingPeace = null;
@@ -25338,11 +26012,15 @@ function applyInstant(world, n, instant, hex){
         break;
       }
       case 'relations': {
+        // W5-8：双边关系落 world.relations 真源（此前写 nation.relations/map
+        // —— nation 上根本没有该字段，整条 instant 链是死写入）。
+        world.relations = world.relations || {};
+        const self = natIdOf(n);
         for(const id2 in world.nations){
-          const o = world.nations[id2];
-          if(id2 !== natIdOf(n) && o.relations != null) o.relations[natIdOf(n)] = (o.relations[natIdOf(n)] || 0) + v;
+          if(id2 === self) continue;
+          const key = [self, id2].sort().join('|');
+          world.relations[key] = Math.max(-100, Math.min(100, (world.relations[key] || 0) + v));
         }
-        if(n.relations) for(const id2 in n.relations) n.relations[id2] = (n.relations[id2] || 0) + v;
         break;
       }
     }
@@ -25502,11 +26180,15 @@ function lawStamp(n){
   return (n.economicLaw || n.law || 'partial') + '|' + (n.conscriptionLaw || 'limited');
 }
 
-/** 领土人口估算（每格常数万人） */
+/** 领土人口：Σ h.pop（W7-2：城市人口按规模加权，首都/大城不再是死字段），
+    无 pop 字段的格子（测试沙盒/旧档）回退 POP_PER_HEX 常数 */
 function territoryPopulation(world, natId){
-  let hexes = 0;
-  for(const h of world.hexes) if(h.owner === natId) hexes++;
-  return hexes * K.POP_PER_HEX;
+  let pop = 0;
+  for(const h of world.hexes){
+    if(h.owner !== natId) continue;
+    pop += (h.pop != null) ? h.pop : K.POP_PER_HEX;
+  }
+  return pop;
 }
 
 /** 初始化/重算人力池上限（领土或法案变化后调用） */
@@ -25777,6 +26459,30 @@ function ideologyTick(world){
     if((n.stability || 0) < 40) delta -= 0.0006;
     if(n.rulingSupport == null) n.rulingSupport = 50;
     n.rulingSupport = Math.max(0, Math.min(100, n.rulingSupport + delta));
+
+    // W4-7：民主国家选举周期 —— 每 4 年（1440 天）一次大选，确定性结算。
+    // 结果由执政党支持度驱动：过半 → 稳定/战意小幅上行；不过半 → 下行且 PP 减损。
+    // 伪随机用 (day, natId) 字符串散列，不接触 rng（剧本回放保持确定性）。
+    if(ideo.id === 'democratic'){
+      n.nextElectionDay = n.nextElectionDay == null ? 1440 : n.nextElectionDay;
+      if(world.day >= n.nextElectionDay){
+        n.nextElectionDay = world.day + 1440;
+        const hash = [...(id + ':' + world.day)].reduce((s, ch) => (s * 31 + ch.charCodeAt(0)) >>> 0, 7);
+        const swing = (hash % 9) - 4;                          // −4 ~ +4 的选情摆动
+        const margin = (n.rulingSupport || 50) - 50;
+        const stabDelta = Math.round((margin >= 0 ? 2 : -3) + swing * 0.5);
+        n.stability = Math.max(10, Math.min(100, (n.stability || 60) + stabDelta));
+        n.warSupport = Math.max(0, Math.min(100, (n.warSupport || 50) + (margin >= 0 ? 2 : -3)));
+        if(margin < 0) n.pp = Math.max(0, (n.pp || 0) - 50);   // 执政联盟受挫：政治资本损耗
+        n.rulingSupport = Math.max(20, Math.min(80, (n.rulingSupport || 50) + (margin >= 0 ? 3 : -3)));
+        world.events = world.events || [];
+        world.events.push({
+          type: 'election', day: world.day, important: true,
+          text: `🗳️【大选日】${n.name}举行四年一度大选：执政联盟${margin >= 0 ? '成功连任' : '受挫'}，` +
+                `稳定度 ${stabDelta >= 0 ? '+' : ''}${stabDelta}%。`
+        });
+      }
+    }
 
     // 中立主义：意识形态变化抵制 -30% [H]（表现为其他派系更难坐大）
     if(ideo.ideologyChangeResist){
@@ -32961,7 +33667,11 @@ class ArmyPanel {
     }
 
     if(!this.selectedArmyId && w.armies.length){
-      this.selectedArmyId = w.armies[0].id;
+      // W2 修复：默认选中本国的第一个军 —— 旧写法取 w.armies[0]，
+      // 多国部队时（SF3 按国家序列建军）会选中外国军队，页签显示
+      // 回退到本国军、按钮却操作外国军，命令全部落空。
+      const mine = w.armies.find(a => a.nat === w.player) || w.armies[0];
+      this.selectedArmyId = mine.id;
     }
   }
 
@@ -33071,6 +33781,16 @@ class ArmyPanel {
           <button class="btn" style="font-size:11px;padding:5px;" data-tool="fallback">
             [V] 退守线
           </button>
+          <!-- W2-1：九种命令的玩家入口 —— 突破 / 牵制 / 区域防御 -->
+          <button class="btn" style="font-size:11px;padding:5px;" data-tool="breakthrough" title="突破命令：+20% 冲击力，沿轴心强穿敌防线">
+            [B] 突破命令
+          </button>
+          <button class="btn" style="font-size:11px;padding:5px;" data-tool="pin" title="牵制命令：对敌格 ×0.67 伤害、本军不耗组织度（原地牵制）">
+            [P] 牵制敌格
+          </button>
+          <button class="btn" style="font-size:11px;padding:5px;" data-tool="area_defense" title="区域防御：驻守当前阵地，防御 +50%，计划槽不消耗（上限 72 师）">
+            [D] 区域防御
+          </button>
         </div>
 
         <!-- 执行推进总按钮 -->
@@ -33118,7 +33838,7 @@ class ArmyPanel {
         sound.playClick();
         const tool = b.dataset.tool;
         const w = this.store.world;
-        const army = (w.armies || []).find(a => a.id === this.selectedArmyId);
+        const army = (w.armies || []).find(a => a.id === this.selectedArmyId && a.nat === w.player);
         if(!army) return;
 
         if(tool === 'front'){
@@ -33154,6 +33874,62 @@ class ArmyPanel {
             this.store.emit();
             this.update();
           }
+        } else if(tool === 'breakthrough'){
+          // W2-1：突破命令 —— 沿矛头选靶轴心建立 breakthrough 箭头并立即执行。
+          // 未填线（师无 inPlan）时调度器不会派单，这里直接逐师下达突破命令兜底。
+          const front = army.frontId ? w.fronts.find(f => f.id === army.frontId) : null;
+          const picked = pickOffensiveTarget(w, 'spearhead');
+          const targetHex = picked ? picked.target
+            : w.hexes.find(h => h.owner !== w.player && h.terrain !== 'sea');
+          if(targetHex){
+            if(front){
+              const arrow = createOffensiveArrow(w, front.id, [targetHex.idx], army.id, 'breakthrough');
+              executeArrow(w, army.id, arrow.id);
+            }
+            const inPlanCount = (army.divisions || []).filter(uid => {
+              const u = w.units.find(x => x.id === uid);
+              return u && u.inPlan;
+            }).length;
+            if(!inPlanCount){
+              for(const uid of (army.divisions || [])){
+                const u = w.units.find(x => x.id === uid);
+                if(u && u.hp > 0) createBreakthroughOrder(w, u, targetHex);
+              }
+              army.executing = true;
+            }
+            showToast(`⚔️ 突破命令已下达：全师沿轴心强穿（+20% 冲击力）`);
+            this.store.emit();
+            this.update();
+          }
+        } else if(tool === 'pin'){
+          // W2-1：牵制命令 —— 全师对最近敌格原地牵制（×0.67 伤害、不耗组织度）
+          const picked = pickOffensiveTarget(w, 'offensive');
+          const targetHex = picked ? picked.target
+            : w.hexes.find(h => h.owner !== w.player && h.terrain !== 'sea');
+          if(targetHex){
+            let n = 0;
+            for(const uid of (army.divisions || [])){
+              const u = w.units.find(x => x.id === uid);
+              if(u && u.hp > 0 && createPinOrder(w, u, targetHex)) n++;
+            }
+            army.orderType = 'pin';
+            showToast(`📌 牵制命令已下达：${n} 个师原地牵制 ${targetHex.city ? targetHex.city.name : `(${targetHex.q},${targetHex.r})`}`);
+            this.store.emit();
+            this.update();
+          }
+        } else if(tool === 'area_defense'){
+          // W2-1：区域防御 —— 驻守当前所在阵地（+50% 防御、计划不消耗）
+          const hexIdxs = [...new Set((army.divisions || [])
+            .map(uid => w.units.find(x => x.id === uid))
+            .filter(u => u && u.hp > 0)
+            .map(u => w.at[u.q + ',' + u.r])
+            .filter(Boolean)
+            .map(h => h.idx))];
+          createAreaDefensePlan(w, army.id, hexIdxs);
+          army.executing = false;
+          showToast(`🛡️ 区域防御已设立：${(army.divisions || []).length} 个师驻守 ${hexIdxs.length} 处阵地`);
+          this.store.emit();
+          this.update();
         }
       });
     });
@@ -33235,7 +34011,8 @@ function renderAirPanel(container, store){
           <div style="font-weight:700;font-size:14px;color:var(--c-brass-bright);display:flex;align-items:center;gap:6px;">
             <span>✈️</span> <span>空军统帅部与战区总览</span>
           </div>
-          <button class="btn small primary" id="btn-air-new-wing" style="padding:2px 8px;font-size:11px;">+ 新编联队</button>
+          <button class="btn small primary" id="btn-air-new-wing" style="padding:2px 8px;font-size:11px;" title="消耗 100 架空军装备库存成军（库存来自 air_eq 产线）">+ 新编联队</button>
+          <button class="btn small" id="btn-air-line" style="padding:2px 8px;font-size:11px;" title="在工业流水线追加一条空军装备产线（用 optimal/滑块分厂）">⚙️ 转产空军装备</button>
         </div>
         <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:6px;font-size:11px;text-align:center;">
           <div style="background:rgba(0,0,0,0.3);padding:6px;border-radius:3px;">
@@ -33355,6 +34132,12 @@ function renderAirPanel(container, store){
               `).join('')}
             </div>
           ` : ''}
+
+          <!-- W6-4：机型设计改进（8 条预置升级链，airXP 100/次） -->
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2px;">
+            <span style="font-size:10px;color:var(--c-text-muted);">${wg.designName || '原型设计'}${(wg.upgradeLevel || 0) > 0 ? ` · 效率 +${(wg.upgradeLevel || 0) * 8}%` : ''}</span>
+            <button class="btn small" data-wing-upgrade="${wg.id}" style="padding:1px 6px;font-size:10px;" title="花 100 空军经验换装改型（任务效率 +8%/级）">✈️ 机型改进</button>
+          </div>
         </div>
       `;
     }
@@ -33451,10 +34234,28 @@ function renderAirPanel(container, store){
     });
   });
 
-  // 绑定新编联队按钮
+  // W6-4：机型设计改进按钮
+  container.querySelectorAll('[data-wing-upgrade]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      sound.playClick();
+      const res = upgradeWingDesign(w, btn.dataset.wingUpgrade);
+      if(res.ok) showToast(`✈️ 换装「${res.name}」（效率累计 +${res.level * 8}%）`);
+      else showToast('⚠️ ' + res.reason);
+      renderAirPanel(container, store);
+    });
+  });
+
+  // 绑定新编联队按钮（W6-3：消耗空军装备库存，不再凭空打印 100 架）
   const btnNew = container.querySelector('#btn-air-new-wing');
   if(btnNew){
     btnNew.addEventListener('click', () => {
+      const n = w.nations[p];
+      n.equipment = n.equipment || {};
+      const stock = n.equipment.air_eq || 0;
+      if(stock < K.AIR.STANDARD_WING_SIZE){
+        showToast(`⚠️ 空军装备库存不足（${Math.floor(stock)}/100 架）——请先转产空军装备`);
+        return;
+      }
       if(!playerBases.length){
         showToast('⚠️ 无可用空军基地！');
         return;
@@ -33464,7 +34265,7 @@ function renderAirPanel(container, store){
         id: `wing_${p}_${(w.airWings?.length || 0) + 1}`,
         nat: p,
         type: 'fighter',
-        count: 100,
+        count: K.AIR.STANDARD_WING_SIZE,
         baseId: base.id,
         baseHex: [base.q, base.r],
         task: 'air_superiority',
@@ -33472,9 +34273,34 @@ function renderAirPanel(container, store){
         exp: 1.0,
         aces: []
       };
+      n.equipment.air_eq = stock - K.AIR.STANDARD_WING_SIZE;
       w.airWings = w.airWings || [];
       w.airWings.push(newWing);
       sound.playClick();
+      showToast('🛫 新联队成军：消耗 100 架空军装备');
+      renderAirPanel(container, store);
+    });
+  }
+
+  // W6-3：转产空军装备 —— 追加一条 air_eq 产线（0 厂起步，用 optimal/滑块分厂）
+  const btnLine = container.querySelector('#btn-air-line');
+  if(btnLine){
+    btnLine.addEventListener('click', () => {
+      const n = w.nations[p];
+      n.productionLines = n.productionLines || [];
+      if(n.productionLines.some(l => l.type === 'air_eq')){
+        showToast('✓ 已存在空军装备产线（去工业流水线分厂即可）');
+        return;
+      }
+      n.productionLines.push({
+        id: `air_eq_${Date.now() % 100000}`,
+        type: 'air_eq',
+        factories: 0,
+        eff: K.EFF_START,
+        cap: K.EFF_CAP
+      });
+      sound.playClick();
+      showToast('⚙️ 空军装备产线已建立：去「工业流水线」分配军工厂');
       renderAirPanel(container, store);
     });
   }
@@ -35182,7 +36008,12 @@ function openDesignerModal(store){
       html += `<button class="btn ${sel ? 'gold' : ''}" style="font-size:11.5px;padding:3px 10px;"
         title="${t.desc}" data-set-tier="${tid}">${t.name}${sel ? ' ✓' : ''}</button>`;
     }
-    html += `<span style="font-size:10px;color:#8a94a6;margin-left:4px;">${TEMPLATE_TIERS[workingTemplate.tier].desc}</span></div>
+    html += `<span style="font-size:10px;color:#8a94a6;margin-left:4px;">${TEMPLATE_TIERS[workingTemplate.tier].desc}</span>
+      <!-- W3-4：具名模板库 —— 自建编制的另存与删除 -->
+      <button class="btn" style="font-size:11.5px;padding:3px 10px;margin-left:8px;" id="sf-save-as-template"
+        title="把当前设计另存为一个具名编制，出现在上方模板列表">📂 另存为具名编制</button>
+      ${String(selectedTmplKey).startsWith('custom_') ? `<button class="btn" style="font-size:11.5px;padding:3px 10px;color:#ff6b6b;" id="sf-delete-template"
+        title="删除这个自建编制（预设编制不可删除）">🗑 删除该自建编制</button>` : ''}</div>
 
       <!-- 预设选择器 -->
       <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center;flex-wrap:wrap;">
@@ -35354,6 +36185,45 @@ function openDesignerModal(store){
       });
     }
 
+    // W3-4：另存为具名编制 —— 具名模板库的"存"
+    const saveAsBtn = modal.querySelector('#sf-save-as-template');
+    if(saveAsBtn){
+      saveAsBtn.addEventListener('click', () => {
+        sound.playClick();
+        promptSaveAsTemplate();
+      });
+    }
+
+    // W3-4：删除自建编制 —— 具名模板库的"删"（预设编制不可删）
+    const delBtn = modal.querySelector('#sf-delete-template');
+    if(delBtn){
+      delBtn.addEventListener('click', () => {
+        sound.playClick();
+        if(!String(selectedTmplKey).startsWith('custom_')) return;
+        const delModal = document.createElement('div');
+        delModal.className = 'sf-overlay on';
+        delModal.innerHTML = `<div class="brief-box" style="max-width:340px;">
+          <h3 style="margin:0 0 10px 0;font-size:16px;color:var(--gold);">删除自建编制</h3>
+          <div style="font-size:12px;color:var(--ink);margin-bottom:12px;">确认删除【${workingTemplate.name}】？该操作不可撤销。</div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn" style="flex:1;" id="sf-del-cancel">取消</button>
+            <button class="btn" style="flex:1;color:#ff6b6b;" id="sf-del-confirm">确认删除</button>
+          </div>
+        </div>`;
+        document.body.appendChild(delModal);
+        delModal.querySelector('#sf-del-cancel').addEventListener('click', () => delModal.remove());
+        delModal.querySelector('#sf-del-confirm').addEventListener('click', () => {
+          sound.playClick();
+          delete w.templates[selectedTmplKey];
+          selectedTmplKey = Object.keys(w.templates)[0] || 'infantry_standard';
+          workingTemplate = JSON.parse(JSON.stringify(w.templates[selectedTmplKey]));
+          originalTemplate = JSON.parse(JSON.stringify(workingTemplate));
+          delModal.remove();
+          render();
+        });
+      });
+    }
+
     // 全军整编
     const refitBtn = modal.querySelector('#sf-refit-all');
     if(refitBtn){
@@ -35376,6 +36246,39 @@ function openDesignerModal(store){
         render();
       });
     }
+  }
+
+  // W3-4：具名模板库 —— 命名弹窗（不花 XP；换装整编才消耗经验）
+  function promptSaveAsTemplate(){
+    const pickModal = document.createElement('div');
+    pickModal.className = 'sf-overlay on';
+    pickModal.innerHTML = `<div class="brief-box" style="max-width:360px;">
+      <h3 style="margin:0 0 10px 0;font-size:16px;color:var(--gold);">另存为具名编制</h3>
+      <div style="font-size:11px;color:#8a94a6;margin-bottom:8px;">编制将存入本国的模板库（免费），此后可在模板列表选用并对全军整编。</div>
+      <input type="text" id="sf-tmpl-name" maxlength="20" placeholder="编制名称（如：装甲矛头师）"
+        style="width:100%;padding:7px 10px;background:#131720;border:1px solid #2d3748;border-radius:4px;color:var(--ink);font-size:13px;margin-bottom:10px;">
+      <div style="display:flex;gap:8px;">
+        <button class="btn" style="flex:1;" id="sf-saveas-cancel">取消</button>
+        <button class="btn gold" style="flex:1;" id="sf-saveas-confirm">保存编制</button>
+      </div>
+    </div>`;
+    document.body.appendChild(pickModal);
+    const input = pickModal.querySelector('#sf-tmpl-name');
+    input.focus();
+    pickModal.querySelector('#sf-saveas-cancel').addEventListener('click', () => pickModal.remove());
+    const confirm = () => {
+      const name = (input.value || '').trim() || '自定义编制';
+      const key = 'custom_' + Date.now();
+      w.templates[key] = JSON.parse(JSON.stringify(workingTemplate));
+      w.templates[key].name = name;
+      w.templates[key].custom = true;
+      selectedTmplKey = key;
+      originalTemplate = JSON.parse(JSON.stringify(workingTemplate));
+      pickModal.remove();
+      render();
+    };
+    pickModal.querySelector('#sf-saveas-confirm').addEventListener('click', () => { sound.playClick(); confirm(); });
+    input.addEventListener('keydown', e => { if(e.key === 'Enter'){ sound.playClick(); confirm(); } });
   }
 
   function promptSupportSelect(slotIdx){
@@ -36514,6 +37417,7 @@ function renderDecisions(container, store){
 
 
 
+   // W3-1：科技树形布局
 
 
 
@@ -36572,42 +37476,40 @@ function renderResearchPanel(container, store){
     }).join('')}
   </div>`;
 
-  // 渲染当前分支科技树
+  // 渲染当前分支科技树（W3-1：节点图 + 前置连线，取代旧文字行列表）
   const list = TECHS.filter(t => t.branch === activeBranchTab);
-  const done = list.filter(t => n.research.done[t.id]).length;
 
-  // 树状层级：根据 requires 深度组织
-  const rows = list.map(t => {
+  // 树形布局：y=前置深度、x=DFS 整洁列；连线由 layoutForest 给出
+  const layout = layoutForest(list, { reqKey: 'requires' });
+  const NODE_W = 168, NODE_H = 86, COL_P = 184, ROW_P = 104;
+
+  const nodeCards = list.map(t => {
+    const p = layout.pos[t.id];
+    if(!p) return '';
     const isDone = !!n.research.done[t.id];
     const isActive = slots.includes(t.id);
     const unmet = techUnmetRequires(w, w.player, t.id);
     const can = avail.some(a => a.id === t.id);
     const ahead = Math.max(0, t.year - curYear);
-    const aheadTxt = ahead > 0 ? `<span class="rs-ahead" title="超前研究惩罚">⚠ 超前 ${ahead} 年</span>` : '';
-    let btn;
-    if(isDone) btn = '<span class="rs-done">✓ 已掌握</span>';
+    const aheadTxt = ahead > 0 ? `<span title="超前研究惩罚" style="color:#e0a34a;">⚠${ahead}年</span>` : '';
+    let act;
+    if(isDone) act = '<span style="color:#81c784;font-size:10.5px;">✓ 已掌握</span>';
     else if(isActive){
-      const p = (n.research.progress && n.research.progress[w.player + ':' + t.id]) || 0;
-      const pct = Math.min(100, Math.round(p / t.days * 100));
-      btn = `<span class="rs-active">研发中 ${pct}%</span>
-             <button class="btn small rs-cancel" data-rs-cancel="${t.id}" style="margin-left:6px;">中止</button>`;
-    } else if(can) btn = `<button class="btn small primary" data-rs="${t.id}">启动研发</button>`;
-    else btn = `<span class="rs-locked" title="前置未完成">${unmet.length ? '需前置：' + unmet.map(u => (TECHS.find(x=>x.id===u)||{name:u}).name).join('、') : '前置受锁'}</span>`;
+      const p2 = (n.research.progress && n.research.progress[w.player + ':' + t.id]) || 0;
+      const pct = Math.min(100, Math.round(p2 / t.days * 100));
+      act = `<span style="color:#64b5f6;font-size:10.5px;">研发中 ${pct}%</span>
+             <button class="btn small rs-cancel" data-rs-cancel="${t.id}" style="font-size:10px;padding:1px 5px;margin-left:4px;">中止</button>`;
+    } else if(can) act = `<button class="btn small primary" data-rs="${t.id}" style="font-size:10.5px;padding:2px 8px;">启动研发</button>`;
+    else act = `<span style="color:#718096;font-size:10px;" title="前置未完成">🔒 ${unmet.length ? unmet.map(u => (TECHS.find(x=>x.id===u)||{name:u}).name).join('+') : '前置受锁'}</span>`;
 
-    const reqNames = (t.requires || []).map(r => (TECHS.find(x => x.id === r) || { name: r }).name);
-    const reqBadge = reqNames.length ? `<div style="font-size:10px;color:#8a94a6;margin-top:2px;">前置依赖: ${reqNames.join(' ➔ ')}</div>` : '';
-
-    return `<div class="rs-row ${isDone ? 'done' : (isActive ? 'on' : (can ? '' : 'off'))}" style="margin-bottom:8px;border-left:3px solid ${isDone ? '#81c784' : isActive ? '#64b5f6' : can ? '#d4af37' : '#4a5568'};background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:4px;display:flex;align-items:center;justify-content:space-between;">
-      <div class="rs-main" style="flex:1;">
-        <div class="rs-name" style="font-weight:700;font-size:13px;color:var(--ink);">
-          ${t.name} ${aheadTxt}
-          <span class="rs-days" style="font-size:11px;color:var(--dim);margin-left:8px;">⏱️ ${t.days}天</span>
-          <span class="rs-year" style="font-size:11px;color:var(--gold);margin-left:6px;">📅 ${t.year}年</span>
-        </div>
-        <div class="rs-eff" style="font-size:11px;color:#a0aec0;margin-top:2px;">${effectText(t)}</div>
-        ${reqBadge}
-      </div>
-      <div class="rs-act" style="margin-left:12px;">${btn}</div>
+    return `<div class="rs-node ${isDone ? 'done' : (isActive ? 'on' : (can ? '' : 'off'))}"
+      style="position:absolute;left:${20 + p.x * COL_P}px;top:${20 + p.y * ROW_P}px;width:${NODE_W}px;
+             border-left:3px solid ${isDone ? '#81c784' : isActive ? '#64b5f6' : can ? '#d4af37' : '#4a5568'};
+             background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:4px;">
+      <div style="font-weight:700;font-size:12px;color:var(--ink);line-height:1.25;">${t.name} ${aheadTxt}</div>
+      <div style="font-size:10px;color:#a0aec0;margin-top:2px;line-height:1.3;">${effectText(t)}</div>
+      <div style="font-size:10px;color:var(--dim);margin-top:3px;">⏱️${t.days}天 📅${t.year}年</div>
+      <div style="margin-top:4px;">${act}</div>
     </div>`;
   }).join('');
 
@@ -36617,7 +37519,7 @@ function renderResearchPanel(container, store){
         <span>🔬 国家工业与尖端国防科研院</span>
       </div>
       <div class="rs-year" style="font-size:12px;color:var(--dim);margin-top:4px;">
-        当前国际历法 <b>${curYear} 年</b> · 军工科研槽 <b>${slots.filter(Boolean).length}/${slots.length}</b> 运转中
+        当前国际历法 <b>${curYear} 年</b> · 军工科研槽 <b>${slots.filter(Boolean).length}/${slots.length}</b> 运转中 · 连线为前置依赖
       </div>
     </div>
     <div class="rs-slots" style="display:flex;gap:8px;margin-bottom:12px;">
@@ -36626,8 +37528,21 @@ function renderResearchPanel(container, store){
       </div>`).join('')}
     </div>
     ${tabHtml}
-    <div class="rs-cat-tree" style="max-height:55vh;overflow-y:auto;padding-right:6px;">
-      ${rows}
+    <div class="rs-tree-wrap" style="overflow:auto;max-height:52vh;border:1px solid #2b3647;border-radius:6px;background:rgba(8,10,14,0.45);">
+      <div style="position:relative;width:${layout.cols * COL_P + 40}px;height:${layout.rows * ROW_P + 40}px;">
+        <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 ${layout.cols * COL_P + 40} ${layout.rows * ROW_P + 40}">
+          ${layout.edges.map(e => {
+            const a = layout.pos[e.from], b = layout.pos[e.to];
+            if(!a || !b) return '';
+            const x1 = 20 + a.x * COL_P + NODE_W / 2, y1 = 20 + a.y * ROW_P + NODE_H;
+            const x2 = 20 + b.x * COL_P + NODE_W / 2, y2 = 20 + b.y * ROW_P;
+            const midY = y1 + (y2 - y1) / 2;
+            return `<path d="M ${x1} ${y1} L ${x1} ${midY} L ${x2} ${midY} L ${x2} ${y2}"
+              fill="none" stroke="#5a6a85" stroke-width="1.6" opacity="0.7"/>`;
+          }).join('')}
+        </svg>
+        ${nodeCards}
+      </div>
     </div>`;
 
   function esc(str){
@@ -37311,8 +38226,11 @@ function aarBackground(scenarioId, win){
 
 
 
+   // W5：改善关系（tension）
+   // W5：宣战选目标/志愿军实体化（含 world 边，必须在 diplomacy 导入）
+   // W5：白和/同盟
 
-
+   // W3-3：optimal 一键分配引擎真源
 
 
 
@@ -37327,6 +38245,7 @@ function aarBackground(scenarioId, win){
 
    // v14.0 P2 决议面板
    // v14.0 P4 科研面板
+   // W3-1/W3-2：树形布局纯函数（科技树/国策树共用）
    // v14.1 E4：军与作战计划面板激活（此前整文件死代码）
    // v14.0 P3
    // v14.0 P3
@@ -37648,6 +38567,16 @@ class HUD {
     const xpEl = document.getElementById('sf-xp');
     if(xpEl) xpEl.textContent = `${Math.floor(n.armyXp != null ? n.armyXp : 50)}`;
 
+    // W4-6：人力日增在下方 v14.0 P2 的 sf-manpower 块中追加（同一元素同一作用域，
+    // 变量名错开为 mpRibbon —— 本块只算日增，池/上限由旧块写入）。
+    let mpRibbonGrowth = null;
+    if(n.manpowerCap != null){
+      mpRibbonGrowth = Math.round(n.manpowerCap * K.MANPOWER_DAILY_REGEN
+        * (0.6 + 0.4 * ((n.stability || 50) / 100))
+        * (0.5 + 0.5 * ((n.warSupport ?? 50) / 100)));
+    }
+    void mpRibbonGrowth;
+
     // 3.1 v7.0 E4：战略资源汇总 + 燃料储备（悬停下钻 B.4 赤字公式）
     const resStrip = document.getElementById('sf-res-strip');
     if(resStrip){
@@ -37704,7 +38633,8 @@ class HUD {
         mp = Math.round((n.civ * 180000 + n.mil * 120000) * 1.5);
       }
       mpEl.textContent = (mp >= 1000000 ? (mp / 1000000).toFixed(2) + 'M' : mp >= 1000 ? Math.round(mp / 1000) + 'K' : mp)
-        + (mpCap ? ' / ' + Math.round(mpCap / 1000) + 'K' : '');
+        + (mpCap ? ' / ' + Math.round(mpCap / 1000) + 'K' : '')
+        + (mpRibbonGrowth != null ? ' (+' + mpRibbonGrowth + ')' : '');   // W4-6：日增（征兵法×稳定×战意）
       const item = mpEl.closest ? mpEl.closest('.sf-ribbon-item') : null;
       if(item){
         item.style.color = mpRatio < 0.05 ? '#f87171' : '';
@@ -37952,7 +38882,7 @@ class Panels {
 
   /* 指标详情系统：顶栏每个指示器点击弹出完整说明与明细 */
   bindIndicatorDetails(){
-    const map = { 'sf-pp':'pp', 'sf-cp':'cp', 'sf-xp':'xp', 'sf-tension':'tension',
+    const map = { 'sf-pp':'pp', 'sf-cp':'cp', 'sf-xp':'xp', 'sf-manpower':'manpower', 'sf-tension':'tension',
                   'sf-stab-war':'stabwar', 'sf-equip':'equip', 'sf-div':'div', 'sf-mil':'factory' };
     for(const [elId, key] of Object.entries(map)){
       const el = document.getElementById(elId);
@@ -38013,6 +38943,11 @@ class Panels {
 
       if(n.productionLines && n.productionLines.length){
         const eqNames = K.EQUIP_NAMES || {};
+        // W3-3：optimal 一键 + 军工选址（滑块此前已有）
+        html += `<div style="display:flex;gap:6px;margin-bottom:8px;">
+          <button class="btn gold" data-line-optimal style="flex:1;font-size:11.5px;padding:5px;" title="把空闲军工厂按各线现有占比一键分配到位">⚡ 一键 optimal 分配 (${freeMil} 空闲)</button>
+          <button class="btn" data-prod-siteline style="flex:1;font-size:11.5px;padding:5px;" title="先在地图点击一个己方格，再点此按钮：在该格建军工厂（不占厂槽会入建造队列）">🏗️ 军工选址（用选定格）</button>
+        </div>`;
         for(const line of n.productionLines){
           const nm = eqNames[line.type] || line.type;
           const stock = Math.floor(n.equipment ? (n.equipment[line.type] || 0) : 0);
@@ -38050,8 +38985,20 @@ class Panels {
 
     // ===== TAB 2: 部队招募与训练动员 =====
     else if(this.activeDrawerTab === 'recruit'){
-      html += `<div style="font-size:12px;font-weight:700;color:var(--brass-bright);margin-bottom:6px;">部队动员与建制编成</div>
-        <div class="sf-recruit-grid">`;
+      html += `<div style="font-size:12px;font-weight:700;color:var(--brass-bright);margin-bottom:6px;">部队动员与建制编成</div>`;
+      // W4-6：人力摘要（池/上限/日增/征兵法名）—— 招募决策的依据
+      if(n.manpowerCap != null){
+        const cLaw = CONSCRIPTION_LAWS[n.conscriptionLaw || 'limited'];
+        const mpGrowth = Math.round(n.manpowerCap * K.MANPOWER_DAILY_REGEN
+          * (0.6 + 0.4 * ((n.stability || 50) / 100))
+          * (0.5 + 0.5 * ((n.warSupport ?? 50) / 100)));
+        const mpPct = Math.round((n.manpowerPool || 0) / n.manpowerCap * 100);
+        html += `<div style="font-size:11.5px;color:#a0aec0;background:rgba(255,255,255,0.03);border-left:2px solid var(--gold);padding:6px 9px;margin-bottom:8px;line-height:1.6;">
+          🧑‍🌾 人力池 <b style="color:#a5d6a7">${Math.floor(n.manpowerPool || 0)}</b> / ${Math.floor(n.manpowerCap)}（${mpPct}%）· 日增 <b style="color:#a5d6a7">+${mpGrowth}</b><br>
+          征兵法：${cLaw ? cLaw.name : (n.conscriptionLaw || '有限征兵制')} · 稳定 ${Math.round(n.stability || 50)}% / 战意 ${Math.round(n.warSupport ?? 50)}% 调制回补速度
+        </div>`;
+      }
+      html += `<div class="sf-recruit-grid">`;
       for(const [t, nm, cost] of [['inf','步兵师',400],['cav','骑兵师',350],['mtn','山地师',480],['mot','摩托化师',700],['arm','重装甲师',1400]]){
         html += `
           <button class="sf-recruit-btn" data-train="${t}">
@@ -38448,6 +39395,32 @@ class Panels {
         }
         return;
       }
+      // W3-3：optimal 一键分配（引擎真源 allocateFactoriesOptimal）
+      if(e.target.closest('[data-line-optimal]')){
+        sound.playClick();
+        const w2 = this.store.world;
+        const res = allocateFactoriesOptimal(w2, w2.player);
+        showToast(res.allocated > 0
+          ? `⚡ optimal 分配完成：${res.allocated} 座空闲军工厂已按产线占比就位`
+          : '✓ 无空闲军工厂需要分配');
+        this.update();
+        return;
+      }
+      // W3-3：军工选址 —— 对 ui.selHex 直接下发军工建造（厂满/占用自动入队列）
+      if(e.target.closest('[data-prod-siteline]')){
+        sound.playClick();
+        const h = this.ui.selHex ? this.store.world.at[this.ui.selHex.q + ',' + this.ui.selHex.r] : null;
+        if(!h || h.owner !== this.store.world.player){
+          showToast('⚠️ 请先在地图上点击一个己方格作为厂址');
+        } else {
+          this.store.dispatch({ type:'BUILD', q: h.q, r: h.r, kind:'mil' });
+          const n2 = this.store.world.nations[this.store.world.player];
+          showToast(n2.build.kind && n2.build.q === h.q && n2.build.r === h.r
+            ? `🏗️ 军工厂选址开工：(${h.q},${h.r})${h.city && h.city.name ? ' ' + h.city.name : ''}`
+            : '🏗️ 该格厂槽已满，军工建造已加入建造队列');
+        }
+        return;
+      }
       const lineSub = e.target.closest('[data-line-sub]');
       if(lineSub){
         sound.playClick();
@@ -38512,95 +39485,78 @@ function renderFocusTree(store, modal){
   const list = focusesFor(w, natId);
   const avail = availableFocuses(w, natId).map(f => f.id);
 
-  const chainTitles = {
-    industry: '⚙️ 工业与资源统制',
-    army:     '⚔️ 陆战学说与军工',
-    armor:    '🛡️ 装甲突击与兵器',
-    air:      '✈️ 空军战备与空优',
-    navy:     '⚓ 海军重整与大洋',
-    politics: '🏛️ 战略外交与地缘',
-    diplomacy:'🌐 国际同盟与阵营',
-    economy:  '📈 国家金融与配给',
-    social:   '📢 社会动员与治安',
-    intel:    '🕵️ 绝密情报与破译',
-    nuclear:  '☢️ 核物理与终极威慑',
-    character:'🎖️ 统帅部军官整肃'
+  // W3-2：真树形布局 —— y=前置深度、x=DFS 整洁列，前置连线由 layoutForest 给出
+  // （兼容通用国策 requires 与剧本国策 pre 两种数据形态）
+  const layout = layoutForest(list);
+  const NODE_W = 176, NODE_H = 128, COL_P = 192, ROW_P = 146;
+  const chainColors = {
+    industry:'#d4af37', army:'#e06055', armor:'#42a5f5', air:'#64b5f6', navy:'#4db6ac',
+    politics:'#ba68c8', diplomacy:'#ffb74d', economy:'#81c784', social:'#f06292',
+    intel:'#9575cd', nuclear:'#e57373', character:'#fff176'
   };
 
-  const chains = {};
-  for(const k of ['industry', 'army', 'air', 'navy', 'politics']){
-    chains[k] = { title: chainTitles[k] || k, items: [] };
-  }
-
-  for(const f of list){
-    const c = f.chain || 'industry';
-    if(!chains[c]) chains[c] = { title: chainTitles[c] || c, items: [] };
-    chains[c].items.push(f);
-  }
-
-  // 清除无内容的预设链
-  for(const k in chains){
-    if(chains[k].items.length === 0) delete chains[k];
-    else chains[k].items.sort((a,b) => a.y - b.y);
-  }
-
-  let html = `<div class="focus-modal-box">
+  let html = `<div class="focus-modal-box" style="max-width:96vw;">
     <div class="modal-header">
       <div style="display:flex;align-items:center;gap:12px;">
         ${renderFlagHtml(natId, 36, 24)}
         <div>
-          <h2 class="modal-title">${n ? n.name : natId} · 最高国家战略与全量国策树</h2>
-          <div class="modal-sub">点击任何国策节点即可展开 150+ 字深度历史考据档案、前置互斥分支与全国收益清单</div>
+          <h2 class="modal-title">${n ? n.name : natId} · 最高国家战略树</h2>
+          <div class="modal-sub">连线 = 前置依赖 · 点击节点调阅战略档案 · 已就绪节点可直接签署 · 进行中节点可花 ${K.FOCUS_RUSH_PP} PP 加速</div>
         </div>
       </div>
       <button class="btn" id="sf-close-focus">关闭 (ESC)</button>
     </div>
-    <div class="focus-chains-grid" style="grid-template-columns: repeat(${Math.min(5, Math.max(3, Object.keys(chains).length))}, 1fr);">`;
-
-  for(const k in chains){
-    const col = chains[k];
-    const motherIconSrc = getFocusMotherIconSrc(k);
-
-    html += `<div class="focus-chain-col">
-      <div class="focus-chain-title" style="display:flex;align-items:center;justify-content:center;gap:6px;">
-        <img src="${motherIconSrc}" alt="${k}" style="width:24px;height:24px;object-fit:contain;filter:drop-shadow(0 0 4px rgba(212,175,55,0.4))">
-        <span>${col.title}</span>
-      </div>`;
-    for(const f of col.items){
-      const isDone = n.focus.done.includes(f.id);
-      const isActive = n.focus.active === f.id;
-      const isAvail = avail.includes(f.id);
-      const statusClass = isDone ? 'done' : isActive ? 'active' : isAvail ? 'available' : 'locked';
-      const statusText = isDone ? '已完成' : isActive ? `进行中 (${n.focus.progress}/${f.days || 70}天)` : isAvail ? '可签署' : '未解锁';
-
-      const reqNames = (f.requires || []).map(r => (list.find(x => x.id === r) || { name: r }).name);
-      const reqBadge = reqNames.length ? `<div style="font-size:10px;color:#718096;margin-bottom:3px;display:flex;align-items:center;gap:4px;">
-        <span style="color:#d4af37">▲ 前置:</span> ${reqNames.join(' + ')}
-      </div>` : '';
-
-      html += `<div class="focus-node-card ${statusClass}" data-foc="${f.id}" title="点击调阅【${f.name}】战略档案" style="position:relative;">
-        ${reqBadge}
-        <div style="font-size:13px;font-weight:bold;color:var(--ink);display:flex;justify-content:space-between;align-items:center;">
-          <span>${f.name}</span>
-          <span style="font-size:10px;padding:1px 6px;border-radius:2px;background:#2d3748;color:var(--brass-bright)">${statusText}</span>
-        </div>
-        <div style="font-size:11px;color:var(--dim);line-height:1.4;margin:4px 0;">${f.desc || ''}</div>
-        <div style="font-size:10px;color:#a2c49d;background:rgba(0,0,0,0.3);padding:3px 6px;border-radius:2px;">
-          ${(f.effects||[]).map(formatEffect).join(' | ')}
-        </div>
-        <div style="font-size:10px;color:var(--brass-bright);display:flex;justify-content:space-between;align-items:center;margin-top:4px;">
-          <span>${isAvail ? '<b style="color:#4ade80;">⚡ 点击调阅/直接签署</b>' : '🔍 调阅战略档案'}</span>
-          <span>⏱️ ${f.days || 70}天</span>
-        </div>
-      </div>`;
-    }
-    html += `</div>`;
-  }
-
-  html += `</div></div>`;
+    <div style="overflow:auto;max-height:74vh;border:1px solid #2b3647;border-radius:6px;background:rgba(8,10,14,0.5);">
+      <div style="position:relative;width:${layout.cols * COL_P + 40}px;height:${layout.rows * ROW_P + 40}px;">
+        <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 ${layout.cols * COL_P + 40} ${layout.rows * ROW_P + 40}">
+          ${layout.edges.map(e => {
+            const a = layout.pos[e.from], b = layout.pos[e.to];
+            if(!a || !b) return '';
+            const x1 = 20 + a.x * COL_P + NODE_W / 2, y1 = 20 + a.y * ROW_P + NODE_H;
+            const x2 = 20 + b.x * COL_P + NODE_W / 2, y2 = 20 + b.y * ROW_P;
+            const midY = y1 + (y2 - y1) / 2;
+            return `<path d="M ${x1} ${y1} L ${x1} ${midY} L ${x2} ${midY} L ${x2} ${y2}"
+              fill="none" stroke="#5a6a85" stroke-width="2" opacity="0.75"/>`;
+          }).join('')}
+        </svg>
+        ${list.map(f => {
+          const p = layout.pos[f.id];
+          if(!p) return '';
+          const isDone = n.focus.done.includes(f.id);
+          const isActive = n.focus.active === f.id;
+          const isAvail = avail.includes(f.id);
+          const statusClass = isDone ? 'done' : isActive ? 'active' : isAvail ? 'available' : 'locked';
+          const chain = f.chain || 'industry';
+          const accent = chainColors[chain] || '#d4af37';
+          const statusText = isDone ? '已完成' : isActive ? `进行中 ${n.focus.progress}/${f.days || 70}天` : isAvail ? '可签署' : '未解锁';
+          return `<div class="focus-node-card ${statusClass}" data-foc="${f.id}" title="点击调阅【${f.name}】战略档案"
+            style="position:absolute;left:${20 + p.x * COL_P}px;top:${20 + p.y * ROW_P}px;width:${NODE_W}px;min-height:${NODE_H - 14}px;border-left:3px solid ${accent};">
+            <div style="font-size:12.5px;font-weight:bold;color:var(--ink);line-height:1.3;">${f.name}</div>
+            <div style="font-size:10px;padding:1px 5px;border-radius:2px;background:#2d3748;color:${isDone ? '#81c784' : isActive ? '#64b5f6' : isAvail ? 'var(--brass-bright)' : '#718096'};display:inline-block;margin:3px 0;">${statusText}</div>
+            ${isActive ? `<button class="btn gold" data-foc-rush="${f.id}" style="width:100%;font-size:10.5px;padding:3px 4px;margin-top:2px;"
+              title="花费 ${K.FOCUS_RUSH_PP} 政治点，国策立即推进 ${K.FOCUS_RUSH_DAYS} 天">⚡ 花 ${K.FOCUS_RUSH_PP} PP 加速</button>` : ''}
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+  </div>`;
   modal.innerHTML = html;
 
   modal.querySelector('#sf-close-focus').addEventListener('click', () => modal.classList.remove('on'));
+
+  // W3-2：花 PP 主动点亮（树节点上的直达入口；档案卡内的入口保留）
+  modal.querySelectorAll('[data-foc-rush]').forEach(btn => {
+    btn.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      const cost = K.FOCUS_RUSH_PP;
+      if(!n.focus.active){ showToast('⚠️ 当前没有进行中的国策'); return; }
+      if((n.pp || 0) < cost){ showToast(`⚠️ 政治点不足（需 ${cost}，现有 ${Math.floor(n.pp || 0)}）`); return; }
+      sound.playClick();
+      store.dispatch({ type:'RUSH_FOCUS' });
+      showToast(`⚡ 国策加速：${n.focus.active} 进度 +${K.FOCUS_RUSH_DAYS} 天（-${cost} PP）`);
+      renderFocusTree(store, modal);
+    });
+  });
 
   modal.querySelectorAll('.focus-node-card').forEach(card => {
     card.addEventListener('click', () => {
@@ -39567,7 +40523,10 @@ function openCharactersModal(store, defaultTab = 'generals'){
     modal.querySelectorAll('[data-hire-cat]').forEach(btn => {
       btn.addEventListener('click', () => {
         sound.playClick();
-        hireAdvisor(w, w.player, btn.dataset.hireCat, btn.dataset.hireId);
+        const hireRes = hireAdvisor(w, w.player, btn.dataset.hireCat, btn.dataset.hireId);
+        if(hireRes && hireRes.reason === 'cooldown'){
+          showToast('🗓️ 该顾问槽每周只能换一次（第 ' + hireRes.readyDay + ' 天可再任命）');
+        }
         renderList();
       });
     });
@@ -39687,6 +40646,11 @@ function showModal(html){
 function openIndicatorModal(store, key){
   const w = store.world;
   const n = w.nations[w.player];
+  if(key === 'tension'){
+    // W5：紧张度弹窗升级为外交行动中心（借口/宣战选目标/改善关系/白和/结盟）
+    openTensionActionsModal(store);
+    return;
+  }
   const meta = IND_META[key];
   if(!meta) return;
   showModal(`
@@ -39695,6 +40659,114 @@ function openIndicatorModal(store, key){
     <div class="txt">${meta.body(w, n)}</div>
     <div class="close-row"><button class="btn" data-close>了解</button></div>
   `);
+}
+
+/* ============================================================
+   W5 外交行动中心（紧张度弹窗）—— 宣战目标选择 / 改善关系 / 白和 / 结盟
+   ============================================================ */
+function openTensionActionsModal(store){
+  const w = store.world;
+  const n = w.nations[w.player];
+  const snap = w.tension ? w.tension.value : 0;
+
+  // 借口与宣战
+  const justifyRows = (n.justifying || []).map(j => {
+    const t = w.nations[j.target];
+    const tName = t ? t.name : j.target;
+    if(!j.done){
+      return `<div style="font-size:11.5px;color:#a0aec0;padding:3px 0;">📜 对 ${tName} 制造借口中：剩余 ${j.daysLeft} 天</div>`;
+    }
+    // capture 目标 = 对方最高 VP 城市（无城则不可选）
+    const bestCity = (w.hexes.filter(h => h.owner === j.target && h.city) || [])
+      .sort((a, b) => b.city.w - a.city.w)[0];
+    const capBtn = bestCity
+      ? `<button class="btn small" data-w5-war="${j.target}" data-goal="capture:${bestCity.city.name}" title="夺取 ${bestCity.city.name}">夺取城市</button>` : '';
+    return `<div style="font-size:11.5px;padding:4px 0;border-bottom:1px dashed #2b3647;">
+      <b style="color:#ffd977;">✅ 借口就绪：对 ${tName}</b>
+      <span style="display:inline-flex;gap:4px;margin-left:6px;flex-wrap:wrap;">
+        <button class="btn small gold" data-w5-war="${j.target}" data-goal="conquer">全面战争</button>
+        ${capBtn}
+        <button class="btn small" data-w5-war="${j.target}" data-goal="puppet">傀儡</button>
+        <button class="btn small" data-w5-war="${j.target}" data-goal="contain">有限目标</button>
+      </span>
+    </div>`;
+  }).join('') || '<div style="font-size:11.5px;color:#64748b;">暂无进行中的借口。</div>';
+
+  // 可行动国家：非交战活着的国家，按国力排序取前 6
+  const others = Object.values(w.nations)
+    .filter(o => o.alive && o.id !== w.player && !(n.atWarWith || []).includes(o.id))
+    .sort((a, b) => ((b.civ || 0) + (b.mil || 0)) - ((a.civ || 0) + (a.mil || 0)))
+    .slice(0, 6);
+  const relOf = (id) => (w.relations || {})[[w.player, id].sort().join('|')] || 0;
+  const otherRows = others.map(o => {
+    const rel = Math.round(relOf(o.id));
+    const relColor = rel >= 40 ? '#4ade80' : rel <= -40 ? '#f87171' : '#94a3b8';
+    const allied = (n.allies || []).includes(o.id);
+    return `<div style="display:flex;align-items:center;gap:6px;font-size:11.5px;padding:4px 0;border-bottom:1px dashed #2b3647;">
+      <span style="flex:1;">${o.name} <span style="color:${relColor};">关系 ${rel > 0 ? '+' : ''}${rel}</span>${allied ? ' <b style="color:#4ade80;">[同盟]</b>' : ''}</span>
+      <button class="btn small" data-w5-rel="${o.id}" title="花 25 PP 改善关系 +25">🕊️ 改善</button>
+      <button class="btn small" data-w5-justify="${o.id}" title="花 50 PP 制造战争借口（30 天）">📜 制造借口</button>
+      ${!allied ? `<button class="btn small" data-w5-ally="${o.id}" title="花 100 PP 缔结共同防御条约">🤝 结盟</button>` : ''}
+    </div>`;
+  }).join('');
+
+  // 交战国：白和提议
+  const warRows = (n.atWarWith || []).map(id => {
+    const o = w.nations[id];
+    if(!o) return '';
+    return `<div style="display:flex;align-items:center;gap:6px;font-size:11.5px;padding:4px 0;">
+      <span style="flex:1;color:#f87171;">⚔️ ${o.name}（战意 ${Math.round(o.warSupport ?? 50)}%）</span>
+      <button class="btn small" data-w5-peace="${id}" title="提议无条件停战（对方战意低迷或损失过半才会接受）">🕊️ 提议白和</button>
+    </div>`;
+  }).join('');
+
+  showModal(`
+    <h3>🌐 世界紧张度与外交行动</h3>
+    <div class="kind">当前紧张度 ${snap.toFixed(0)}% · 借口/宣战/结盟都推高紧张度</div>
+    <div class="txt">
+      <div style="margin-bottom:10px;">
+        <b style="color:var(--gold);font-size:12px;">战争借口</b>
+        ${justifyRows}
+      </div>
+      ${warRows ? `<div style="margin-bottom:10px;"><b style="color:var(--gold);font-size:12px;">交战国</b>${warRows}</div>` : ''}
+      <div style="margin-bottom:6px;"><b style="color:var(--gold);font-size:12px;">外交对象</b></div>
+      ${otherRows}
+    </div>
+    <div class="close-row"><button class="btn" data-close>了解</button></div>
+  `);
+
+  const handler = (sel, fn) => {
+    document.querySelectorAll(sel).forEach(btn => {
+      btn.addEventListener('click', () => {
+        sound.playClick();
+        fn(btn);
+        openTensionActionsModal(store);   // 重渲染
+      });
+    });
+  };
+  handler('[data-w5-justify]', btn => {
+    if(startJustifyWar(w, w.player, btn.dataset.w5Justify)) showToast('📜 开始制造战争借口（30 天）');
+    else showToast('⚠️ 紧张度门槛或政治点不足');
+  });
+  handler('[data-w5-war]', btn => {
+    const res = declareWarWithGoal(w, w.player, btn.dataset.w5War, btn.dataset.goal);
+    if(res.ok){
+      showToast(`⚔️ 宣战！战争目标：${btn.dataset.goal}`);
+      w.speed = 1;
+    } else showToast('⚠️ ' + res.reason);
+  });
+  handler('[data-w5-rel]', btn => {
+    const res = improveRelations(w, w.player, btn.dataset.w5Rel);
+    showToast(res.ok ? '🕊️ 双边关系 +25' : '⚠️ ' + res.reason);
+  });
+  handler('[data-w5-peace]', btn => {
+    const res = proposeWhitePeace(w, w.player, btn.dataset.w5Peace);
+    showToast(res.ok ? '🕊️ 白和达成，双方停战 365 天' : '⚠️ ' + res.reason);
+  });
+  handler('[data-w5-ally]', btn => {
+    const res = formAlliance(w, w.player, btn.dataset.w5Ally);
+    showToast(res.ok ? '🤝 同盟条约缔结：遭入侵自动参战' : '⚠️ ' + res.reason);
+  });
 }
 
 /* ============================================================
@@ -39884,6 +40956,105 @@ function openBattleModal(store, hexIdx){
   });
 }
 
+
+/* ===== js/ui/treeLayout.js ===== */
+/* ============================================================
+   ui/treeLayout.js —— 树形布局纯函数（W3-1 科技树图 / W3-2 国策树图共用）
+   ------------------------------------------------------------
+   输入节点集（{ id, requires|pre }），输出：
+     - pos:   { [id]: { x: 列号, y: 层级 } }（y = 最长路径深度，x = DFS 整洁布局）
+     - edges: [{ from, to }]（前置 → 节点，供画连线）
+     - cols / rows: 画布尺寸
+   兼容两种数据形态：科技（requires）与国策（requires 或 pre）。
+   纯函数、确定性、无 DOM —— tests/ui_logic.test.js 直接断言。
+   ============================================================ */
+
+/**
+ * @param {Array<{id:string, requires?:string[], pre?:string[]}>} nodes
+ * @param {object} [opts] { idKey='id', reqKey=null }
+ *   reqKey 缺省时自动探测：节点有 requires 用 requires，否则用 pre。
+ */
+function layoutForest(nodes, opts = {}){
+  const idKey = opts.idKey || 'id';
+  const byId = new Map();
+  for(const nd of nodes) byId.set(nd[idKey], nd);
+
+  const reqOf = (nd) => {
+    if(opts.reqKey) return nd[opts.reqKey] || [];
+    if(Array.isArray(nd.requires)) return nd.requires;
+    if(Array.isArray(nd.pre)) return nd.pre;
+    return [];
+  };
+
+  const children = new Map();   // parentId -> [childId]
+  const roots = [];
+  for(const nd of nodes){
+    const reqs = reqOf(nd).filter(r => byId.has(r));   // 只连树内已知的父节点
+    if(!reqs.length) roots.push(nd[idKey]);
+    for(const r of reqs){
+      if(!children.has(r)) children.set(r, []);
+      children.set(r, children.get(r).concat(nd[idKey]));
+    }
+  }
+
+  // y = 最长路径深度（带环守卫：环上节点落到 root 兜底层）
+  const depthMemo = new Map();
+  const depthOf = (id, stack) => {
+    if(depthMemo.has(id)) return depthMemo.get(id);
+    if(stack.has(id)) return 0;                      // 环守卫
+    stack.add(id);
+    const nd = byId.get(id);
+    const reqs = reqOf(nd).filter(r => byId.has(r));
+    let d = 0;
+    for(const r of reqs) d = Math.max(d, depthOf(r, stack) + 1);
+    stack.delete(id);
+    depthMemo.set(id, d);
+    return d;
+  };
+  for(const nd of nodes) depthOf(nd[idKey], new Set());
+
+  // x = DFS 整洁布局：叶节点按序占新列，父节点居中于子节点
+  const pos = {};
+  let nextX = 0;
+  const assignX = (id, stack) => {
+    if(pos[id] !== undefined) return pos[id].x;
+    if(stack.has(id)) return 0;                      // 环守卫
+    stack.add(id);
+    const kids = children.get(id) || [];
+    let x;
+    if(!kids.length){
+      x = nextX++;
+    } else {
+      const xs = [];
+      for(const k of kids){
+        if(!stack.has(k)) xs.push(assignX(k, stack));
+      }
+      x = xs.length ? (Math.min(...xs) + Math.max(...xs)) / 2 : nextX++;
+    }
+    stack.delete(id);
+    pos[id] = { x, y: depthMemo.get(id) || 0 };
+    return x;
+  };
+  for(const r of roots) assignX(r, new Set());
+
+  // 兜底：不在任何根的子树（孤立环等）平铺到新列
+  for(const nd of nodes){
+    if(pos[nd[idKey]] === undefined){
+      pos[nd[idKey]] = { x: nextX++, y: depthMemo.get(nd[idKey]) || 0 };
+    }
+  }
+
+  const edges = [];
+  for(const nd of nodes){
+    for(const r of reqOf(nd)){
+      if(byId.has(r) && pos[r]) edges.push({ from: r, to: nd[idKey] });
+    }
+  }
+
+  const cols = Math.max(1, ...nodes.map(nd => Math.round(pos[nd[idKey]].x) + 1));
+  const rows = Math.max(1, ...nodes.map(nd => pos[nd[idKey]].y + 1));
+  return { pos, edges, cols, rows, children };
+}
 
 /* ===== js/ui/hudV8.js ===== */
 /* ============================================================

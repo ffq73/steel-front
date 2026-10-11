@@ -7,6 +7,9 @@ import { K } from '../data/constants.js';
 
 export const ECONOMIC_LAWS = {
   civilian: { id: 'civilian', name: '民用经济', consumerGoods: 0.35, milPenalty: -0.15, cost: 150, desc: '和平时期经济，35% 民厂生产消费品，军工生产受抑' },
+  // W4-5：第五档 —— 出口重点（HOI4 Export Focus）：消费品高于部分动员，
+  // 换取外贸弹性（贸易法收益在 TRADE_LAWS 侧独立结算）
+  export_focus: { id: 'export_focus', name: '出口重点', consumerGoods: 0.30, milPenalty: -0.05, cost: 150, desc: '鼓励出口创汇：30% 消费品，外贸市场准入放宽，军工小幅受抑' },
   partial:  { id: 'partial',  name: '部分动员', consumerGoods: 0.20, milPenalty: 0, cost: 150, desc: '应对边境威胁，20% 民厂生产消费品，生产平衡' },
   war:      { id: 'war',      name: '战时经济', consumerGoods: 0.10, milBonus: 0.15, cost: 150, desc: '国家进入战时体制，仅 10% 消费品，军厂产出 +15%' },
   total:    { id: 'total',    name: '总动员',   consumerGoods: 0.05, milBonus: 0.20, manpowerPenalty: -0.03, cost: 150, desc: '一切为了前线，仅 5% 消费品，军厂产出 +20%，但抽调劳工使征兵人口 -3%' }
@@ -120,9 +123,19 @@ export function hireAdvisor(world, natId, category, advisorId){
   const adv = pool.find(a => a.id === advisorId);
   if(!n || !adv || n.pp < adv.cost) return false;
 
+  // W4-4：每周重选冷却 —— 同一槽位 7 天内不得再度易人（HOI4 换顾问一周生效）。
+  // 冷却命中返回 { ok:false, reason:'cooldown', readyDay }，调用方可给具体提示；
+  // 其余失败返回 false，成功返回 true —— 真值契约保持。
+  n.advisorCd = n.advisorCd || {};
+  const readyDay = (n.advisorCd[category] || -999) + K.ADVISOR_SWAP_COOLDOWN;
+  if(readyDay > world.day){
+    return { ok: false, reason: 'cooldown', readyDay };
+  }
+
   n.advisors = n.advisors || {};
   n.pp -= adv.cost;
   n.advisors[category] = advisorId;
+  n.advisorCd[category] = world.day;
   recalculateNationModifiers(world, natId);
 
   world.events = world.events || [];

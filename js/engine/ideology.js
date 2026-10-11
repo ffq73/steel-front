@@ -58,6 +58,30 @@ export function ideologyTick(world){
     if(n.rulingSupport == null) n.rulingSupport = 50;
     n.rulingSupport = Math.max(0, Math.min(100, n.rulingSupport + delta));
 
+    // W4-7：民主国家选举周期 —— 每 4 年（1440 天）一次大选，确定性结算。
+    // 结果由执政党支持度驱动：过半 → 稳定/战意小幅上行；不过半 → 下行且 PP 减损。
+    // 伪随机用 (day, natId) 字符串散列，不接触 rng（剧本回放保持确定性）。
+    if(ideo.id === 'democratic'){
+      n.nextElectionDay = n.nextElectionDay == null ? 1440 : n.nextElectionDay;
+      if(world.day >= n.nextElectionDay){
+        n.nextElectionDay = world.day + 1440;
+        const hash = [...(id + ':' + world.day)].reduce((s, ch) => (s * 31 + ch.charCodeAt(0)) >>> 0, 7);
+        const swing = (hash % 9) - 4;                          // −4 ~ +4 的选情摆动
+        const margin = (n.rulingSupport || 50) - 50;
+        const stabDelta = Math.round((margin >= 0 ? 2 : -3) + swing * 0.5);
+        n.stability = Math.max(10, Math.min(100, (n.stability || 60) + stabDelta));
+        n.warSupport = Math.max(0, Math.min(100, (n.warSupport || 50) + (margin >= 0 ? 2 : -3)));
+        if(margin < 0) n.pp = Math.max(0, (n.pp || 0) - 50);   // 执政联盟受挫：政治资本损耗
+        n.rulingSupport = Math.max(20, Math.min(80, (n.rulingSupport || 50) + (margin >= 0 ? 3 : -3)));
+        world.events = world.events || [];
+        world.events.push({
+          type: 'election', day: world.day, important: true,
+          text: `🗳️【大选日】${n.name}举行四年一度大选：执政联盟${margin >= 0 ? '成功连任' : '受挫'}，` +
+                `稳定度 ${stabDelta >= 0 ? '+' : ''}${stabDelta}%。`
+        });
+      }
+    }
+
     // 中立主义：意识形态变化抵制 -30% [H]（表现为其他派系更难坐大）
     if(ideo.ideologyChangeResist){
       n.partySupport = n.rulingSupport;

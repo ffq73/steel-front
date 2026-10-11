@@ -37,8 +37,18 @@ export function resourcesTick(world){
     const base = NATION_RESOURCE_BASE[id] || {};
 
     // 1) 本土+占领区产出
+    // W7-2：本土资源格（STRATEGIC_RESOURCES 落到 h.resources）此前对本土零贡献
+    // ——占领区读取点只覆盖 h._orig !== id 的格子。现在本土聚合与国家表取 max
+    // （国家表是下限兜底，资源格聚合是地形真源；避免双计也避免静默丢失）。
+    const ownCoreRes = {};
+    for(const h of world.hexes){
+      if(h._orig !== id || h.owner !== id || !h.resources) continue;
+      for(const rk in h.resources){
+        ownCoreRes[rk] = (ownCoreRes[rk] || 0) + h.resources[rk];
+      }
+    }
     for(const r of RESOURCE_TYPES){
-      let income = base[r] || 0;
+      let income = Math.max(base[r] || 0, ownCoreRes[r] || 0);
       // 占领区资源开采（顺从度 20% 解锁 25%，60% 解锁 75%）
       for(const h of world.hexes){
         if(h._orig === id) continue;

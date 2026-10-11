@@ -150,11 +150,15 @@ function applyInstant(world, n, instant, hex){
         break;
       }
       case 'relations': {
+        // W5-8：双边关系落 world.relations 真源（此前写 nation.relations/map
+        // —— nation 上根本没有该字段，整条 instant 链是死写入）。
+        world.relations = world.relations || {};
+        const self = natIdOf(n);
         for(const id2 in world.nations){
-          const o = world.nations[id2];
-          if(id2 !== natIdOf(n) && o.relations != null) o.relations[natIdOf(n)] = (o.relations[natIdOf(n)] || 0) + v;
+          if(id2 === self) continue;
+          const key = [self, id2].sort().join('|');
+          world.relations[key] = Math.max(-100, Math.min(100, (world.relations[key] || 0) + v));
         }
-        if(n.relations) for(const id2 in n.relations) n.relations[id2] = (n.relations[id2] || 0) + v;
         break;
       }
     }

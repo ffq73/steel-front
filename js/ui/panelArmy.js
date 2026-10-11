@@ -5,7 +5,7 @@
 
 import { K } from '../data/constants.js';
 import { renderPortraitHtml } from '../core/assets.js';
-import { getGeneralSkills, getArmyPlanCap, createFront, assignToFront, createArrow, createFallbackLine, executeArrow } from '../engine/plans.js';
+import { getGeneralSkills, getArmyPlanCap, createFront, assignToFront, createArrow, createOffensiveArrow, createFallbackLine, executeArrow, createPinOrder, createBreakthroughOrder, createAreaDefensePlan, pickOffensiveTarget } from '../engine/plans.js';
 import { sound } from '../core/audio.js';
 import { showToast } from './panels.js';   // v12.0 C47：alert 清零
 
@@ -54,7 +54,11 @@ export class ArmyPanel {
     }
 
     if(!this.selectedArmyId && w.armies.length){
-      this.selectedArmyId = w.armies[0].id;
+      // W2 修复：默认选中本国的第一个军 —— 旧写法取 w.armies[0]，
+      // 多国部队时（SF3 按国家序列建军）会选中外国军队，页签显示
+      // 回退到本国军、按钮却操作外国军，命令全部落空。
+      const mine = w.armies.find(a => a.nat === w.player) || w.armies[0];
+      this.selectedArmyId = mine.id;
     }
   }
 
@@ -164,6 +168,16 @@ export class ArmyPanel {
           <button class="btn" style="font-size:11px;padding:5px;" data-tool="fallback">
             [V] 退守线
           </button>
+          <!-- W2-1：九种命令的玩家入口 —— 突破 / 牵制 / 区域防御 -->
+          <button class="btn" style="font-size:11px;padding:5px;" data-tool="breakthrough" title="突破命令：+20% 冲击力，沿轴心强穿敌防线">
+            [B] 突破命令
+          </button>
+          <button class="btn" style="font-size:11px;padding:5px;" data-tool="pin" title="牵制命令：对敌格 ×0.67 伤害、本军不耗组织度（原地牵制）">
+            [P] 牵制敌格
+          </button>
+          <button class="btn" style="font-size:11px;padding:5px;" data-tool="area_defense" title="区域防御：驻守当前阵地，防御 +50%，计划槽不消耗（上限 72 师）">
+            [D] 区域防御
+          </button>
         </div>
 
         <!-- 执行推进总按钮 -->
@@ -211,7 +225,7 @@ export class ArmyPanel {
         sound.playClick();
         const tool = b.dataset.tool;
         const w = this.store.world;
-        const army = (w.armies || []).find(a => a.id === this.selectedArmyId);
+        const army = (w.armies || []).find(a => a.id === this.selectedArmyId && a.nat === w.player);
         if(!army) return;
 
         if(tool === 'front'){
@@ -247,6 +261,62 @@ export class ArmyPanel {
             this.store.emit();
             this.update();
           }
+        } else if(tool === 'breakthrough'){
+          // W2-1：突破命令 —— 沿矛头选靶轴心建立 breakthrough 箭头并立即执行。
+          // 未填线（师无 inPlan）时调度器不会派单，这里直接逐师下达突破命令兜底。
+          const front = army.frontId ? w.fronts.find(f => f.id === army.frontId) : null;
+          const picked = pickOffensiveTarget(w, 'spearhead');
+          const targetHex = picked ? picked.target
+            : w.hexes.find(h => h.owner !== w.player && h.terrain !== 'sea');
+          if(targetHex){
+            if(front){
+              const arrow = createOffensiveArrow(w, front.id, [targetHex.idx], army.id, 'breakthrough');
+              executeArrow(w, army.id, arrow.id);
+            }
+            const inPlanCount = (army.divisions || []).filter(uid => {
+              const u = w.units.find(x => x.id === uid);
+              return u && u.inPlan;
+            }).length;
+            if(!inPlanCount){
+              for(const uid of (army.divisions || [])){
+                const u = w.units.find(x => x.id === uid);
+                if(u && u.hp > 0) createBreakthroughOrder(w, u, targetHex);
+              }
+              army.executing = true;
+            }
+            showToast(`⚔️ 突破命令已下达：全师沿轴心强穿（+20% 冲击力）`);
+            this.store.emit();
+            this.update();
+          }
+        } else if(tool === 'pin'){
+          // W2-1：牵制命令 —— 全师对最近敌格原地牵制（×0.67 伤害、不耗组织度）
+          const picked = pickOffensiveTarget(w, 'offensive');
+          const targetHex = picked ? picked.target
+            : w.hexes.find(h => h.owner !== w.player && h.terrain !== 'sea');
+          if(targetHex){
+            let n = 0;
+            for(const uid of (army.divisions || [])){
+              const u = w.units.find(x => x.id === uid);
+              if(u && u.hp > 0 && createPinOrder(w, u, targetHex)) n++;
+            }
+            army.orderType = 'pin';
+            showToast(`📌 牵制命令已下达：${n} 个师原地牵制 ${targetHex.city ? targetHex.city.name : `(${targetHex.q},${targetHex.r})`}`);
+            this.store.emit();
+            this.update();
+          }
+        } else if(tool === 'area_defense'){
+          // W2-1：区域防御 —— 驻守当前所在阵地（+50% 防御、计划不消耗）
+          const hexIdxs = [...new Set((army.divisions || [])
+            .map(uid => w.units.find(x => x.id === uid))
+            .filter(u => u && u.hp > 0)
+            .map(u => w.at[u.q + ',' + u.r])
+            .filter(Boolean)
+            .map(h => h.idx))];
+          createAreaDefensePlan(w, army.id, hexIdxs);
+          army.executing = false;
+          showToast(`🛡️ 区域防御已设立：${(army.divisions || []).length} 个师驻守 ${hexIdxs.length} 处阵地`);
+          this.store.emit();
+          this.update();
         }
       });
     });

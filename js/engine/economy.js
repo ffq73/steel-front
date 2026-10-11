@@ -6,6 +6,7 @@ import { K } from '../data/constants.js';
 import { getLineResourceEff, tradeCivCost } from './resources.js';
 import { canAffordRecruit, payRecruitManpower, initManpower } from './manpower.js';   // v14.0 P2
 import { OCCUPATION_LAWS } from './resistance.js';
+import { ECONOMIC_LAWS } from './laws.js';   // W4-5：消费品份额全五档真源
 
 export function economyTick(world){
   for(const id in world.nations){
@@ -61,16 +62,22 @@ export function economyTick(world){
       : ((0.5 - stab) / 0.5) * (K.PP_STABILITY_PENALTY || -0.5);
     n.pp = Math.min(K.PP_MAX, n.pp + K.PP_PER_DAY * (1 + stabMod) * (1 + (n.modifiers.pp || 0)));
 
-    // 指挥点数与陆军经验 [B] —— 低战意削弱指挥点每日积累
+    // 指挥点数与陆军经验 [B]
+    // W4-3：低战意惩罚（HOI4 精神：战争不得人心时指挥体系瘫痪）
+    //   WS 0% → CP 日增 −95%；WS 100% → 满速。动员 −50% 见 manpower.js wsFactor。
     const wsRatio = (n.warSupport != null ? n.warSupport : 50) / 100;
-    const cpGain = 0.5 * Math.max(0.4, 0.4 + 0.6 * wsRatio);
+    const cpGain = 0.5 * Math.max(0.05, wsRatio * wsRatio);
     n.commandPower = Math.min(200, (n.commandPower != null ? n.commandPower : 100) + cpGain);
     const divCount = (world.units || []).filter(u => u.nat === id).length;
     if(n.atWarWith && n.atWarWith.length){
       n.armyXp = (n.armyXp || 0) + 0.4 * divCount;
-      // 战时低战意疲劳拖累稳定度
-      if(wsRatio < 0.50){
-        n.stability = Math.max(0, (n.stability || 50) - (0.50 - wsRatio) * 0.05);
+      // W4-2：战意 → 稳定度反向（向下漂移，只罚不奖）
+      //   战意 100% → 稳定目标 100（无惩罚）；战意 0% → 稳定目标 70（−30）。
+      //   每日最多漂移 0.1 点，只向下 —— 高战意不会在战时凭空抬升稳定度。
+      const stabNow = n.stability != null ? n.stability : 50;
+      const stabTarget = 100 - K.WS_STABILITY_PENALTY * (1 - wsRatio);
+      if(stabNow > stabTarget){
+        n.stability = Math.max(0, stabNow - Math.min(0.1, stabNow - stabTarget));
       }
     }
 
@@ -78,7 +85,11 @@ export function economyTick(world){
     //    v14.1 B5：n.buildQueue[] 排队、n.build 为当前施工项；队列空时自动取下一项。
     //    注：州（state）层属 W7-1，现阶段按 hex 建造并以此口径验收（sim B16）。
     if(!n.buildQueue) n.buildQueue = [];
-    const cg = K.CONSUMER_GOODS[n.law] ?? 0.20;
+    // W4-5：消费品份额读 ECONOMIC_LAWS 全五档（含 export_focus）。
+    // 旧写法 K.CONSUMER_GOODS[n.law] ?? 0.20 —— 剧本 law 值跨剧本不统一
+    //（§12-5：'early_mob'/'wartime' 不在四档内）时静默按 0.20 结算。
+    const eLawEntry = ECONOMIC_LAWS[n.economicLaw || n.law];
+    const cg = eLawEntry ? eLawEntry.consumerGoods : (K.CONSUMER_GOODS[n.law] ?? 0.20);
     const tradeOccup = (typeof tradeCivCost === 'function') ? Math.min(0.6, tradeCivCost(n)) : 0;
 
     // W7/§12：占领法案 factoryYield 接入 —— 占领区工厂受占领法与顺从度调制贡献给占领国
@@ -232,6 +243,42 @@ export function switchLineType(line, newType){
   if(!line || line.type === newType) return;
   line.type = newType;
   line.eff = Math.max(K.EFF_START, +(line.eff * 0.5).toFixed(4));
+}
+
+/**
+ * W3-3：生产线 optimal 一键分配（纯函数式结算，UI 一键调用的引擎真源）。
+ * 把空闲军工厂按各线现有占比分配下去，同时尊重单线上限 K.LINE_FACTORY_CAP
+ * 与单格厂槽语义（全国总厂不超过 n.mil）。返回 { allocated, lines }。
+ * deterministic —— tests/ui_logic.test.js 直接断言守恒与占比不变性。
+ */
+export function allocateFactoriesOptimal(world, natId){
+  const n = world.nations[natId];
+  if(!n || !n.productionLines || !n.productionLines.length) return { allocated: 0, lines: [] };
+  const used = n.productionLines.reduce((s, l) => s + (l.factories || 0), 0);
+  let free = (n.mil || 0) - used;
+  if(free <= 0) return { allocated: 0, lines: n.productionLines.map(l => ({ id: l.id, factories: l.factories })) };
+
+  // 按现有占比分配（保持玩家比例偏好），逐个厂落位避免整除误差
+  const total = Math.max(1, used);
+  const want = n.productionLines.map(l => ({ line: l, share: (l.factories || 0) / total }));
+  let allocated = 0;
+  let guard = 0;
+  while(free > 0 && guard < 1000){
+    guard++;
+    // 每轮把 1 个厂给「share×(used+allocated) 最缺额」的未满线
+    let best = null, bestGap = -1;
+    for(const w of want){
+      const cur = w.line.factories || 0;
+      if(cur >= K.LINE_FACTORY_CAP) continue;
+      const gap = w.share * (used + allocated) - cur;
+      if(gap > bestGap){ bestGap = gap; best = w; }
+    }
+    if(!best) break;   // 全部线到顶
+    best.line.factories += 1;
+    allocated += 1;
+    free -= 1;
+  }
+  return { allocated, lines: n.productionLines.map(l => ({ id: l.id, factories: l.factories })) };
 }
 
 function trainingCost(type){

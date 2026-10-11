@@ -124,6 +124,134 @@
         </div>
       </div>
 
+PE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>钢铁前线 Steel Front · 战争大厅与统帅部</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/screens.css">
+<link rel="stylesheet" href="css/era.css">
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- v9.5 U5 黄铜线描图标集（stroke=currentColor 由 CSS 着色） -->
+  <symbol id="ic-pp" viewBox="0 0 16 16">
+    <rect x="4" y="2.5" width="8" height="11" rx="1"/>
+    <line x1="6" y1="5.5" x2="10" y2="5.5"/><line x1="6" y1="8" x2="10" y2="8"/><line x1="6" y1="10.5" x2="8.5" y2="10.5"/>
+    <circle cx="12.5" cy="12.5" r="1.6" class="accent"/>
+  </symbol>
+  <symbol id="ic-cp" viewBox="0 0 16 16">
+    <line x1="4" y1="2" x2="4" y2="14"/>
+    <path d="M4 3 L12 4.5 L4 7"/>
+    <circle cx="12" cy="4.5" r="1" class="accent"/>
+  </symbol>
+  <symbol id="ic-xp" viewBox="0 0 16 16">
+    <path d="M4 12 C2.5 9 3 5.5 5.5 3.5"/>
+    <path d="M12 12 C13.5 9 13 5.5 10.5 3.5"/>
+    <path d="M5.5 8 L7 9.5 L10.5 5.5"/>
+    <circle cx="8" cy="12.8" r="1" class="accent"/>
+  </symbol>
+  <symbol id="ic-stab" viewBox="0 0 16 16">
+    <line x1="8" y1="3" x2="8" y2="13"/><line x1="5.5" y1="13" x2="10.5" y2="13"/>
+    <line x1="3" y1="4.5" x2="13" y2="4.5"/>
+    <path d="M1.5 8 A 2.2 2.2 0 0 0 5.5 8 Z"/><path d="M10.5 8 A 2.2 2.2 0 0 0 14.5 8 Z"/>
+    <line x1="3.5" y1="4.5" x2="3.5" y2="8"/><line x1="12.5" y1="4.5" x2="12.5" y2="8"/>
+  </symbol>
+  <symbol id="ic-mp" viewBox="0 0 16 16">
+    <circle cx="8" cy="4.5" r="1.8"/><path d="M5.5 12 C5.5 9.5 6.5 8 8 8 C9.5 8 10.5 9.5 10.5 12"/>
+    <circle cx="3.5" cy="5.5" r="1.3"/><path d="M1.8 12 C1.8 10 2.4 9 3.5 9 C4.2 9 4.8 9.4 5.1 10.2"/>
+    <circle cx="12.5" cy="5.5" r="1.3"/><path d="M14.2 12 C14.2 10 13.6 9 12.5 9 C11.8 9 11.2 9.4 10.9 10.2"/>
+  </symbol>
+  <symbol id="ic-fac" viewBox="0 0 16 16">
+    <path d="M2.5 13.5 L2.5 7 L6 9.5 L6 7 L9.5 9.5 L9.5 7 L13 9.5 L13 13.5 Z"/>
+    <line x1="11" y1="7" x2="11" y2="3.5"/><line x1="13" y1="7" x2="13" y2="4.5"/>
+    <circle cx="4.5" cy="11.5" r="0.9" class="accent"/>
+  </symbol>
+  <symbol id="ic-eq" viewBox="0 0 16 16">
+    <rect x="3" y="4.5" width="10" height="9" rx="0.8"/>
+    <line x1="3" y1="7.5" x2="13" y2="7.5"/><line x1="8" y1="7.5" x2="8" y2="13.5"/>
+    <path d="M5.5 4.5 L5.5 2.5 M10.5 4.5 L10.5 2.5"/>
+  </symbol>
+  <symbol id="ic-res" viewBox="0 0 16 16">
+    <ellipse cx="8" cy="4" rx="4" ry="1.6"/>
+    <path d="M4 4 L4 12 C4 13 6 13.8 8 13.8 C10 13.8 12 13 12 12 L12 4"/>
+    <line x1="4" y1="8" x2="12" y2="8"/>
+    <circle cx="8" cy="10" r="0.9" class="accent"/>
+  </symbol>
+  <symbol id="ic-div" viewBox="0 0 16 16">
+    <rect x="4.5" y="4.5" width="7" height="7"/>
+    <line x1="3" y1="13" x2="6.5" y2="9.5"/><line x1="13" y1="13" x2="9.5" y2="9.5"/>
+    <circle cx="8" cy="2.8" r="1" class="accent"/>
+  </symbol>
+</svg>
+
+<script>window.onerror=function(m,u,l){window.__pageError={m:m,l:l};document.title="ERR:"+m;};</script>
+<div id="sf-app">
+  <!-- 1. 冷启动主菜单（v7.0 全景页面流） -->
+  <section class="sf-screen" id="screen-main-menu"></section>
+  <!-- 2. 四时代全景副本大厅 -->
+  <section class="sf-screen" id="screen-era-select"></section>
+  <!-- 3. 国家挑选与沙盘档案舱 -->
+  <section class="sf-screen" id="screen-country-select"></section>
+
+  <!-- 4. 局内推演大厅（v6.0 战争大厅标准） -->
+  <section class="sf-screen active" id="screen-gameplay">
+  <!-- §2 顶部：国家统帅看板与战略缎带 -->
+  <header class="sf-topbar">
+    <!-- 2.1 领袖统帅看板 -->
+    <div class="sf-leader-plaque" id="hud-leader-plaque">
+      <div class="sf-leader-frame" id="hud-leader-frame" title="点击进入统帅部与内阁管理">
+        <div id="hud-leader-portrait"></div>
+      </div>
+      <div class="sf-nation-info">
+        <div class="sf-nation-name-row">
+          <span id="hud-nation-flag-wrap"></span>
+          <span class="sf-nation-title" id="hud-nation-title">德意志国</span>
+          <span class="sf-cabinet-badge" id="hud-ideology-badge">国家复兴</span>
+        </div>
+        <div class="sf-nation-badge-row">
+          <div class="sf-focus-quick-slot" id="hud-focus-quick-slot" title="点击查看全量国策树">
+            <div class="sf-focus-arc-wrap">
+              <svg class="sf-focus-arc-svg" viewBox="0 0 36 36">
+                <path class="sf-focus-arc-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path id="hud-focus-arc-path" class="sf-focus-arc-bar" stroke-dasharray="35, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              </svg>
+            </div>
+            <span class="sf-focus-text" id="hud-focus-text">国策: <b>四周年计划</b> (24/70天)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.2 中部：宏观战略资源金属缎带 -->
+    <div class="sf-strategic-ribbon" id="hud-strategic-ribbon">
+      <div class="sf-ribbon-item" data-tip="pp" title="政治点数: 影响内阁顾问、法案制定与外交行动">
+        <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-pp"/></svg></span>
+        <div class="sf-ribbon-data">
+          <span class="sf-ribbon-label">政治点</span>
+          <span class="sf-ribbon-val gold" id="sf-pp">0</span>
+        </div>
+      </div>
+      <div class="sf-ribbon-item" data-tip="cp" title="指挥点数: 用于将领战术特技、编制重组与作战动员">
+        <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-cp"/></svg></span>
+        <div class="sf-ribbon-data">
+          <span class="sf-ribbon-label">指挥点</span>
+          <span class="sf-ribbon-val cyan" id="sf-cp">100/200</span>
+        </div>
+      </div>
+      <div class="sf-ribbon-item" data-tip="xp" title="陆战作战经验: 用于师设计器调整与科技学说强化">
+        <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-xp"/></svg></span>
+        <div class="sf-ribbon-data">
+          <span class="sf-ribbon-label">陆战经验</span>
+          <span class="sf-ribbon-val green" id="sf-xp">50</span>
+        </div>
+      </div>
+
+      <!-- W4-6：人力已由上方 sf-manpower 项承载（本项曾与其重复，已合并） -->
+
       <div class="sf-ribbon-item" data-tip="stab" title="国家稳定度与战争支持度">
         <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-stab"/></svg></span>
         <div class="sf-ribbon-data">
@@ -132,7 +260,7 @@
         </div>
       </div>
 
-      <div class="sf-ribbon-item sf-ribbon-manpower" data-tip="manpower" title="可动员人力储备 (可征召/服役)">
+      <div class="sf-ribbon-item" data-tip="manpower" title="可动员人力储备：补充伤亡与组建新师（受征兵法/稳定度/战意调制，点击看明细）">
         <span class="sf-ribbon-icon"><svg class="ico"><use href="#ic-mp"/></svg></span>
         <div class="sf-ribbon-data">
           <span class="sf-ribbon-label">人力</span>

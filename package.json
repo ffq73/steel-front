@@ -1,6 +1,6 @@
 {
   "name": "steel-front",
-  "version": "14.1.0",
+  "version": "14.8.0",
   "private": true,
   "type": "module",
   "description": "钢铁前线 Steel Front —— 零依赖 Web 简约版钢铁雄心（确定性引擎）",

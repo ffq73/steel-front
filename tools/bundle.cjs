@@ -157,6 +157,7 @@ const ORDER = [
   'js/ui/screenPages.js',
   'js/ui/portraitMap.js',
   'js/ui/panels.js',
+  'js/ui/treeLayout.js',   // W3-1/W3-2：树形布局纯函数
   'js/ui/hudV8.js',
   'js/ui/eraHud.js',
   'js/main.js'

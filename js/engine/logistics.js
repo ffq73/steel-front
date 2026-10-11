@@ -162,7 +162,10 @@ export function calcSupplyNetwork(world){
         break;
       }
     }
-    const cap = hubSupply + (hex.infra || 0) * K.SUPPLY_INFRA_BONUS;
+    // W7-2：铁路等级入补给上限（railLevel 0-3 由 atlas 按城市规模生成，
+    // 此前只有 states.railLevel 聚合、无任何游戏读点）
+    const cap = hubSupply + (hex.infra || 0) * K.SUPPLY_INFRA_BONUS
+      + (hex.railLevel || 0) * (K.SUPPLY_RAIL_BONUS || 0.2);
     hex.supplyCap = cap;
     hex.supplyDemand = demand;
     hex.supplyUtil = demand > 0 ? cap / demand : 1;

@@ -48,6 +48,7 @@ export const K = {
   SUPPLY_HUB_BASE: 4.0,             // [B] 单个连通枢纽的基础供给
   SUPPLY_HUB_MOTOR: 1.6,            // [B] 摩托化等级每级 +60% 供给（马→卡车→多卡）
   SUPPLY_INFRA_BONUS: 0.3,          // [H] 每级基建提供的底供（HOI4 原版 0.3）
+  SUPPLY_RAIL_BONUS: 0.2,           // [H] W7-2：每级铁路等级补带上限 +0.2（railLevel 0-3 首个游戏读点）
   SUPPLY_OVERLOAD_PENALTY: 0.40,    // [B] 过载时补给率最多削弱 40%（HOI4 补给不足有下限）
   MANPOWER_PER_DIVISION: {    // [B] 各兵种编制人力（千人）
     inf: 1000, cav: 800, mtn: 900, mot: 1200, larm: 1400, arm: 1600
@@ -70,7 +71,9 @@ export const K = {
   PP_PER_DAY: 2.0,            // [H]
   PP_STABILITY_PENALTY: -0.5, // [H] 稳定性 0% → -50%
   PP_STABILITY_BONUS: 0.2,    // [H] 稳定性 100% → +20%
+  WS_STABILITY_PENALTY: 30,   // [H] W4-2：战意 0% 时战时稳定度目标 −30 点（每日向下漂移 ≤0.1）
   PP_MAX: 2000,               // [H]
+  ADVISOR_SWAP_COOLDOWN: 7,   // [H] W4-4：同一顾问槽 7 天冷却（每周重选）
   PP_FOCUS_COST: 1.0,         // [H] 国策进行中 -1PP/天
   FOCUS_DAYS: 70,             // [H]
   FOCUS_RUSH_PP: 100,         // [B] 加速国策花费
@@ -84,7 +87,7 @@ export const K = {
   EFF_CAP: 0.50,              // [H] 效率上限 50%
   EFF_GROWTH: 0.001,          // [H] 日增 = 0.001 × cap² / current
   LINE_FACTORY_CAP: 15,       // [H] 单条生产线最多 15 厂
-  CONSUMER_GOODS: { civilian:0.35, partial:0.20, war:0.10, total:0.05 },  // [H] 结构 + [B] 数值
+  CONSUMER_GOODS: { civilian:0.35, export_focus:0.30, partial:0.20, war:0.10, total:0.05 },  // W4-5：+export_focus  // [H] 结构 + [B] 数值
   // v14.1 B5：5 类建筑 —— 军民工厂受厂槽约束，基建/空海军基地不占厂槽
   BUILD_COST: { civ:5000, mil:6000, infra:3000, fort:2000, air_base:4000, naval_base:4500 },  // [B] 成本
   FACTORY_SLOTS_PER_HEX: 3,   // [B] 每格厂槽（v14.1 B5：4→3，对齐 HOI4 每州 3 建筑位）
@@ -119,14 +122,16 @@ export const K = {
     art_eq: '火炮',
     tank_eq: '坦克',
     truck_eq: '卡车',
-    sup_eq: '支援装备'
+    sup_eq: '支援装备',
+    air_eq: '空军装备'
   },
   EQUIP_COSTS: {
     inf_eq: 0.5,    // 步枪/轻武器造价低
     art_eq: 3.0,    // 火炮
     tank_eq: 12.0,  // 坦克
     truck_eq: 2.0,  // 军用卡车
-    sup_eq: 4.0     // 电台/工程/野战医疗支援装备
+    sup_eq: 4.0,    // 电台/工程/野战医疗支援装备
+    air_eq: 4.0     // W6-3：空军装备（每架飞机 4 装备点，联队由 airProductionTick 从库存补充）
   },
   DIVISION_EQUIPMENT: {
     inf:  { inf_eq: 100, sup_eq: 10 },
@@ -276,6 +281,7 @@ export const K = {
     OVERCROWD_EFF_PENALTY: 2.0,     // [H] 超容每 1% 任务效率 -2% (超 50% 效率归 0)
     OVERCROWD_MAX_PENALTY: 1.0,     // [H] 超容最高惩罚 -100%
     STANDARD_WING_SIZE: 100,        // [H] 联队标准规模 100 架
+    UPGRADE_XP_COST: 100,           // [H] W6-4：机型设计改进每次 100 空军经验
     MAX_WING_SIZE: 1000,            // [H] 联队上限 1000 架
 
     // 机种制空权重 [H]

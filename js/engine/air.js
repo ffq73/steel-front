@@ -208,9 +208,55 @@ export function calcWingSuperiority(wing, baseEff = 1.0, rangeEff = 1.0){
   if(!wing || wing.count <= 0) return 0;
   const weight = (K.AIR.WEIGHTS && K.AIR.WEIGHTS[wing.type] != null) ? K.AIR.WEIGHTS[wing.type] : 1.0;
   const aceBonus = (wing.aces || []).reduce((s, a) => s + (a.effBonus || 0), 0);
-  const missionEff = Math.max(0, baseEff * rangeEff * (1 + aceBonus));
+  // W6-4：机型升级链 —— 每级设计改进 +8% 任务效率（upgradeLevel 0~2）
+  const upgradeBonus = (wing.upgradeLevel || 0) * (K.AIR ? 0.08 : 0.08);
+  const missionEff = Math.max(0, baseEff * rangeEff * (1 + aceBonus + upgradeBonus));
   const scale = wing.count / K.AIR.STANDARD_WING_SIZE;
   return +(scale * weight * missionEff).toFixed(4);
+}
+
+/* ============================================================
+   W6-4（可选尾项）：8 条预置机型升级链 —— 每型两级设计改进。
+   升级消耗空军经验（n.airXP，与学说共享 100 XP/次），效果为
+   upgradeLevel +1（calcWingSuperiority 内 +8% 效率/级）。
+   此前 wing.type 永不变、无任何设计改进机制。
+   ============================================================ */
+export const AIR_WING_UPGRADE_CHAINS = {
+  fighter:         ['战斗机改型 I', '战斗机改型 II'],
+  heavy_fighter:   ['重型战斗机改型 I', '重型战斗机改型 II'],
+  cas:             ['对地攻击机改型 I', '对地攻击机改型 II'],
+  naval_bomber:    ['海军轰炸机改型 I', '海军轰炸机改型 II'],
+  tactical_bomber: ['战术轰炸机改型 I', '战术轰炸机改型 II'],
+  strat_bomber:    ['战略轰炸机改型 I', '战略轰炸机改型 II'],
+  air_supply:      ['运输机改型 I', '运输机改型 II'],
+  recon:           ['侦察机改型 I', '侦察机改型 II']
+};
+
+export function canUpgradeWing(world, wing){
+  if(!wing) return { ok:false, reason:'联队不存在' };
+  const chain = AIR_WING_UPGRADE_CHAINS[wing.type];
+  if(!chain) return { ok:false, reason:'该机型无升级链' };
+  const lvl = wing.upgradeLevel || 0;
+  if(lvl >= chain.length) return { ok:false, reason:'已达设计上限' };
+  const n = world.nations[wing.nat];
+  if(!n || (n.airXP || 0) < K.AIR.UPGRADE_XP_COST) return { ok:false, reason:`空军经验不足（需 ${K.AIR.UPGRADE_XP_COST}）` };
+  return { ok:true, nextName: chain[lvl], level: lvl + 1 };
+}
+
+export function upgradeWingDesign(world, wingId){
+  const wing = (world.airWings || []).find(x => x.id === wingId);
+  const chk = canUpgradeWing(world, wing);
+  if(!chk.ok) return chk;
+  const n = world.nations[wing.nat];
+  n.airXP -= K.AIR.UPGRADE_XP_COST;
+  wing.upgradeLevel = chk.level;
+  wing.designName = chk.nextName;
+  world.events = world.events || [];
+  world.events.push({
+    type: 'air_upgrade', day: world.day, important: wing.nat === world.player,
+    text: `✈️ 机型设计改进：【${wing.nat} 空军】换装「${chk.nextName}」（任务效率 +8%/级，累计 +${chk.level * 8}%）`
+  });
+  return { ok:true, name: chk.nextName, level: chk.level };
 }
 
 /* 4. 空区制空权与制空比计算 [H]
@@ -344,8 +390,82 @@ export function applyStratBombingDamage(buildingType, rawDamage, provinceAALevel
   return { effectiveDamage, disabled };
 }
 
+/* 7.5 W6-3：联队补充 / 新编 / 损耗（每日 airTick 首步调用）
+   ------------------------------------------------------------
+   - 产线 hookup：productionLines 里 type='air_eq' 的线按通用经济管线产出
+     n.equipment.air_eq（架数），本 tick 把库存转换为联队补充与新编联队
+   - 补员：每联队每日最多 +5 架，补到 STANDARD_WING_SIZE
+   - 新编：库存 ≥ 100 架且机场有空容量 → 在有空位的机场自动成军
+   - 损耗：执行任务的联队每日 0.5% 折损（事故/磨损），至少 1 架
+   此前 wing.count 固定 100 永不变 —— 联队是"打印出来就不动的贴图"。 */
+export function airProductionTick(world){
+  if(!world.airWings) return;
+  const byNat = {};
+  for(const wg of world.airWings){
+    (byNat[wg.nat] = byNat[wg.nat] || []).push(wg);
+  }
+  for(const natId in byNat){
+    const n = world.nations[natId];
+    if(!n || !n.alive) continue;
+    n.equipment = n.equipment || {};
+    let stock = n.equipment.air_eq || 0;
+    const wings = byNat[natId];
+    // 飞机按整架计：存量战斗损耗（AA 击落等）带小数，每日在此规范化
+    for(const wg of wings) wg.count = Math.max(0, Math.round(wg.count));
+    const bases = (world.airBases || []).filter(b => b.nat === natId);
+    const capacity = bases.reduce((s, b) => s + (b.capacity || 0), 0);
+
+    // 1) 补员：按缺口从库存转换
+    for(const wg of wings){
+      const deficit = K.AIR.STANDARD_WING_SIZE - wg.count;
+      if(deficit <= 0 || stock <= 0) continue;
+      const refill = Math.min(deficit, stock, 5);
+      wg.count += refill;
+      stock -= refill;
+    }
+
+    // 2) 新编：库存满一个联队且有机场余量
+    if(stock >= K.AIR.STANDARD_WING_SIZE && wings.length * K.AIR.STANDARD_WING_SIZE < capacity){
+      const used = bases.map(b => wings.filter(wg => wg.baseId === b.id).reduce((s, wg) => s + wg.count, 0));
+      const host = bases.find((b, i) => used[i] + K.AIR.STANDARD_WING_SIZE <= (b.capacity || 0));
+      if(host){
+        const newWing = {
+          id: `wing_${natId}_${world.airWings.length + 1}_${world.day}`,
+          nat: natId,
+          type: 'fighter',
+          count: K.AIR.STANDARD_WING_SIZE,
+          baseId: host.id,
+          baseHex: [host.q, host.r],
+          task: 'air_superiority',
+          regionId: getHexAirRegion(host.q, host.r),
+          exp: 1.0,
+          aces: []
+        };
+        world.airWings.push(newWing);
+        wings.push(newWing);
+        stock -= K.AIR.STANDARD_WING_SIZE;
+        if(natId === world.player && world.events){
+          world.events.push({ type:'air_wing_founded', day: world.day, important: false,
+            text: `🛫 空军扩编：新战斗机联队在 ${host.name || '机场'} 成军（100 架，来自空军装备产线库存）` });
+        }
+      }
+    }
+
+    // 3) 任务损耗：0.5%/日（至少 1 架），仅对在执行任务的联队
+    for(const wg of wings){
+      if(wg.count <= 0 || wg.task === 'none' || !wg.task) continue;
+      const loss = Math.max(1, Math.round(wg.count * 0.005));
+      wg.count = Math.max(0, wg.count - loss);
+    }
+
+    n.equipment.air_eq = stock;
+  }
+}
+
 /* 8. 每日空军总轮转调度 (每日 step 9 调用) */
 export function airTick(world, rng = Math.random){
+  // 0. W6-3：联队补充 / 新编 / 损耗（先于任务结算，保证 count 是当日实数）
+  airProductionTick(world);
   if(!world.airWings || !world.airWings.length) return;
 
   // 1. 刷新机场驻军与容量统计
@@ -419,6 +539,31 @@ export function airTick(world, rng = Math.random){
               day: world.day,
               text: `【战略轰炸】${targetHex.q},${targetHex.r} 基础设施遭受轰炸受损，降至 ${targetHex.infra} 级！`,
               important: false
+            });
+          }
+        }
+
+        // W6-7：战略轰炸打击工厂产能 —— mil/civ 各按 STRAT_BOMB_TARGETS 权重
+        // 独立掷击；命中则工厂 -1（格面与国家计数同步，产线裁最末厂）。
+        // 补给侧无需另接：infra 损伤已经压低物流补给上限（logistics.js 读 h.infra）。
+        const victim = world.nations[targetHex.owner];
+        for(const kind of ['mil', 'civ']){
+          const resF = applyStratBombingDamage(kind, 1.2, aaLv);
+          if(!resF.disabled) continue;
+          if((targetHex[kind] || 0) <= 0) continue;
+          targetHex[kind] -= 1;
+          if(victim){
+            victim[kind] = Math.max(0, (victim[kind] || 0) - 1);
+            // 产线裁最末厂：最末一条有厂的线 −1（等价于整编掉一座厂）
+            const line = (victim.productionLines || []).filter(l => (l.factories || 0) > 0).pop();
+            if(line) line.factories -= 1;
+          }
+          if(world.events && (w.nat === world.player || targetHex.owner === world.player)){
+            world.events.push({
+              type: 'air_strat_bomb_factory',
+              day: world.day,
+              text: `🏭【战略轰炸】${targetHex.q},${targetHex.r} 的${kind === 'mil' ? '军工厂' : '民用工厂'}被炸毁一座！${victim ? victim.name : ''} 产能受损。`,
+              important: w.nat === world.player || targetHex.owner === world.player
             });
           }
         }

@@ -101,6 +101,12 @@ resourcesTick(worldA);
 assert.ok(g.resourceStock.steel !== steelBefore, '资源库存应随结算变化（产出-消耗）');
 
 // 赤字惩罚：停产线大部分厂并清空钢铁 → 产线效率折损（B.4）
+// v14.8 W7-2 fixture 更新：本土资源格（鲁尔 steel 105）此前是死字段、G 实际零本土
+// 产钢，"清空库存即赤字"静默成立；字段接活后 G 日产钢 >100，必须同步清掉本土
+// 资源格才能构造贫矿国场景 —— 旧 fixture 编码的正是被 W7-2 修复的盲区。
+for(const h of worldA.hexes){
+  if(h.owner === 'G' && h.resources) h.resources = null;
+}
 g.resourceStock.steel = 0;
 g.productionLines = [
   { id:'inf_eq', type:'inf_eq', factories:15, eff:0.1, cap:0.5 },

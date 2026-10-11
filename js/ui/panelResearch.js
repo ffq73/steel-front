@@ -7,6 +7,7 @@
 import { TECHS, TECH_BRANCHES } from '../data/techs.js';
 import { availableTechs, startResearch, techUnmetRequires } from '../engine/research.js';
 import { K } from '../data/constants.js';
+import { layoutForest } from './treeLayout.js';   // W3-1：科技树形布局
 import { showToast } from './panels.js';
 import { sound } from '../core/audio.js';
 
@@ -65,42 +66,40 @@ export function renderResearchPanel(container, store){
     }).join('')}
   </div>`;
 
-  // 渲染当前分支科技树
+  // 渲染当前分支科技树（W3-1：节点图 + 前置连线，取代旧文字行列表）
   const list = TECHS.filter(t => t.branch === activeBranchTab);
-  const done = list.filter(t => n.research.done[t.id]).length;
 
-  // 树状层级：根据 requires 深度组织
-  const rows = list.map(t => {
+  // 树形布局：y=前置深度、x=DFS 整洁列；连线由 layoutForest 给出
+  const layout = layoutForest(list, { reqKey: 'requires' });
+  const NODE_W = 168, NODE_H = 86, COL_P = 184, ROW_P = 104;
+
+  const nodeCards = list.map(t => {
+    const p = layout.pos[t.id];
+    if(!p) return '';
     const isDone = !!n.research.done[t.id];
     const isActive = slots.includes(t.id);
     const unmet = techUnmetRequires(w, w.player, t.id);
     const can = avail.some(a => a.id === t.id);
     const ahead = Math.max(0, t.year - curYear);
-    const aheadTxt = ahead > 0 ? `<span class="rs-ahead" title="超前研究惩罚">⚠ 超前 ${ahead} 年</span>` : '';
-    let btn;
-    if(isDone) btn = '<span class="rs-done">✓ 已掌握</span>';
+    const aheadTxt = ahead > 0 ? `<span title="超前研究惩罚" style="color:#e0a34a;">⚠${ahead}年</span>` : '';
+    let act;
+    if(isDone) act = '<span style="color:#81c784;font-size:10.5px;">✓ 已掌握</span>';
     else if(isActive){
-      const p = (n.research.progress && n.research.progress[w.player + ':' + t.id]) || 0;
-      const pct = Math.min(100, Math.round(p / t.days * 100));
-      btn = `<span class="rs-active">研发中 ${pct}%</span>
-             <button class="btn small rs-cancel" data-rs-cancel="${t.id}" style="margin-left:6px;">中止</button>`;
-    } else if(can) btn = `<button class="btn small primary" data-rs="${t.id}">启动研发</button>`;
-    else btn = `<span class="rs-locked" title="前置未完成">${unmet.length ? '需前置：' + unmet.map(u => (TECHS.find(x=>x.id===u)||{name:u}).name).join('、') : '前置受锁'}</span>`;
+      const p2 = (n.research.progress && n.research.progress[w.player + ':' + t.id]) || 0;
+      const pct = Math.min(100, Math.round(p2 / t.days * 100));
+      act = `<span style="color:#64b5f6;font-size:10.5px;">研发中 ${pct}%</span>
+             <button class="btn small rs-cancel" data-rs-cancel="${t.id}" style="font-size:10px;padding:1px 5px;margin-left:4px;">中止</button>`;
+    } else if(can) act = `<button class="btn small primary" data-rs="${t.id}" style="font-size:10.5px;padding:2px 8px;">启动研发</button>`;
+    else act = `<span style="color:#718096;font-size:10px;" title="前置未完成">🔒 ${unmet.length ? unmet.map(u => (TECHS.find(x=>x.id===u)||{name:u}).name).join('+') : '前置受锁'}</span>`;
 
-    const reqNames = (t.requires || []).map(r => (TECHS.find(x => x.id === r) || { name: r }).name);
-    const reqBadge = reqNames.length ? `<div style="font-size:10px;color:#8a94a6;margin-top:2px;">前置依赖: ${reqNames.join(' ➔ ')}</div>` : '';
-
-    return `<div class="rs-row ${isDone ? 'done' : (isActive ? 'on' : (can ? '' : 'off'))}" style="margin-bottom:8px;border-left:3px solid ${isDone ? '#81c784' : isActive ? '#64b5f6' : can ? '#d4af37' : '#4a5568'};background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:4px;display:flex;align-items:center;justify-content:space-between;">
-      <div class="rs-main" style="flex:1;">
-        <div class="rs-name" style="font-weight:700;font-size:13px;color:var(--ink);">
-          ${t.name} ${aheadTxt}
-          <span class="rs-days" style="font-size:11px;color:var(--dim);margin-left:8px;">⏱️ ${t.days}天</span>
-          <span class="rs-year" style="font-size:11px;color:var(--gold);margin-left:6px;">📅 ${t.year}年</span>
-        </div>
-        <div class="rs-eff" style="font-size:11px;color:#a0aec0;margin-top:2px;">${effectText(t)}</div>
-        ${reqBadge}
-      </div>
-      <div class="rs-act" style="margin-left:12px;">${btn}</div>
+    return `<div class="rs-node ${isDone ? 'done' : (isActive ? 'on' : (can ? '' : 'off'))}"
+      style="position:absolute;left:${20 + p.x * COL_P}px;top:${20 + p.y * ROW_P}px;width:${NODE_W}px;
+             border-left:3px solid ${isDone ? '#81c784' : isActive ? '#64b5f6' : can ? '#d4af37' : '#4a5568'};
+             background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:4px;">
+      <div style="font-weight:700;font-size:12px;color:var(--ink);line-height:1.25;">${t.name} ${aheadTxt}</div>
+      <div style="font-size:10px;color:#a0aec0;margin-top:2px;line-height:1.3;">${effectText(t)}</div>
+      <div style="font-size:10px;color:var(--dim);margin-top:3px;">⏱️${t.days}天 📅${t.year}年</div>
+      <div style="margin-top:4px;">${act}</div>
     </div>`;
   }).join('');
 
@@ -110,7 +109,7 @@ export function renderResearchPanel(container, store){
         <span>🔬 国家工业与尖端国防科研院</span>
       </div>
       <div class="rs-year" style="font-size:12px;color:var(--dim);margin-top:4px;">
-        当前国际历法 <b>${curYear} 年</b> · 军工科研槽 <b>${slots.filter(Boolean).length}/${slots.length}</b> 运转中
+        当前国际历法 <b>${curYear} 年</b> · 军工科研槽 <b>${slots.filter(Boolean).length}/${slots.length}</b> 运转中 · 连线为前置依赖
       </div>
     </div>
     <div class="rs-slots" style="display:flex;gap:8px;margin-bottom:12px;">
@@ -119,8 +118,21 @@ export function renderResearchPanel(container, store){
       </div>`).join('')}
     </div>
     ${tabHtml}
-    <div class="rs-cat-tree" style="max-height:55vh;overflow-y:auto;padding-right:6px;">
-      ${rows}
+    <div class="rs-tree-wrap" style="overflow:auto;max-height:52vh;border:1px solid #2b3647;border-radius:6px;background:rgba(8,10,14,0.45);">
+      <div style="position:relative;width:${layout.cols * COL_P + 40}px;height:${layout.rows * ROW_P + 40}px;">
+        <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 ${layout.cols * COL_P + 40} ${layout.rows * ROW_P + 40}">
+          ${layout.edges.map(e => {
+            const a = layout.pos[e.from], b = layout.pos[e.to];
+            if(!a || !b) return '';
+            const x1 = 20 + a.x * COL_P + NODE_W / 2, y1 = 20 + a.y * ROW_P + NODE_H;
+            const x2 = 20 + b.x * COL_P + NODE_W / 2, y2 = 20 + b.y * ROW_P;
+            const midY = y1 + (y2 - y1) / 2;
+            return `<path d="M ${x1} ${y1} L ${x1} ${midY} L ${x2} ${midY} L ${x2} ${y2}"
+              fill="none" stroke="#5a6a85" stroke-width="1.6" opacity="0.7"/>`;
+          }).join('')}
+        </svg>
+        ${nodeCards}
+      </div>
     </div>`;
 
   function esc(str){

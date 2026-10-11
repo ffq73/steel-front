@@ -82,6 +82,10 @@ export function calcTradeInfluence(world, buyerNatId, sellerNatId){
     influence += 50;
   }
 
+  // W5-8：双边关系修正（world.relations −100~100 → 影响力 ±25）
+  const rel = (world.relations || {})[[buyerNatId, sellerNatId].sort().join('|')] || 0;
+  influence += Math.max(-25, Math.min(25, Math.round(rel / 4)));
+
   // 距离衰减（v14.1 B8：锚点改为两国首都间 hexDist）。
   // 旧实现「h.city?.cap === X || h.owner === X」的第二条件几乎总先命中任意格，
   // 所谓距离其实是「两国任意首格」的距离；首都解析不到时不做距离衰减。

@@ -5,6 +5,8 @@
 
 import { K } from '../data/constants.js';
 import { warJustifyLegality } from './ideology.js';   // v14.0 P3 宣战合法性
+// （本文件不得引入 diplomacy/world 边：events.js→tension 是剧本子图的一部分，
+//   diplomacy→world→scenarios 会构成 ESM 链接环 → scenarios TDZ）
 
 export function initTension(world){
   world.tension = world.tension || {
@@ -36,6 +38,24 @@ export function addTension(world, amount, text, sourceNat = null, targetNat = nu
  */
 export function tensionTick(world){
   initTension(world);
+  // W5-1：制造借口进度 tick —— 此前 justifying 创建后全库无人消费（休眠链）
+  for(const natId in (world.nations || {})){
+    const n = world.nations[natId];
+    if(!n || !n.alive || !n.justifying) continue;
+    for(const j of n.justifying){
+      if(j.done) continue;
+      j.daysLeft -= 1;
+      if(j.daysLeft <= 0){
+        j.done = true;
+        j.readyDay = world.day;
+        world.events = world.events || [];
+        world.events.push({
+          type: 'justify_ready', day: world.day, important: false,
+          text: `📜【借口就绪】${n.name} 对 ${world.nations[j.target]?.name || j.target} 的战争借口已准备完毕，可择机宣战。`
+        });
+      }
+    }
+  }
   // 检查是否全图和平
   let anyWar = false;
   for(const natId in (world.nations || {})){
@@ -49,6 +69,47 @@ export function tensionTick(world){
   if(!anyWar && world.tension.value > 0){
     world.tension.value = Math.max(0, +(world.tension.value - 0.1).toFixed(1));
   }
+}
+
+/**
+ * W5-1/2 带目标宣战 与 W5-7 志愿军实体化 都实现在 diplomacy.js
+ * （它们需要 world.js 的 spawnUnit；从本文件引 world 会把 scenarios.js
+ *   拉进剧本事件子图的 ESM 链接环 events→tension→world→scenarios → TDZ）。
+ * 调用方请直接从 './diplomacy.js' 导入 declareWarWithGoal / sendVolunteers。
+ */
+
+/**
+ * W5-8：双边关系（world.relations，键为排序后的 'A|B'，值 −100~100）。
+ * decisions.js 的 instant.relations 与改善关系行动都落到这里。
+ */
+export function getRelations(world, a, b){
+  if(!world.relations || a === b) return 0;
+  return world.relations[[a, b].sort().join('|')] || 0;
+}
+
+export function adjustRelations(world, a, b, delta){
+  if(a === b) return;
+  world.relations = world.relations || {};
+  const key = [a, b].sort().join('|');
+  world.relations[key] = Math.max(-100, Math.min(100, (world.relations[key] || 0) + delta));
+}
+
+/** W5-8：改善关系行动（25 PP → +25 关系，被制裁/交战状态下无效） */
+export function improveRelations(world, fromNat, toNat){
+  const n = world.nations[fromNat];
+  const to = world.nations[toNat];
+  if(!n || !to || fromNat === toNat) return { ok:false, reason:'国家不存在' };
+  if(n.pp < 25) return { ok:false, reason:'政治点数不足（需 25）' };
+  if((n.atWarWith || []).includes(toNat)) return { ok:false, reason:'交战国之间无法改善关系' };
+  if(getRelations(world, fromNat, toNat) >= 100) return { ok:false, reason:'关系已至上限' };
+  n.pp -= 25;
+  adjustRelations(world, fromNat, toNat, +25);
+  world.events = world.events || [];
+  world.events.push({
+    type: 'improve_relations', day: world.day, important: false,
+    text: `🕊️ 外交 gestures：${n.name} 向 ${to.name} 派遣特使团，双边关系 +25。`
+  });
+  return { ok:true };
 }
 
 /**
@@ -148,34 +209,6 @@ export function guaranteeIndependence(world, sourceNat, targetNat){
     day: world.day,
     important: true,
     text: `🛡️ 外交条约：${n.name} 正式向【${target.name}】提供独立安全保障！`
-  });
-
-  return true;
-}
-
-/**
- * 派遣志愿军 (需紧张度 >= 30%)
- */
-export function sendVolunteers(world, sourceNat, targetNat){
-  initTension(world);
-  const n = world.nations[sourceNat];
-  const target = world.nations[targetNat];
-  if(!n || !target) return false;
-  if(world.tension.value < 30) return false;
-  if(n.pp < 30) return false;
-
-  n.pp -= 30;
-  n.volunteersSent = n.volunteersSent || [];
-  if(!n.volunteersSent.includes(targetNat)) n.volunteersSent.push(targetNat);
-  target.volunteersReceived = target.volunteersReceived || [];
-  if(!target.volunteersReceived.includes(sourceNat)) target.volunteersReceived.push(sourceNat);
-
-  world.events = world.events || [];
-  world.events.push({
-    type: 'volunteers',
-    day: world.day,
-    important: true,
-    text: `🪖 志愿军开拔：${n.name} 批准向【${target.name}】派遣军事志愿观察团与干预师！`
   });
 
   return true;

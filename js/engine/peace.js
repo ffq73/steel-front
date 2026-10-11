@@ -7,7 +7,7 @@
 
 import { K } from '../data/constants.js';
 import { getIdeology } from '../data/ideology.js';   // v14.0 P3 傀儡规则
-import { nationalVP, lostVP } from './victory.js';
+import { nationalVP, lostVP, evaluateObjective } from './victory.js';
 
 export const PEACE_ACTIONS = {
   takeState:       { id:'takeState',       name:'割让领土',       costVP: 5,  costBase: 20, desc:'将目标省份并入本国版图，变更国境线与工业归属。' },
@@ -197,6 +197,36 @@ export function closePeaceConference(world){
       h.owner = conf.winners[0];
     }
   }
+  // W5-2：和会校验战争目标是否达成 —— 达成者收获声望与战意，
+  // 未达成者承受"战争无果"的国内反噬（HOI4 同款张力）。
+  for(const g of (world.activeWargoals || [])){
+    if(!conf.winners.includes(g.from) || g.to !== conf.loser) continue;
+    const n = world.nations[g.from];
+    if(!n) continue;
+    const type = g.goal.type;
+    let achieved;
+    if(type === 'conquer' || type === 'contain'){
+      achieved = true;   // 全面战争/有限目标：战胜即达成
+    } else if(type === 'puppet' || type === 'subjugate'){
+      achieved = loser.puppetOf === g.from;
+    } else {
+      // capture:城市 等 —— 交由统一目标解释器判定（capitalDown 口径）
+      achieved = evaluateObjective(world, g.from, type + (g.goal.arg ? ':' + g.goal.arg : '')).achieved;
+    }
+    if(achieved){
+      n.warSupport = Math.min(100, (n.warSupport || 50) + 4);
+      n.prestige = (n.prestige || 0) + 5;
+      world.events.push({ type:'wargoal_fulfilled', day:world.day, important:true,
+        text:`🎖️ 战争目标达成：${n.name} 实现了对${loser.name}的${g.goal.type}${g.goal.arg ? '（' + g.goal.arg + '）' : ''}，声望 +5！` });
+    } else {
+      n.warSupport = Math.max(0, (n.warSupport || 50) - 6);
+      n.stability = Math.max(10, (n.stability || 60) - 3);
+      world.events.push({ type:'wargoal_failed', day:world.day, important:true,
+        text:`💢 战争无果：${n.name} 未能达成对${loser.name}的${g.goal.type}${g.goal.arg ? '（' + g.goal.arg + '）' : ''}战争目标，国内舆论哗然。` });
+    }
+  }
+  world.activeWargoals = (world.activeWargoals || []).filter(g => !(
+    conf.winners.includes(g.from) && g.to === conf.loser));
   conf.resolved = true;
   world.events.push({ type:'peace', day:world.day, important:true, text:'📜 和会闭幕，战后秩序确立。' });
   world.pendingPeace = null;

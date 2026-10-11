@@ -15,7 +15,9 @@ import {
   calcRangeEfficiency,
   calcWingSuperiority,
   calcRegionAirSuperiority,
-  updateAirbaseCounts
+  updateAirbaseCounts,
+  canUpgradeWing,
+  upgradeWingDesign
 } from '../engine/air.js';
 import { sound } from '../core/audio.js';
 import { showToast } from './panels.js';   // v12.0 C47：alert 清零
@@ -52,7 +54,8 @@ export function renderAirPanel(container, store){
           <div style="font-weight:700;font-size:14px;color:var(--c-brass-bright);display:flex;align-items:center;gap:6px;">
             <span>✈️</span> <span>空军统帅部与战区总览</span>
           </div>
-          <button class="btn small primary" id="btn-air-new-wing" style="padding:2px 8px;font-size:11px;">+ 新编联队</button>
+          <button class="btn small primary" id="btn-air-new-wing" style="padding:2px 8px;font-size:11px;" title="消耗 100 架空军装备库存成军（库存来自 air_eq 产线）">+ 新编联队</button>
+          <button class="btn small" id="btn-air-line" style="padding:2px 8px;font-size:11px;" title="在工业流水线追加一条空军装备产线（用 optimal/滑块分厂）">⚙️ 转产空军装备</button>
         </div>
         <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:6px;font-size:11px;text-align:center;">
           <div style="background:rgba(0,0,0,0.3);padding:6px;border-radius:3px;">
@@ -172,6 +175,12 @@ export function renderAirPanel(container, store){
               `).join('')}
             </div>
           ` : ''}
+
+          <!-- W6-4：机型设计改进（8 条预置升级链，airXP 100/次） -->
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2px;">
+            <span style="font-size:10px;color:var(--c-text-muted);">${wg.designName || '原型设计'}${(wg.upgradeLevel || 0) > 0 ? ` · 效率 +${(wg.upgradeLevel || 0) * 8}%` : ''}</span>
+            <button class="btn small" data-wing-upgrade="${wg.id}" style="padding:1px 6px;font-size:10px;" title="花 100 空军经验换装改型（任务效率 +8%/级）">✈️ 机型改进</button>
+          </div>
         </div>
       `;
     }
@@ -268,10 +277,28 @@ export function renderAirPanel(container, store){
     });
   });
 
-  // 绑定新编联队按钮
+  // W6-4：机型设计改进按钮
+  container.querySelectorAll('[data-wing-upgrade]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      sound.playClick();
+      const res = upgradeWingDesign(w, btn.dataset.wingUpgrade);
+      if(res.ok) showToast(`✈️ 换装「${res.name}」（效率累计 +${res.level * 8}%）`);
+      else showToast('⚠️ ' + res.reason);
+      renderAirPanel(container, store);
+    });
+  });
+
+  // 绑定新编联队按钮（W6-3：消耗空军装备库存，不再凭空打印 100 架）
   const btnNew = container.querySelector('#btn-air-new-wing');
   if(btnNew){
     btnNew.addEventListener('click', () => {
+      const n = w.nations[p];
+      n.equipment = n.equipment || {};
+      const stock = n.equipment.air_eq || 0;
+      if(stock < K.AIR.STANDARD_WING_SIZE){
+        showToast(`⚠️ 空军装备库存不足（${Math.floor(stock)}/100 架）——请先转产空军装备`);
+        return;
+      }
       if(!playerBases.length){
         showToast('⚠️ 无可用空军基地！');
         return;
@@ -281,7 +308,7 @@ export function renderAirPanel(container, store){
         id: `wing_${p}_${(w.airWings?.length || 0) + 1}`,
         nat: p,
         type: 'fighter',
-        count: 100,
+        count: K.AIR.STANDARD_WING_SIZE,
         baseId: base.id,
         baseHex: [base.q, base.r],
         task: 'air_superiority',
@@ -289,9 +316,34 @@ export function renderAirPanel(container, store){
         exp: 1.0,
         aces: []
       };
+      n.equipment.air_eq = stock - K.AIR.STANDARD_WING_SIZE;
       w.airWings = w.airWings || [];
       w.airWings.push(newWing);
       sound.playClick();
+      showToast('🛫 新联队成军：消耗 100 架空军装备');
+      renderAirPanel(container, store);
+    });
+  }
+
+  // W6-3：转产空军装备 —— 追加一条 air_eq 产线（0 厂起步，用 optimal/滑块分厂）
+  const btnLine = container.querySelector('#btn-air-line');
+  if(btnLine){
+    btnLine.addEventListener('click', () => {
+      const n = w.nations[p];
+      n.productionLines = n.productionLines || [];
+      if(n.productionLines.some(l => l.type === 'air_eq')){
+        showToast('✓ 已存在空军装备产线（去工业流水线分厂即可）');
+        return;
+      }
+      n.productionLines.push({
+        id: `air_eq_${Date.now() % 100000}`,
+        type: 'air_eq',
+        factories: 0,
+        eff: K.EFF_START,
+        cap: K.EFF_CAP
+      });
+      sound.playClick();
+      showToast('⚙️ 空军装备产线已建立：去「工业流水线」分配军工厂');
       renderAirPanel(container, store);
     });
   }

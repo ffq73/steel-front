@@ -31,11 +31,15 @@ function lawStamp(n){
   return (n.economicLaw || n.law || 'partial') + '|' + (n.conscriptionLaw || 'limited');
 }
 
-/** 领土人口估算（每格常数万人） */
+/** 领土人口：Σ h.pop（W7-2：城市人口按规模加权，首都/大城不再是死字段），
+    无 pop 字段的格子（测试沙盒/旧档）回退 POP_PER_HEX 常数 */
 export function territoryPopulation(world, natId){
-  let hexes = 0;
-  for(const h of world.hexes) if(h.owner === natId) hexes++;
-  return hexes * K.POP_PER_HEX;
+  let pop = 0;
+  for(const h of world.hexes){
+    if(h.owner !== natId) continue;
+    pop += (h.pop != null) ? h.pop : K.POP_PER_HEX;
+  }
+  return pop;
 }
 
 /** 初始化/重算人力池上限（领土或法案变化后调用） */
